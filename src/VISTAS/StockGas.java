@@ -5,7 +5,7 @@
  */
 package VISTAS;
 
-import static VISTAS.Trabajadores.coneccion;
+import Codigos.Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,19 +25,6 @@ public class StockGas extends javax.swing.JFrame {
      */
     public StockGas() {
         initComponents();
-    }
-    public static Connection coneccion() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/proyectogas";
-        String user = "root";
-        String pass = "";
-        Connection con = DriverManager.getConnection(url, user, pass);
-        try {
-            System.out.println("Si se pudo conectar a la base de datos");
-            return con;
-        } catch (Exception e) {
-            System.out.println("No se pudo conectar a la base de datos: " + e.toString());
-            return con;
-        }
     }
     PreparedStatement ps;
     ResultSet rs;
@@ -496,8 +483,8 @@ public class StockGas extends javax.swing.JFrame {
         // TODO add your handling code here:
         try 
         {
-            coneccion();
-            ps = coneccion().prepareStatement("select stock from tipo where id_tipo = 4");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select stock from tipo where id_tipo = 4");
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -513,8 +500,8 @@ public class StockGas extends javax.swing.JFrame {
         }
         try 
         {
-            coneccion();
-            ps = coneccion().prepareStatement("select stock from tipo where id_tipo = 3");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select stock from tipo where id_tipo = 3");
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -530,8 +517,8 @@ public class StockGas extends javax.swing.JFrame {
         }
          try 
         {
-            coneccion();
-            ps = coneccion().prepareStatement("select stock from tipo where id_tipo = 2");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select stock from tipo where id_tipo = 2");
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -547,8 +534,8 @@ public class StockGas extends javax.swing.JFrame {
         }
          try 
         {
-            coneccion();
-            ps = coneccion().prepareStatement("select stock from tipo where id_tipo = 1");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select stock from tipo where id_tipo = 1");
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -564,8 +551,8 @@ public class StockGas extends javax.swing.JFrame {
         }
           try 
         {
-            coneccion();
-            ps = coneccion().prepareStatement("select stock from tipo where id_tipo = 8");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select stock from tipo where id_tipo = 8");
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -581,8 +568,8 @@ public class StockGas extends javax.swing.JFrame {
         }
          try 
         {
-            coneccion();
-            ps = coneccion().prepareStatement("select stock from tipo where id_tipo = 7");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select stock from tipo where id_tipo = 7");
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -598,8 +585,8 @@ public class StockGas extends javax.swing.JFrame {
         }
          try 
         {
-            coneccion();
-            ps = coneccion().prepareStatement("select stock from tipo where id_tipo = 6");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select stock from tipo where id_tipo = 6");
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -615,8 +602,8 @@ public class StockGas extends javax.swing.JFrame {
         }
          try 
         {
-            coneccion();
-            ps = coneccion().prepareStatement("select stock from tipo where id_tipo = 5");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select stock from tipo where id_tipo = 5");
 
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -646,11 +633,11 @@ public class StockGas extends javax.swing.JFrame {
             jTable2.setModel(modelo);
             PreparedStatement ps = null;
             ResultSet rs = null;
-            coneccion();
+            Conexion.coneccion();
             String sql = "select id_gas,nombre,precio from gas "
             + where;
             System.out.println(sql);
-            ps = coneccion().prepareStatement(sql);
+            ps = Conexion.coneccion().prepareStatement(sql);
             rs = ps.executeQuery();
             java.sql.ResultSetMetaData rsMd = rs.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
@@ -678,8 +665,8 @@ public class StockGas extends javax.swing.JFrame {
         // TODO add your handling code here:
         try 
         {
-        coneccion();
-        ps = coneccion().prepareStatement("insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)");
+        Conexion.coneccion();
+        ps = Conexion.coneccion().prepareStatement("insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)");
         ps.setString(1, xprecio.getText());
         ps.setString(2, xnombre.getText());
         ps.setString(3, xtipo.getSelectedItem().toString());
@@ -700,8 +687,8 @@ public class StockGas extends javax.swing.JFrame {
     private void xtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xtipoActionPerformed
         // TODO add your handling code here:
         try {
-                coneccion();
-                ps = coneccion().prepareStatement("select * from tipo where id_tipo= ?");
+                Conexion.coneccion();
+                ps = Conexion.coneccion().prepareStatement("select * from tipo where id_tipo= ?");
                 ps.setString(1, xtipo.getSelectedItem().toString());
 
                 rs = ps.executeQuery();
@@ -709,7 +696,6 @@ public class StockGas extends javax.swing.JFrame {
                     xprecio.setText(rs.getString("Precio"));
                     xnombre.setText(rs.getString("nombre"));
                     
-
                 } else {
 
                 }

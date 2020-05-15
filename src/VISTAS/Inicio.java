@@ -5,14 +5,11 @@
  */
 package VISTAS;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import Codigos.Conexion;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-import static VISTAS.StockGas.coneccion;
+
 
 /**
  *
@@ -26,26 +23,13 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         initComponents();
     }
-    public static Connection coneccion() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/proyectogas";
-        String user = "root";
-        String pass = "";
-        Connection con = DriverManager.getConnection(url, user, pass);
-        try {
-            System.out.println("Si se pudo conectar a la base de datos");
-            return con;
-        } catch (Exception e) {
-            System.out.println("No se pudo conectar a la base de datos: " + e.toString());
-            return con;
-        }
-    }
     public void ValidarUsuarios(){
         int resultado = 0;
         String password=String.valueOf(xpassword.getPassword());
         String usuario=xusuario.getText();
         String SQL="select * from usuario where usuario='"+usuario+"' and password='"+password+"'";
         try {
-            Statement st=coneccion().createStatement();
+            Statement st=Conexion.coneccion().createStatement();
             ResultSet rs=st.executeQuery(SQL);
             if (rs.next()){
                 resultado = 1;

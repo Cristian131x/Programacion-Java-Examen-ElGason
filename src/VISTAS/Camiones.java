@@ -6,7 +6,7 @@
 package VISTAS;
 
 import Codigos.CamionCombo_1;
-import static VISTAS.StockGas.coneccion;
+import Codigos.Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -35,23 +35,8 @@ public class Camiones extends javax.swing.JFrame {
             lista = CamionCombo_1.llenar_combox();
             for(int i = 0; i<lista.size();i++)
             {
-
                 xbuscar1.addItem(lista.get(i));
             }
-
-    }
-    public static Connection coneccion() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/proyectogas";
-        String user = "root";
-        String pass = "";
-        Connection con = DriverManager.getConnection(url, user, pass);
-        try {
-            System.out.println("Si se pudo conectar a la base de datos");
-            return con;
-        } catch (Exception e) {
-            System.out.println("No se pudo conectar a la base de datos: " + e.toString());
-            return con;
-        }
     }
     PreparedStatement ps;
     Statement st;
@@ -517,8 +502,8 @@ public class Camiones extends javax.swing.JFrame {
         // TODO add your handling code here:
         try 
         {
-        coneccion();
-        ps =  coneccion().prepareStatement("insert into camiones(Patente, Modelo, Marca, Revision_Tecnica, Proxima_Revision) values (?,?,?,?,?)");
+        Conexion.coneccion();
+        ps =  Conexion.coneccion().prepareStatement("insert into camiones(Patente, Modelo, Marca, Revision_Tecnica, Proxima_Revision) values (?,?,?,?,?)");
         ps.setString(1, xpatente.getText());
         ps.setString(2, xmodelo.getText());
         ps.setString(3, xmarca.getText());
@@ -552,11 +537,11 @@ public class Camiones extends javax.swing.JFrame {
             jTable2.setModel(modelo);
             PreparedStatement ps = null;
             ResultSet rs = null;
-            coneccion();
+            Conexion.coneccion();
             String sql = "select id_camion,Patente,Modelo,Marca,Revision_Tecnica,Proxima_Revision from camiones "
             + where;
             System.out.println(sql);
-            ps = coneccion().prepareStatement(sql);
+            ps = Conexion.coneccion().prepareStatement(sql);
             rs = ps.executeQuery();
             java.sql.ResultSetMetaData rsMd = rs.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
@@ -600,11 +585,11 @@ public class Camiones extends javax.swing.JFrame {
                 jTable3.setModel(modelo);
                 PreparedStatement ps = null;
                 ResultSet rs = null;
-                coneccion();
+                Conexion.coneccion();
                 String sql = "select Patente,Modelo,Marca,Revision_Tecnica,Proxima_Revision from camiones "
                 + where;
                 System.out.println(sql);
-                ps = coneccion().prepareStatement(sql);
+                ps = Conexion.coneccion().prepareStatement(sql);
                 rs = ps.executeQuery();
                 java.sql.ResultSetMetaData rsMd = rs.getMetaData();
                 int cantidadColumnas = rsMd.getColumnCount();
@@ -625,8 +610,8 @@ public class Camiones extends javax.swing.JFrame {
             } catch (Exception e) {
             }
             try {
-                coneccion();
-                ps = coneccion().prepareStatement("select * from camiones where id_camion= ?");
+                Conexion.coneccion();
+                ps = Conexion.coneccion().prepareStatement("select * from camiones where id_camion= ?");
                 ps.setString(1, xbuscar1.getSelectedItem().toString());
 
                 rs = ps.executeQuery();
@@ -648,8 +633,8 @@ public class Camiones extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
                 try {
-            coneccion();
-            ps = coneccion().prepareStatement("update camiones set Patente=?,Modelo=?,Marca=?,Revision_Tecnica=?,Proxima_Revision=? where id_camion=?");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("update camiones set Patente=?,Modelo=?,Marca=?,Revision_Tecnica=?,Proxima_Revision=? where id_camion=?");
             ps.setString(1, xpatente1.getText());
             ps.setString(2, xmodelo1.getText());
             ps.setString(3, xmarca1.getText());

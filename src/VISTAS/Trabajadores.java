@@ -6,9 +6,8 @@
 package VISTAS;
 
 import Codigos.CamionCombo_1;
+import Codigos.Conexion;
 import Codigos.TrabajadorCombo_1;
-import static VISTAS.Camiones.coneccion;
-import static VISTAS.StockGas.coneccion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,19 +37,6 @@ public class Trabajadores extends javax.swing.JFrame {
             {
                 xbuscar1.addItem(lista.get(i));
             }
-    }
-    public static Connection coneccion() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/proyectogas";
-        String user = "root";
-        String pass = "";
-        Connection con = DriverManager.getConnection(url, user, pass);
-        try {
-            System.out.println("Si se pudo conectar a la base de datos");
-            return con;
-        } catch (Exception e) {
-            System.out.println("No se pudo conectar a la base de datos: " + e.toString());
-            return con;
-        }
     }
     PreparedStatement ps;
     ResultSet rs;
@@ -523,8 +509,8 @@ public class Trabajadores extends javax.swing.JFrame {
         // TODO add your handling code here:
         try 
         {
-        coneccion();
-        ps = coneccion().prepareStatement("insert into empleado(Rut,Nombre,Apellido,Sexo,Telefono,Estado,Puesto) values (?,?,?,?,?,?,?)");
+        Conexion.coneccion();
+        ps = Conexion.coneccion().prepareStatement("insert into empleado(Rut,Nombre,Apellido,Sexo,Telefono,Estado,Puesto) values (?,?,?,?,?,?,?)");
         ps.setString(1, xrut.getText());
         ps.setString(2, xnombre.getText());
         ps.setString(3, xapellido.getText());
@@ -558,11 +544,11 @@ public class Trabajadores extends javax.swing.JFrame {
             jTable2.setModel(modelo);
             PreparedStatement ps = null;
             ResultSet rs = null;
-            coneccion();
+            Conexion.coneccion();
             String sql = "select Id,Rut,Nombre,Apellido,Sexo,Telefono,Estado,Puesto from empleado "
             + where;
             System.out.println(sql);
-            ps = coneccion().prepareStatement(sql);
+            ps = Conexion.coneccion().prepareStatement(sql);
             rs = ps.executeQuery();
             java.sql.ResultSetMetaData rsMd = rs.getMetaData();
             int cantidadColumnas = rsMd.getColumnCount();
@@ -609,11 +595,11 @@ public class Trabajadores extends javax.swing.JFrame {
                 jTable3.setModel(modelo);
                 PreparedStatement ps = null;
                 ResultSet rs = null;
-                coneccion();
+                Conexion.coneccion();
                 String sql = "select Id,Rut,Nombre,Apellido,Sexo,Telefono,Estado,Puesto from empleado "
                 + where;
                 System.out.println(sql);
-                ps = coneccion().prepareStatement(sql);
+                ps = Conexion.coneccion().prepareStatement(sql);
                 rs = ps.executeQuery();
                 java.sql.ResultSetMetaData rsMd = rs.getMetaData();
                 int cantidadColumnas = rsMd.getColumnCount();
@@ -637,8 +623,8 @@ public class Trabajadores extends javax.swing.JFrame {
             } catch (Exception e) {
             }
             try {
-                coneccion();
-                ps = coneccion().prepareStatement("select * from empleado where Id= ?");
+                Conexion.coneccion();
+                ps = Conexion.coneccion().prepareStatement("select * from empleado where Id= ?");
                 ps.setString(1, xbuscar1.getSelectedItem().toString());
 
                 rs = ps.executeQuery();
@@ -661,8 +647,8 @@ public class Trabajadores extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         try {
-            coneccion();
-            ps = coneccion().prepareStatement("update empleado set Rut=?,Nombre=?,Apellido=?,Telefono=?, Sexo=?, Estado=?, Puesto=? where Id=?");
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("update empleado set Rut=?,Nombre=?,Apellido=?,Telefono=?, Sexo=?, Estado=?, Puesto=? where Id=?");
             ps.setString(1, xrut1.getText());
             ps.setString(2, xnombre1.getText());
             ps.setString(3, xapellido1.getText());
