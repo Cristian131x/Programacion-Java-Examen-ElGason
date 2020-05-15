@@ -5,6 +5,7 @@
  */
 package VISTAS;
 
+import static VISTAS.Trabajadores.coneccion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -42,9 +43,9 @@ public class StockGas extends javax.swing.JFrame {
     ResultSet rs;
     void limpiar() {
         xprecio.setText("");
-        xnombre.setSelectedIndex(0);
+        xnombre.setText("");
         xtipo.setSelectedIndex(0);
-        xestado.setSelectedIndex(0);
+        xestado.setText("");
     }
 
     /**
@@ -83,15 +84,17 @@ public class StockGas extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        xnombre = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         xprecio = new javax.swing.JTextField();
         xtipo = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        xestado = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        xnombre = new javax.swing.JTextField();
+        xestado = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        xcantidad = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -306,13 +309,16 @@ public class StockGas extends javax.swing.JFrame {
 
         jLabel1.setText("Precio");
 
-        xnombre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR:", "Abastible", "Gasco", "Lipigas" }));
-
-        jLabel5.setText("Nombre");
-
         jLabel6.setText("Tipo");
 
+        xprecio.setEditable(false);
+
         xtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR:", "1", "2", "3", "4" }));
+        xtipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xtipoActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("ACEPTAR");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -323,59 +329,87 @@ public class StockGas extends javax.swing.JFrame {
 
         jLabel3.setText("Estado");
 
-        xestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bodega" }));
-
         jLabel4.setText("1= 45KG 2= 15KG 3= 11KG 4= 5KG");
+
+        jLabel5.setText("Nombre");
+
+        xnombre.setEditable(false);
+
+        xestado.setEditable(false);
+        xestado.setText("Bodega");
+
+        jLabel13.setText("Cantidad");
+
+        xcantidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(57, 57, 57))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(xprecio)
-                    .addComponent(xestado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(xnombre, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(xtipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(7, 7, 7)
-                .addComponent(jLabel4)
-                .addContainerGap(178, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)
+                        .addComponent(xcantidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(xtipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(xestado)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(xnombre)
+                            .addComponent(xprecio))))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel4)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(jButton4)
+                        .addGap(57, 57, 57))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(36, 36, 36)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(xtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(xprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(xnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(xtipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)))
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(xestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(40, 40, 40))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addGap(40, 40, 40))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(xcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -394,9 +428,9 @@ public class StockGas extends javax.swing.JFrame {
             .addGap(0, 342, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 1, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 2, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Agregar", jPanel3);
@@ -647,9 +681,9 @@ public class StockGas extends javax.swing.JFrame {
         coneccion();
         ps = coneccion().prepareStatement("insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)");
         ps.setString(1, xprecio.getText());
-        ps.setString(2, xnombre.getSelectedItem().toString());
+        ps.setString(2, xnombre.getText());
         ps.setString(3, xtipo.getSelectedItem().toString());
-        ps.setString(4, xestado.getSelectedItem().toString());
+        ps.setString(4, xestado.getText());
         int res = ps.executeUpdate();
         JOptionPane.showMessageDialog(null, "Gas agregado exitosamente");
         limpiar();
@@ -660,6 +694,27 @@ public class StockGas extends javax.swing.JFrame {
             limpiar();
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+            
+  
+    private void xtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xtipoActionPerformed
+        // TODO add your handling code here:
+        try {
+                coneccion();
+                ps = coneccion().prepareStatement("select * from tipo where id_tipo= ?");
+                ps.setString(1, xtipo.getSelectedItem().toString());
+
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    xprecio.setText(rs.getString("Precio"));
+                    xnombre.setText(rs.getString("nombre"));
+                    
+
+                } else {
+
+                }
+            } catch (SQLException ex) {}
+    }//GEN-LAST:event_xtipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -705,6 +760,7 @@ public class StockGas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
@@ -731,8 +787,9 @@ public class StockGas extends javax.swing.JFrame {
     private javax.swing.JTextField x5;
     private javax.swing.JTextField x5v;
     private javax.swing.JComboBox<String> xbuscar;
-    private javax.swing.JComboBox<String> xestado;
-    private javax.swing.JComboBox<String> xnombre;
+    private javax.swing.JComboBox<String> xcantidad;
+    private javax.swing.JTextField xestado;
+    private javax.swing.JTextField xnombre;
     private javax.swing.JTextField xprecio;
     private javax.swing.JComboBox<String> xtipo;
     // End of variables declaration//GEN-END:variables
