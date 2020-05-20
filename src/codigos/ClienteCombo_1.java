@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Codigos;
+package codigos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,14 +15,14 @@ import java.util.ArrayList;
  *
  * @author crist
  */
-public class TrabajadorCombo_1 {
+public class ClienteCombo_1 {
     static Statement st;
     static ResultSet rs;
     static Connection conexion=null;
         
         public static ArrayList<String> llenar_combox(){
         ArrayList<String> lista = new ArrayList<String>();
-        String q = "SELECT * FROM empleado";
+        String q = "SELECT * FROM cliente";
         try {
             rs = st.executeQuery(q);
             System.out.println("Correcto");
@@ -31,7 +31,7 @@ public class TrabajadorCombo_1 {
         }
         try {
             while(rs.next()){
-                lista.add(rs.getString("Id"));
+                lista.add(rs.getString("Rut_Cliente"));
             }
         } catch (Exception e) {
         }
@@ -50,4 +50,5 @@ public class TrabajadorCombo_1 {
             System.out.println("No conectado");
         }
     }  
+    
 }
