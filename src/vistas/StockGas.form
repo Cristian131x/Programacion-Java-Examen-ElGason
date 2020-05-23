@@ -417,19 +417,23 @@
             <Component class="javax.swing.JComboBox" name="xbuscar">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="9">
-                    <StringItem index="0" value="1 -Gas 45KG "/>
-                    <StringItem index="1" value="2 -Gas 15KG "/>
-                    <StringItem index="2" value="3 -Gas 11KG "/>
-                    <StringItem index="3" value="4 -Gas 5KG"/>
-                    <StringItem index="4" value="5 -Gas 45KG  Vacio"/>
-                    <StringItem index="5" value="6 -Gas 15KG  Vacio"/>
-                    <StringItem index="6" value="7 -Gas 11KG  Vacio"/>
-                    <StringItem index="7" value="8 -Gas 5KG Vacio"/>
+                  <StringArray count="10">
+                    <StringItem index="0" value="5 -Gas 5KG"/>
+                    <StringItem index="1" value="11 -Gas 11KG "/>
+                    <StringItem index="2" value="15 -Gas 15KG "/>
+                    <StringItem index="3" value="45 -Gas 45KG "/>
+                    <StringItem index="4" value="50-Gas 5KG Vacio"/>
+                    <StringItem index="5" value="150 -Gas 15KG  Vacio"/>
+                    <StringItem index="6" value="110 -Gas 11KG  Vacio"/>
+                    <StringItem index="7" value="450 -Gas 45KG  Vacio"/>
                     <StringItem index="8" value=" "/>
+                    <StringItem index="9" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xbuscarActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -489,7 +493,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jSpinner1" max="32767" attributes="0"/>
+                                  <Component id="xcantidad" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -553,7 +557,7 @@
                                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="xcantidad" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
@@ -586,10 +590,10 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="5">
                         <StringItem index="0" value="SELECCIONAR:"/>
-                        <StringItem index="1" value="5 -KG"/>
-                        <StringItem index="2" value="11 -KG"/>
-                        <StringItem index="3" value="15 -KG"/>
-                        <StringItem index="4" value="45 -KG"/>
+                        <StringItem index="1" value="5"/>
+                        <StringItem index="2" value="11"/>
+                        <StringItem index="3" value="15"/>
+                        <StringItem index="4" value="45"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -641,7 +645,10 @@
                     <Property name="text" type="java.lang.String" value="Cantidad"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JSpinner" name="jSpinner1">
+                <Component class="javax.swing.JSpinner" name="xcantidad">
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

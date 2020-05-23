@@ -5,18 +5,10 @@
  */
 package vistas;
 
-import codigos.CamionCombo_1;
-import conexion.Conexion;
 import codigos.TrabajadorCombo_1;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,6 +22,7 @@ public class Trabajadores extends javax.swing.JFrame {
     public Trabajadores() {
         initComponents();
         actualizarCombo();
+        consultas.ConsultasTrabajador.listarTrabajadores();
     }
 
     void actualizarCombo() {
@@ -40,7 +33,6 @@ public class Trabajadores extends javax.swing.JFrame {
         for (int i = 0; i < lista.size(); i++) {
             xbuscar1.addItem(lista.get(i));
         }
-
     }
 
     PreparedStatement ps;
@@ -68,15 +60,15 @@ public class Trabajadores extends javax.swing.JFrame {
         xrut = new javax.swing.JTextField();
         xnombre = new javax.swing.JTextField();
         xapellido = new javax.swing.JTextField();
-        xnumero = new javax.swing.JTextField();
+        xtelefono = new javax.swing.JTextField();
         xsexo = new javax.swing.JComboBox<>();
         xpuesto = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        agregarT = new javax.swing.JButton();
         xestado = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaT = new javax.swing.JTable();
         xbuscar = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -90,15 +82,15 @@ public class Trabajadores extends javax.swing.JFrame {
         xrut1 = new javax.swing.JTextField();
         xnombre1 = new javax.swing.JTextField();
         xapellido1 = new javax.swing.JTextField();
-        xnumero1 = new javax.swing.JTextField();
+        xtelefono1 = new javax.swing.JTextField();
         xsexo1 = new javax.swing.JComboBox<>();
         xestado1 = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tablaModificar = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         xpuesto1 = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        buscarT = new javax.swing.JButton();
+        modificarT = new javax.swing.JButton();
         xbuscar1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
@@ -138,9 +130,9 @@ public class Trabajadores extends javax.swing.JFrame {
             }
         });
 
-        xnumero.addActionListener(new java.awt.event.ActionListener() {
+        xtelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xnumeroActionPerformed(evt);
+                xtelefonoActionPerformed(evt);
             }
         });
 
@@ -148,10 +140,10 @@ public class Trabajadores extends javax.swing.JFrame {
 
         xpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Conductor:", "Paleta:" }));
 
-        jButton3.setText("Aceptar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        agregarT.setText("Aceptar");
+        agregarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                agregarTActionPerformed(evt);
             }
         });
 
@@ -176,7 +168,7 @@ public class Trabajadores extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(xpuesto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(xnumero)
+                    .addComponent(xtelefono)
                     .addComponent(xapellido)
                     .addComponent(xnombre)
                     .addComponent(xrut, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -185,7 +177,7 @@ public class Trabajadores extends javax.swing.JFrame {
                 .addContainerGap(468, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(agregarT)
                 .addGap(76, 76, 76))
         );
         jPanel1Layout.setVerticalGroup(
@@ -207,7 +199,7 @@ public class Trabajadores extends javax.swing.JFrame {
                             .addComponent(xapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4))
-                    .addComponent(xnumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(xtelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -221,13 +213,13 @@ public class Trabajadores extends javax.swing.JFrame {
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(xpuesto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
-                .addComponent(jButton3)
+                .addComponent(agregarT)
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registrar", jPanel1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -247,7 +239,7 @@ public class Trabajadores extends javax.swing.JFrame {
                 "Id", "Rut", "Nombre", "Apellido", "Contacto", "Sexo", "Estado", "Puesto"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tablaT);
 
         jButton2.setText("BUSCAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -313,7 +305,7 @@ public class Trabajadores extends javax.swing.JFrame {
 
         xestado1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Contratado", "Despedido" }));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tablaModificar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -321,25 +313,25 @@ public class Trabajadores extends javax.swing.JFrame {
                 "Id", "Rut", "Nombre", "Apellido", "Contacto", "Sexo", "Estado", "Puesto"
             }
         ));
-        jTable3.setEnabled(false);
-        jScrollPane3.setViewportView(jTable3);
-        jTable3.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaModificar.setEnabled(false);
+        jScrollPane3.setViewportView(tablaModificar);
+        tablaModificar.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jLabel15.setText("Puesto");
 
         xpuesto1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Conductor", "Paleta" }));
 
-        jButton4.setText("BUSCAR");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        buscarT.setText("BUSCAR");
+        buscarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                buscarTActionPerformed(evt);
             }
         });
 
-        jButton5.setText("ACEPTAR");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        modificarT.setText("ACEPTAR");
+        modificarT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                modificarTActionPerformed(evt);
             }
         });
 
@@ -370,17 +362,17 @@ public class Trabajadores extends javax.swing.JFrame {
                     .addComponent(xrut1)
                     .addComponent(xnombre1)
                     .addComponent(xapellido1)
-                    .addComponent(xnumero1)
+                    .addComponent(xtelefono1)
                     .addComponent(xsexo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addComponent(buscarT)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(17, 17, 17))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton5)
+                        .addComponent(modificarT)
                         .addGap(31, 31, 31))))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         );
@@ -392,7 +384,7 @@ public class Trabajadores extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
+                            .addComponent(buscarT)
                             .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -411,7 +403,7 @@ public class Trabajadores extends javax.swing.JFrame {
                                     .addComponent(xapellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel12))
-                            .addComponent(xnumero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(xtelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
@@ -424,7 +416,7 @@ public class Trabajadores extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
                             .addComponent(xpuesto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5))
+                            .addComponent(modificarT))
                         .addGap(30, 30, 30))))
         );
 
@@ -499,22 +491,16 @@ public class Trabajadores extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void xnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xnumeroActionPerformed
+    private void xtelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xtelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_xnumeroActionPerformed
+    }//GEN-LAST:event_xtelefonoActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            modulos.TrabajadoresM.insertarTrabajdor();
-            modulos.TrabajadoresM.limpiarA();
-            actualizarCombo();
-        } catch (Exception e) {
-        }
+    private void agregarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTActionPerformed
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_agregarTActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        modulos.TrabajadoresM.listarTrabajadores();
+        consultas.ConsultasTrabajador.listarTrabajadores();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void xapellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xapellido1ActionPerformed
@@ -525,21 +511,13 @@ public class Trabajadores extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_xsexo1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        modulos.TrabajadoresM.buscarLista();
-        modulos.TrabajadoresM.buscarNormal();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void buscarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTActionPerformed
+        consultas.ConsultasTrabajador.listarModificarTrabajadores();
+    }//GEN-LAST:event_buscarTActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try {
-            modulos.TrabajadoresM.modificarTrabajador();
-            modulos.TrabajadoresM.buscarLista();
-            modulos.TrabajadoresM.limpiarU();
-        } catch (Exception e) {
-            System.out.println(e);
-            modulos.TrabajadoresM.limpiarU();
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void modificarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarTActionPerformed
+        consultas.ConsultasTrabajador.listarModificarTrabajadores();
+    }//GEN-LAST:event_modificarTActionPerformed
 
     private void xbuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xbuscar1ActionPerformed
         // TODO add your handling code here:
@@ -585,11 +563,10 @@ public class Trabajadores extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton agregarT;
+    public javax.swing.JButton buscarT;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -614,8 +591,9 @@ public class Trabajadores extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    public static javax.swing.JTable jTable2;
-    public static javax.swing.JTable jTable3;
+    public javax.swing.JButton modificarT;
+    public static javax.swing.JTable tablaModificar;
+    public static javax.swing.JTable tablaT;
     public static javax.swing.JTextField xapellido;
     public static javax.swing.JTextField xapellido1;
     public static javax.swing.JTextField xbuscar;
@@ -624,13 +602,13 @@ public class Trabajadores extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> xestado1;
     public static javax.swing.JTextField xnombre;
     public static javax.swing.JTextField xnombre1;
-    public static javax.swing.JTextField xnumero;
-    public static javax.swing.JTextField xnumero1;
     public static javax.swing.JComboBox<String> xpuesto;
     public static javax.swing.JComboBox<String> xpuesto1;
     public static javax.swing.JTextField xrut;
     public static javax.swing.JTextField xrut1;
     public static javax.swing.JComboBox<String> xsexo;
     public static javax.swing.JComboBox<String> xsexo1;
+    public static javax.swing.JTextField xtelefono;
+    public static javax.swing.JTextField xtelefono1;
     // End of variables declaration//GEN-END:variables
 }

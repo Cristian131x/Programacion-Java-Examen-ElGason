@@ -5,6 +5,9 @@
  */
 package vistas;
 
+import codigos.ClienteCombo_1;
+import java.util.ArrayList;
+
 /**
  *
  * @author crist
@@ -16,6 +19,16 @@ public class GestionClientes extends javax.swing.JFrame {
      */
     public GestionClientes() {
         initComponents();
+        actualizarCombo();
+    }
+    void actualizarCombo() {
+        ClienteCombo_1.conectar();
+        xbuscar1.removeAllItems();
+        ArrayList<String> lista = new ArrayList<String>();
+        lista = ClienteCombo_1.llenar_combox();
+        for (int i = 0; i < lista.size(); i++) {
+            xbuscar1.addItem(lista.get(i));
+        }
     }
 
     /**
@@ -37,6 +50,17 @@ public class GestionClientes extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        xnombre = new javax.swing.JTextField();
+        xtelefono = new javax.swing.JTextField();
+        xdirecion = new javax.swing.JTextField();
+        xcomuna = new javax.swing.JComboBox<>();
+        xbuscar1 = new javax.swing.JComboBox<>();
+        buscarCli = new javax.swing.JButton();
+        modificarCli = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -98,13 +122,43 @@ public class GestionClientes extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "NumeroCliente", "Nombre", "Telefono", "Direccion", "Comuna", "Estado"
+                "Rut_Cliente", "Nombre", "Telefono", "Direccion", "Comuna"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
+
+        jLabel2.setText("Nombre");
+
+        jLabel3.setText("Telefono");
+
+        jLabel4.setText("Direccion:");
+
+        jLabel5.setText("Comuna:");
+
+        xcomuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "1", "2", "3" }));
+
+        xbuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xbuscar1ActionPerformed(evt);
+            }
+        });
+
+        buscarCli.setText("BUSCAR");
+        buscarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarCliActionPerformed(evt);
+            }
+        });
+
+        modificarCli.setText("ACEPTAR");
+        modificarCli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarCliActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -112,15 +166,67 @@ public class GestionClientes extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 409, Short.MAX_VALUE)
+                                .addComponent(buscarCli)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5))
+                                        .addGap(26, 26, 26)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(xcomuna, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(xdirecion, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addGap(33, 33, 33)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(xtelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                                            .addComponent(xnombre))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(modificarCli)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarCli))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(xnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(xtelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(xdirecion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(xcomuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(modificarCli)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Modificar", jPanel3);
@@ -159,7 +265,7 @@ public class GestionClientes extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,8 +278,21 @@ public class GestionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        modulos.ClienteM.listarCliente();
+        consultas.ConsultasCliente.listarCliente();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void buscarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCliActionPerformed
+        // TODO add your handling code here:
+        consultas.ConsultasCliente.buscarListaGestion();
+    }//GEN-LAST:event_buscarCliActionPerformed
+
+    private void modificarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarCliActionPerformed
+
+    }//GEN-LAST:event_modificarCliActionPerformed
+
+    private void xbuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xbuscar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xbuscar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,9 +330,14 @@ public class GestionClientes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton buscarCli;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -221,7 +345,13 @@ public class GestionClientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    public static javax.swing.JTable jTable3;
+    public javax.swing.JButton modificarCli;
+    public static javax.swing.JComboBox<String> xbuscar1;
     public static javax.swing.JTextField xbuscarC;
+    public static javax.swing.JComboBox<String> xcomuna;
+    public static javax.swing.JTextField xdirecion;
+    public static javax.swing.JTextField xnombre;
+    public static javax.swing.JTextField xtelefono;
     // End of variables declaration//GEN-END:variables
 }

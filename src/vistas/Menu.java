@@ -5,6 +5,18 @@
  */
 package vistas;
 
+import consultas.ConsultasCamion;
+import consultas.ConsultasCliente;
+
+import consultas.ConsultasTrabajador;
+import controladores.ControladorCamion;
+import controladores.ControladorCliente;
+
+import controladores.ControladorTrabajadores;
+import modelo.Camion;
+import modelo.Cliente;
+import modelo.Trabajador;
+
 /**
  *
  * @author crist
@@ -199,9 +211,13 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Trabajadores t = new Trabajadores();
-        t.setVisible(true);
+        Trabajador mod = new Trabajador();
+        ConsultasTrabajador modc = new ConsultasTrabajador();
+        Trabajadores frm = new Trabajadores();
+        
+        ControladorTrabajadores ctrl = new ControladorTrabajadores(mod, modc, frm);
+        ctrl.iniciar();
+        frm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -211,7 +227,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Cliente p = new Cliente();
+        Clientes p = new Clientes();
         p.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -238,16 +254,26 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        Camiones c = new Camiones();
-        c.setVisible(true);
+        Camion mod = new Camion();
+        ConsultasCamion modc = new ConsultasCamion();
+        Camiones frm = new Camiones();
+        
+        ControladorCamion ctrl = new ControladorCamion(mod, modc, frm);
+        ctrl.iniciar();
+        frm.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        GestionClientes g = new GestionClientes();
-        g.setVisible(true);
-        this.dispose();
+        Cliente mod = new Cliente();
+        ConsultasCliente modC = new ConsultasCliente();
+        GestionClientes frms = new GestionClientes();
+        Clientes frm = new Clientes();
+
+        ControladorCliente ctrl = new ControladorCliente(mod, modC, frms,frm);
+        ctrl.iniciar();
+        frms.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /**

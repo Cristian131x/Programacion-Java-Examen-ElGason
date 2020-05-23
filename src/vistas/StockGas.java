@@ -66,7 +66,7 @@ public class StockGas extends javax.swing.JFrame {
         xnombre = new javax.swing.JTextField();
         xestado = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        xcantidad = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -257,7 +257,12 @@ public class StockGas extends javax.swing.JFrame {
             }
         });
 
-        xbuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 -Gas 45KG ", "2 -Gas 15KG ", "3 -Gas 11KG ", "4 -Gas 5KG", "5 -Gas 45KG  Vacio", "6 -Gas 15KG  Vacio", "7 -Gas 11KG  Vacio", "8 -Gas 5KG Vacio", " " }));
+        xbuscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "5 -Gas 5KG", "11 -Gas 11KG ", "15 -Gas 15KG ", "45 -Gas 45KG ", "50-Gas 5KG Vacio", "150 -Gas 15KG  Vacio", "110 -Gas 11KG  Vacio", "450 -Gas 45KG  Vacio", " ", " " }));
+        xbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xbuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -296,7 +301,7 @@ public class StockGas extends javax.swing.JFrame {
 
         xprecio.setEditable(false);
 
-        xtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR:", "5 -KG", "11 -KG", "15 -KG", "45 -KG" }));
+        xtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR:", "5", "11", "15", "45" }));
         xtipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 xtipoActionPerformed(evt);
@@ -331,7 +336,7 @@ public class StockGas extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSpinner1))
+                        .addComponent(xcantidad))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -380,7 +385,7 @@ public class StockGas extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(xcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -466,11 +471,11 @@ public class StockGas extends javax.swing.JFrame {
     }//GEN-LAST:event_x11ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        modulos.StockGasM.verstocks();
+        modelos.StockGasM.verstocks();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        modulos.StockGasM.listarStock();
+        modelos.StockGasM.listarStock();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void x45vActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x45vActionPerformed
@@ -478,13 +483,14 @@ public class StockGas extends javax.swing.JFrame {
     }//GEN-LAST:event_x45vActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        modulos.StockGasM.agregarGas();
+        modelos.StockGasM.actualizarStock();
+        modelos.StockGasM.agregarGas();
     }//GEN-LAST:event_jButton4ActionPerformed
 
             
   
     private void xtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xtipoActionPerformed
-       modulos.StockGasM.comboGas();
+       modelos.StockGasM.comboGas();
     }//GEN-LAST:event_xtipoActionPerformed
 
     private void x5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_x5ActionPerformed
@@ -494,6 +500,10 @@ public class StockGas extends javax.swing.JFrame {
     private void jTabbedPane1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTabbedPane1CaretPositionChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPane1CaretPositionChanged
+
+    private void xbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xbuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xbuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -554,7 +564,6 @@ public class StockGas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTable jTable2;
     public static javax.swing.JTextField x11;
@@ -566,6 +575,7 @@ public class StockGas extends javax.swing.JFrame {
     public static javax.swing.JTextField x5;
     public static javax.swing.JTextField x5v;
     public static javax.swing.JComboBox<String> xbuscar;
+    public static javax.swing.JSpinner xcantidad;
     public static javax.swing.JTextField xestado;
     public static javax.swing.JTextField xnombre;
     public static javax.swing.JTextField xprecio;

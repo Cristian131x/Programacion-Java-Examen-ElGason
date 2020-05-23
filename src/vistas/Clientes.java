@@ -5,20 +5,19 @@
  */
 package vistas;
 
-import modulos.ClienteM;
-
 /**
  *
  * @author crist
  */
-public class Cliente extends javax.swing.JFrame {
+public class Clientes extends javax.swing.JFrame {
 
     /**
      * Creates new form Pedidos
      */
 
-    public Cliente() {
+    public Clientes() {
         initComponents();
+        
 
     }
     
@@ -43,7 +42,7 @@ public class Cliente extends javax.swing.JFrame {
         xcomunaC = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        agregarCli = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         xnombreC = new javax.swing.JTextField();
 
@@ -73,10 +72,10 @@ public class Cliente extends javax.swing.JFrame {
 
         jLabel5.setText("1= La Granja 2= La Cisterna 3= La Pintana");
 
-        jButton2.setText("ACEPTAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        agregarCli.setText("ACEPTAR");
+        agregarCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                agregarCliActionPerformed(evt);
             }
         });
 
@@ -112,7 +111,7 @@ public class Cliente extends javax.swing.JFrame {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(295, 295, 295)
-                        .addComponent(jButton2)))
+                        .addComponent(agregarCli)))
                 .addContainerGap(151, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,7 +137,7 @@ public class Cliente extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(xdireccionC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71)
-                .addComponent(jButton2)
+                .addComponent(agregarCli)
                 .addGap(45, 45, 45))
         );
 
@@ -181,12 +180,12 @@ public class Cliente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        modulos.ClienteM.insertarCliente();
+    private void agregarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCliActionPerformed
+        
         Vender v = new Vender();
         v.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_agregarCliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,28 +204,30 @@ public class Cliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cliente().setVisible(true);
+                new Clientes().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton agregarCli;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;

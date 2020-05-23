@@ -5,8 +5,9 @@
  */
 package vistas;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import consultas.ConsultasTrabajador;
+import controladores.ControladorTrabajadores;
+import modelo.Trabajador;
 
 /**
  *
@@ -18,8 +19,6 @@ public class TiendaGas {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
     }
-    
-    
+ 
 }

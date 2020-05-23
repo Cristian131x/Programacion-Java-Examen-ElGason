@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modulos;
+package modelos;
 
 import conexion.Conexion;
 import java.sql.PreparedStatement;
@@ -15,6 +15,7 @@ import static vistas.StockGas.xestado;
 import static vistas.StockGas.xnombre;
 import static vistas.StockGas.xprecio;
 import static vistas.StockGas.xtipo;
+import static vistas.StockGas.xcantidad;
 
 /**
  *
@@ -182,11 +183,14 @@ public class StockGasM {
         try {
             Conexion.coneccion();
             ps = Conexion.coneccion().prepareStatement("insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)");
-            ps.setString(1, xprecio.getText());
-            ps.setString(2, xnombre.getText());
-            ps.setString(3, xtipo.getSelectedItem().toString());
-            ps.setString(4, xestado.getText());
-            int res = ps.executeUpdate();
+            int Cantidad = Integer.parseInt(xcantidad.getValue().toString());
+            for (int i = 0; i < Cantidad; i++) {
+                ps.setString(1, xprecio.getText());
+                ps.setString(2, xnombre.getText());
+                ps.setString(3, xtipo.getSelectedItem().toString());
+                ps.setString(4, xestado.getText());
+                ps.execute();
+            }
             JOptionPane.showMessageDialog(null, "Gas agregado exitosamente");
             limpiarGas();
         } catch (SQLException | NumberFormatException ex) {
@@ -199,6 +203,25 @@ public class StockGasM {
         xprecio.setText("");
         xnombre.setText("");
         xtipo.setSelectedIndex(0);
-        xestado.setText("");
+        xcantidad.setValue(0);
+    }
+
+    public static void actualizarStock() {
+        PreparedStatement ps = null;
+        try {
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("update tipo set stock = stock + ? where id_tipo = ?");
+            ps.setString(1, xcantidad.getValue().toString());
+            ps.setString(2, xtipo.getSelectedItem().toString());
+
+            int res = ps.executeUpdate();
+            if (res > 0) {
+                JOptionPane.showMessageDialog(null, "Stock aumentado");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 }
