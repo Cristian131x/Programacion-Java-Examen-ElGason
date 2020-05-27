@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package consultas;
 
-import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 
-/**
- *
- * @author crist
- */
-public class ConsultasCliente extends conexion.Conexion{
+public class ConsultasCliente extends conexion.Conexion {
+
     public boolean registrarCliente(Cliente clie) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -29,7 +20,7 @@ public class ConsultasCliente extends conexion.Conexion{
             ps.setString(4, clie.getDireccion());
             ps.setInt(5, clie.getComuna_id());
             ps.execute();
-            return true;          
+            return true;
         } catch (Exception e) {
             System.out.println(e);
             return false;
@@ -41,7 +32,6 @@ public class ConsultasCliente extends conexion.Conexion{
             }
         }
     }
-
     public boolean modificarCliente(Cliente clie) {
         PreparedStatement ps = null;
         Connection con = getConexion();
@@ -76,13 +66,15 @@ public class ConsultasCliente extends conexion.Conexion{
             ps = con.prepareStatement(sql);
             ps.setString(1, clie.getRut_Cliente());
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
+                clie.setId_cliente(rs.getInt("id_cliente"));
                 clie.setNombre(rs.getString("nombre"));
                 clie.setNumero_Telefono(rs.getString("numero_telefono"));
                 clie.setDireccion(rs.getString("direccion"));
-                clie.setComuna_id(Integer.parseInt(rs.getString("comuna_id")));
+                clie.setComuna_id(rs.getInt("comuna_id"));
             }
             return true;
+
         } catch (Exception e) {
             System.out.println(e);
             return false;
@@ -94,80 +86,88 @@ public class ConsultasCliente extends conexion.Conexion{
             }
         }
     }
-    public static void listarCliente() {
-        String campo = vistas.GestionClientes.xbuscarC.getText();
+    private DefaultTableModel DTc;
+    private DefaultTableModel setTituloA() {
+        DTc = new DefaultTableModel();
+        DTc.addColumn("ID");
+        DTc.addColumn("RUT");
+        DTc.addColumn("NOMBRE");
+        DTc.addColumn("TELEFONO");
+        DTc.addColumn("DIRECCION");
+        DTc.addColumn("COMUNA_ID");
+        return DTc;
+    }
+    public DefaultTableModel listar(Cliente clie) {
+        String campo = clie.getRut_Cliente();
         String where = "";
         if (!"".equals(campo)) {
             where = "where Rut_Cliente= '" + campo + "'";
         } else {
         }
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select * from cliente " + where;
         try {
-            DefaultTableModel modelo = new DefaultTableModel();
-            vistas.GestionClientes.jTable2.setModel(modelo);
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            Conexion.coneccion();
-            String sql = "select id_cliente,Rut_Cliente,nombre,numero_telefono,direccion,comun_id from cliente "
-                    + where;
-            System.out.println(sql);
-            ps = Conexion.coneccion().prepareStatement(sql);
+            setTituloA();
+            ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            java.sql.ResultSetMetaData rsMd = rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
-            modelo.addColumn("ID");
-            modelo.addColumn("RUT");
-            modelo.addColumn("NOMBRE");
-            modelo.addColumn("TELEFONO");
-            modelo.addColumn("DIRECCION");
-            modelo.addColumn("COMUNA_ID");
-
+            Object ob[] = new Object[6];
             while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(filas);
+                ob[0] = rs.getInt(1);
+                ob[1] = rs.getString(2);
+                ob[2] = rs.getString(3);
+                ob[3] = rs.getString(4);
+                ob[4] = rs.getString(5);
+                ob[5] = rs.getInt(6);
+                DTc.addRow(ob);
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
+        return DTc;
+    }
+    private DefaultTableModel DTcu;
+
+    private DefaultTableModel setTituloU() {
+        DTcu = new DefaultTableModel();
+        DTcu.addColumn("ID");
+        DTcu.addColumn("Rut_Cliente");
+        DTcu.addColumn("Nombre");
+        DTcu.addColumn("Telefono");
+        DTcu.addColumn("Direccion");
+        DTcu.addColumn("Comuna");
+        return DTcu;
     }
 
-    public static void buscarListaGestion() {
-        String campo = vistas.GestionClientes.xbuscar1.getSelectedItem().toString();
+    public DefaultTableModel listarU(Cliente clie) {
+        String campo = clie.getRut_Cliente();
         String where = "";
         if (!"".equals(campo)) {
             where = "where Rut_Cliente= '" + campo + "'";
         } else {
         }
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select * from cliente " + where;
         try {
-            DefaultTableModel modelo = new DefaultTableModel();
-            vistas.GestionClientes.jTable3.setModel(modelo);
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            Conexion.coneccion();
-            String sql = "select Rut_Cliente,nombre,numero_telefono,direccion,comuna_id from cliente "
-                    + where;
-            System.out.println(sql);
-            ps = Conexion.coneccion().prepareStatement(sql);
+            setTituloU();
+            ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            java.sql.ResultSetMetaData rsMd = rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-
-            modelo.addColumn("Rut_Cliente");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Telefono");
-            modelo.addColumn("Direccion");
-            modelo.addColumn("Comuna");
-
+            Object ob[] = new Object[6];
             while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(filas);
+                ob[0] = rs.getInt(1);
+                ob[1] = rs.getString(2);
+                ob[2] = rs.getString(3);
+                ob[3] = rs.getString(4);
+                ob[4] = rs.getString(5);
+                ob[5] = rs.getInt(6);
+                DTcu.addRow(ob);
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
+        return DTcu;
     }
 }

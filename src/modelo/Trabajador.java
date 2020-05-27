@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
-/**
- *
- * @author crist
- */
+
 public class Trabajador {
 
     private int id;
@@ -16,7 +9,7 @@ public class Trabajador {
     private String Nombre;
     private String Apellido;
     private String Sexo;
-    private int Telefono;
+    private String Telefono;
     private String Estado;
     private String Puesto;
 
@@ -60,11 +53,11 @@ public class Trabajador {
         this.Sexo = Sexo;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return Telefono;
     }
 
-    public void setTelefono(int Telefono) {
+    public void setTelefono(String Telefono) {
         this.Telefono = Telefono;
     }
 

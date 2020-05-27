@@ -1,6 +1,5 @@
 package consultas;
 
-import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,16 +18,14 @@ public class ConsultasTrabajador extends conexion.Conexion {
             ps.setString(2, trab.getNombre());
             ps.setString(3, trab.getApellido());
             ps.setString(4, trab.getSexo());
-            ps.setInt(5, trab.getTelefono());
+            ps.setString(5, trab.getTelefono());
             ps.setString(6, trab.getEstado());
             ps.setString(7, trab.getPuesto());
             ps.execute();
             return true;
-            //INSERTAR LIMPIAR           
         } catch (Exception e) {
             System.out.println(e);
             return false;
-            //INSERTAR LIMPIAR
         } finally {
             try {
                 con.close();
@@ -46,7 +43,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
             ps = con.prepareStatement(sql);
             ps.setString(1, trab.getNombre());
             ps.setString(2, trab.getApellido());
-            ps.setInt(3, trab.getTelefono());
+            ps.setString(3, trab.getTelefono());
             ps.setString(4, trab.getSexo());
             ps.setString(5, trab.getEstado());
             ps.setString(6, trab.getPuesto());
@@ -79,7 +76,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
                 trab.setNombre(rs.getString("Nombre"));
                 trab.setApellido(rs.getString("Apellido"));
                 trab.setSexo(rs.getString("Sexo"));
-                trab.setTelefono(Integer.parseInt(rs.getString("Telefono")));
+                trab.setTelefono(rs.getString("Telefono"));
                 trab.setEstado(rs.getString("Estado"));
                 trab.setPuesto(rs.getString("Puesto"));
             }
@@ -95,83 +92,99 @@ public class ConsultasTrabajador extends conexion.Conexion {
             }
         }
     }
-    public static void listarTrabajadores() {
-        String campo = vistas.Trabajadores.xbuscar.getText();
-        String where = "";
-        if (!"".equals(campo)) {
-            where = "where Rut= '" + campo + "'";
-        } else {
-        }
-        try {
-            DefaultTableModel modelo = new DefaultTableModel();
-            vistas.Trabajadores.tablaT.setModel(modelo);
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            Conexion.coneccion();
-            String sql = "select Id,Rut,Nombre,Apellido,Sexo,Telefono,Estado,Puesto from empleado "
-                    + where;
-            System.out.println(sql);
-            ps = Conexion.coneccion().prepareStatement(sql);
-            rs = ps.executeQuery();
-            java.sql.ResultSetMetaData rsMd = rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
+    private DefaultTableModel DTcu;
 
-            modelo.addColumn("Id");
-            modelo.addColumn("Rut");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellido");
-            modelo.addColumn("Sexo");
-            modelo.addColumn("Telefono");
-            modelo.addColumn("Estado");
-            modelo.addColumn("Puesto");
-
-            while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(filas);
-            }
-        } catch (Exception e) {
-        }
+    private DefaultTableModel setTituloU() {
+        DTcu = new DefaultTableModel();
+        DTcu.addColumn("Id");
+        DTcu.addColumn("Rut");
+        DTcu.addColumn("Nombre");
+        DTcu.addColumn("Apellido");
+        DTcu.addColumn("Sexo");
+        DTcu.addColumn("Telefono");
+        DTcu.addColumn("Estado");
+        DTcu.addColumn("Puesto");
+        return DTcu;
     }
 
-    public static void listarModificarTrabajadores() {
-        String campo = vistas.Trabajadores.xbuscar1.getSelectedItem().toString();
+    public DefaultTableModel listar(Trabajador trab) {
+        String campo = trab.getRut();
         String where = "";
         if (!"".equals(campo)) {
-            where = "where Rut= '" + campo + "'";
+            where = "where Rut_Cliente= '" + campo + "'";
         } else {
         }
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select * from empleado " + where;
         try {
-            DefaultTableModel modelo = new DefaultTableModel();
-            vistas.Trabajadores.tablaModificar.setModel(modelo);
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            Conexion.coneccion();
-            String sql = "select Id,Rut,Nombre,Apellido,Sexo,Telefono,Estado,Puesto from empleado "
-                    + where;
-            System.out.println(sql);
-            ps = Conexion.coneccion().prepareStatement(sql);
+            setTituloU();
+            ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            java.sql.ResultSetMetaData rsMd = rs.getMetaData();
-            int cantidadColumnas = rsMd.getColumnCount();
-            modelo.addColumn("Id");
-            modelo.addColumn("Rut");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Apellido");
-            modelo.addColumn("Sexo");
-            modelo.addColumn("Telefono");
-            modelo.addColumn("Estado");
-            modelo.addColumn("Puesto");
+            Object ob[] = new Object[8];
             while (rs.next()) {
-                Object[] filas = new Object[cantidadColumnas];
-                for (int i = 0; i < cantidadColumnas; i++) {
-                    filas[i] = rs.getObject(i + 1);
-                }
-                modelo.addRow(filas);
+                ob[0] = rs.getInt(1);
+                ob[1] = rs.getString(2);
+                ob[2] = rs.getString(3);
+                ob[3] = rs.getString(4);
+                ob[4] = rs.getString(5);
+                ob[5] = rs.getString(6);
+                ob[6] = rs.getString(7);
+                ob[7] = rs.getString(8);
+                DTcu.addRow(ob);
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
+        return DTcu;
     }
+    private DefaultTableModel DT;
+
+    private DefaultTableModel setTitulo() {
+        DT = new DefaultTableModel();
+        DT.addColumn("Id");
+        DT.addColumn("Rut");
+        DT.addColumn("Nombre");
+        DT.addColumn("Apellido");
+        DT.addColumn("Sexo");
+        DT.addColumn("Telefono");
+        DT.addColumn("Estado");
+        DT.addColumn("Puesto");
+        return DT;
+    }
+
+    public DefaultTableModel listarU(Trabajador trab) {
+        String campo = trab.getRut();
+        String where = "";
+        if (!"".equals(campo)) {
+            where = "where Rut_Cliente= '" + campo + "'";
+        } else {
+        }
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select * from empleado " + where;
+        try {
+            setTitulo();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            Object ob[] = new Object[8];
+            while (rs.next()) {
+                ob[0] = rs.getInt(1);
+                ob[1] = rs.getString(2);
+                ob[2] = rs.getString(3);
+                ob[3] = rs.getString(4);
+                ob[4] = rs.getString(5);
+                ob[5] = rs.getString(6);
+                ob[6] = rs.getString(7);
+                ob[7] = rs.getString(8);
+                DTcu.addRow(ob);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return DTcu;
+    }
+
 }

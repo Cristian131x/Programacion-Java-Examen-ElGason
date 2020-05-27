@@ -1,34 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
-import codigos.CamionCombo_1;
-import conexion.Conexion;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import combos.CamionCombo_1;
+import consultas.ConsultasCamion;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
+import java.util.Date;
+import modelo.Camion;
 
-/**
- *
- * @author crist
- */
+
 public class Camiones extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Camiones
-     */
+    Camion cam = new Camion();
+    ConsultasCamion ccam =new ConsultasCamion();
     public Camiones() {
         initComponents();
         actualizarCombo();
@@ -78,14 +61,14 @@ public class Camiones extends javax.swing.JFrame {
         xrevision = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        xlista = new javax.swing.JTable();
         xbuscar = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        xlistaU = new javax.swing.JTable();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         xrevision1 = new com.toedter.calendar.JDateChooser();
@@ -214,7 +197,7 @@ public class Camiones extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Registrar", jPanel1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        xlista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -225,7 +208,7 @@ public class Camiones extends javax.swing.JFrame {
                 "ID", "Patente", "Modelo", "Marca", "Revision Tec.", "Prox. Revi."
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(xlista);
 
         jButton2.setText("BUSCAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +254,7 @@ public class Camiones extends javax.swing.JFrame {
 
         jPanel4.setForeground(new java.awt.Color(255, 153, 255));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        xlistaU.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
             },
@@ -287,8 +270,8 @@ public class Camiones extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable3.setEnabled(false);
-        jScrollPane3.setViewportView(jTable3);
+        xlistaU.setEnabled(false);
+        jScrollPane3.setViewportView(xlistaU);
 
         jLabel19.setText("Patente");
 
@@ -496,17 +479,42 @@ public class Camiones extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void agregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCActionPerformed
-      
+        agregarCamion();
     }//GEN-LAST:event_agregarCActionPerformed
-
+    void agregarCamion(){
+        String Patente = xpatente.getText();
+        String Marca = xmarca.getText();
+        String Modelo = xmodelo.getText();
+        Date Revision_Tecnica = xrevision.getDate();
+        Date Porxima_Tecnica = xprevision.getDate();
+        cam.setPatente(Patente);
+        cam.setMarca(Marca);
+        cam.setModelo(Modelo);
+        cam.setRevicion_Tecnica(Revision_Tecnica);
+        cam.setProxima_Revision(Porxima_Tecnica);
+        if(ccam.registrarCamion(cam)){
+            limpiarA();
+        }
+        
+    }
+    void limpiarA() {
+        xpatente.setText("");
+        xmodelo.setText("");
+        xmarca.setText("");
+        xrevision.setDateFormatString("");
+        xprevision.setDateFormatString("");
+    }
     private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      consultas.ConsultasCamion.listarCamiones();
+      listar();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+     void listar(){
+        cam.setPatente(xbuscar.getText());      
+        xlista.setModel(ccam.listar(cam));
+    }
     private void xmodelo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xmodelo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_xmodelo1ActionPerformed
@@ -516,12 +524,51 @@ public class Camiones extends javax.swing.JFrame {
     }//GEN-LAST:event_xpatente1ActionPerformed
 
     private void xbuscarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xbuscarCActionPerformed
-        consultas.ConsultasCamion.buscaLista();
+        listarU();
+        buscarCamion();
     }//GEN-LAST:event_xbuscarCActionPerformed
-
+    void listarU(){
+        cam.setId_camion(Integer.parseInt(xbuscar1.getSelectedItem().toString()));      
+        xlistaU.setModel(ccam.listarU(cam));
+    }
+    void buscarCamion(){
+        cam.setId_camion(Integer.parseInt(xbuscar1.getSelectedItem().toString()));
+        if(ccam.buscarCamion(cam)){
+        xpatente1.setText(cam.getPatente());
+        xmarca1.setText(cam.getMarca());
+        xmodelo1.setText(cam.getModelo());
+        xrevision1.setDate(cam.getRevicion_Tecnica()); 
+        xprevision1.setDate(cam.getProxima_Revision());
+        }
+    }
     private void modificarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarCActionPerformed
-        
+        modificarCamion();
+        listarU();
     }//GEN-LAST:event_modificarCActionPerformed
+    void modificarCamion(){
+        int Id_Camion = (Integer.parseInt(xbuscar1.getSelectedItem().toString()));
+        String Patente = xpatente1.getText();
+        String Marca = xmarca1.getText();
+        String Modelo = xmodelo1.getText();
+        Date Revision_Tecnica = xrevision1.getDate();
+        Date Porxima_Tecnica = xprevision1.getDate();
+        cam.setId_camion(Id_Camion);
+        cam.setPatente(Patente);
+        cam.setMarca(Marca);
+        cam.setModelo(Modelo);
+        cam.setRevicion_Tecnica(Revision_Tecnica);
+        cam.setProxima_Revision(Porxima_Tecnica);
+        if(ccam.modificarCamion(cam)){
+            limpiarU();
+        }
+    }
+    void limpiarU() {
+        xpatente1.setText("");
+        xmodelo1.setText("");
+        xmarca1.setText("");
+        xrevision1.setDateFormatString("");
+        xprevision1.setDateFormatString("");
+    }
 
     private void xbuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xbuscar1ActionPerformed
         // TODO add your handling code here:   
@@ -600,13 +647,13 @@ public class Camiones extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    public static javax.swing.JTable jTable2;
-    public static javax.swing.JTable jTable3;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     public javax.swing.JButton modificarC;
     public static javax.swing.JTextField xbuscar;
     public static javax.swing.JComboBox<String> xbuscar1;
     public javax.swing.JButton xbuscarC;
+    public static javax.swing.JTable xlista;
+    public static javax.swing.JTable xlistaU;
     public static javax.swing.JTextField xmarca;
     public static javax.swing.JTextField xmarca1;
     public static javax.swing.JTextField xmodelo;

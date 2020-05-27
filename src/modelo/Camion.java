@@ -2,17 +2,6 @@ package modelo;
 
 import java.util.Date;
 
-
-
-
-
-
-
-
-
-
-
-
 public class Camion {
     private int Id_camion;
     private String Patente;

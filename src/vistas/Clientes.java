@@ -1,24 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
-/**
- *
- * @author crist
- */
+import consultas.ConsultasCliente;
+import modelo.Cliente;
+
+
 public class Clientes extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Pedidos
-     */
+    Cliente clie = new Cliente();
+    ConsultasCliente clv= new ConsultasCliente();
 
     public Clientes() {
-        initComponents();
-        
-
+        initComponents();      
     }
     
     /**
@@ -103,12 +96,12 @@ public class Clientes extends javax.swing.JFrame {
                                     .addComponent(xrutC, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(xcomunaC, javax.swing.GroupLayout.Alignment.LEADING, 0, 113, Short.MAX_VALUE))
                                 .addGap(46, 46, 46)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(xnumeroC, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(jLabel5)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(295, 295, 295)
                         .addComponent(agregarCli)))
@@ -181,12 +174,34 @@ public class Clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void agregarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCliActionPerformed
-        
+        registrarCliente();
         Vender v = new Vender();
         v.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_agregarCliActionPerformed
-
+    void registrarCliente(){
+        String Nombre = xnombreC.getText();
+        String Rut = xrutC.getText();
+        String Numero_Telfono = xnumeroC.getText();
+        int Comuna = Integer.parseInt(xcomunaC.getSelectedItem().toString());
+        String Direcion = xdireccionC.getText();
+        clie.setNombre(Nombre);
+        clie.setRut_Cliente(Rut);
+        clie.setNumero_Telefono(Numero_Telfono);
+        clie.setComuna_id(Comuna);
+        clie.setDireccion(Direcion);
+        if(clv.registrarCliente(clie)){
+        limpiar();
+        }
+        
+    }
+    void limpiar(){
+        xnombreC.setText(null);
+        xnumeroC.setText(null);
+        xdireccionC.setText(null);
+        xrutC.setText(null);
+        xcomunaC.setSelectedIndex(0);
+    }
     /**
      * @param args the command line arguments
      */

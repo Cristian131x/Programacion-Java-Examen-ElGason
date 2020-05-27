@@ -1,28 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
-import codigos.TrabajadorCombo_1;
+import combos.TrabajadorCombo_1;
+import consultas.ConsultasTrabajador;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import modelo.Trabajador;
 
-/**
- *
- * @author crist
- */
+
 public class Trabajadores extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Trabajadores
-     */
+    Trabajador trab = new Trabajador();
+    ConsultasTrabajador ctrab = new ConsultasTrabajador();
     public Trabajadores() {
         initComponents();
         actualizarCombo();
-        consultas.ConsultasTrabajador.listarTrabajadores();
+    }
+    public void limpiar() {
+        xrut.setText(null);
+        xnombre.setText(null);
+        xapellido.setText(null);
+        xtelefono.setText(null);
+        xsexo.setSelectedIndex(0);
+        xestado.setSelectedIndex(0);
+        xpuesto.setSelectedIndex(0);
+    }
+    public void limpiar1() {
+        xnombre1.setText(null);
+        xapellido1.setText(null);
+        xtelefono1.setText(null);
+        xsexo1.setSelectedIndex(0);
+        xestado1.setSelectedIndex(0);
+        xpuesto1.setSelectedIndex(0);
     }
 
     void actualizarCombo() {
@@ -73,13 +84,11 @@ public class Trabajadores extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        xrut1 = new javax.swing.JTextField();
         xnombre1 = new javax.swing.JTextField();
         xapellido1 = new javax.swing.JTextField();
         xtelefono1 = new javax.swing.JTextField();
@@ -278,8 +287,6 @@ public class Trabajadores extends javax.swing.JFrame {
 
         jPanel4.setForeground(new java.awt.Color(255, 153, 255));
 
-        jLabel9.setText("Rut:");
-
         jLabel10.setText("Nombre:");
 
         jLabel11.setText("Apellido:");
@@ -352,14 +359,12 @@ public class Trabajadores extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(jLabel11)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel9)
                     .addComponent(jLabel14)
                     .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(xpuesto1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(xestado1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(xrut1)
                     .addComponent(xnombre1)
                     .addComponent(xapellido1)
                     .addComponent(xtelefono1)
@@ -388,12 +393,9 @@ public class Trabajadores extends javax.swing.JFrame {
                             .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(xrut1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel10)
                                     .addComponent(xnombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -436,7 +438,7 @@ public class Trabajadores extends javax.swing.JFrame {
             .addGap(0, 352, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 19, Short.MAX_VALUE)
+                    .addGap(0, 25, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -496,13 +498,36 @@ public class Trabajadores extends javax.swing.JFrame {
     }//GEN-LAST:event_xtelefonoActionPerformed
 
     private void agregarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTActionPerformed
-
+        registrarTrabajador();
     }//GEN-LAST:event_agregarTActionPerformed
-
+    void registrarTrabajador(){
+        String Rut = xrut.getText();
+        String Nombre = xnombre.getText();
+        String Apellido = xapellido.getText();
+        String Contacto = xtelefono.getText();
+        String Sexo = xsexo.getSelectedItem().toString();
+        String Estado = xestado.getSelectedItem().toString();
+        String Puesto = xpuesto.getSelectedItem().toString();
+        trab.setNombre(Nombre);
+        trab.setRut(Rut);
+        trab.setApellido(Apellido);
+        trab.setTelefono(Contacto);
+        trab.setSexo(Sexo);
+        trab.setEstado(Estado);
+        trab.setPuesto(Puesto);
+        if(ctrab.registrarTrabajador(trab)){
+        JOptionPane.showMessageDialog(null, "Nuevo Trabajador");
+        limpiar();
+        actualizarCombo();
+        }
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        consultas.ConsultasTrabajador.listarTrabajadores();
+        listarT();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    void listarT(){
+        trab.setRut(xbuscar.getText());
+        tablaT.setModel(ctrab.listar(trab));
+    }
     private void xapellido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xapellido1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_xapellido1ActionPerformed
@@ -512,13 +537,49 @@ public class Trabajadores extends javax.swing.JFrame {
     }//GEN-LAST:event_xsexo1ActionPerformed
 
     private void buscarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTActionPerformed
-        consultas.ConsultasTrabajador.listarModificarTrabajadores();
+        listarU();
+        buscarTrabajador();
+        
     }//GEN-LAST:event_buscarTActionPerformed
-
+    void listarU(){
+        trab.setRut(xbuscar1.getSelectedItem().toString());
+        tablaModificar.setModel(ctrab.listarU(trab));
+    }
+    void buscarTrabajador(){
+        trab.setRut(xbuscar1.getSelectedItem().toString());
+        if(ctrab.buscarTrabajador(trab)){
+        xnombre1.setText(trab.getNombre());
+        xapellido1.setText(trab.getApellido());
+        xtelefono1.setText(trab.getTelefono());
+        xsexo1.setSelectedItem(trab.getSexo());
+        xestado1.setSelectedItem(trab.getEstado());
+        xpuesto1.setSelectedItem(trab.getPuesto());
+        }        
+    }
     private void modificarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarTActionPerformed
-        consultas.ConsultasTrabajador.listarModificarTrabajadores();
+        listarU();
+        modificarTrabajador();
     }//GEN-LAST:event_modificarTActionPerformed
-
+    void modificarTrabajador(){
+        String Rut = xbuscar1.getSelectedItem().toString();
+        String Nombre = xnombre1.getText();
+        String Apellido = xapellido1.getText();
+        String Contacto = xtelefono1.getText();
+        String Sexo = xsexo1.getSelectedItem().toString();
+        String Estado = xestado1.getSelectedItem().toString();
+        String Puesto = xpuesto1.getSelectedItem().toString();
+        trab.setNombre(Nombre);
+        trab.setRut(Rut);
+        trab.setApellido(Apellido);
+        trab.setTelefono(Contacto);
+        trab.setSexo(Sexo);
+        trab.setEstado(Estado);
+        trab.setPuesto(Puesto);
+        if(ctrab.registrarTrabajador(trab)){
+        JOptionPane.showMessageDialog(null, "Trabajador Modificado con Exito");
+        limpiar1();
+        }
+    }
     private void xbuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xbuscar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_xbuscar1ActionPerformed
@@ -581,7 +642,6 @@ public class Trabajadores extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -605,7 +665,6 @@ public class Trabajadores extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> xpuesto;
     public static javax.swing.JComboBox<String> xpuesto1;
     public static javax.swing.JTextField xrut;
-    public static javax.swing.JTextField xrut1;
     public static javax.swing.JComboBox<String> xsexo;
     public static javax.swing.JComboBox<String> xsexo1;
     public static javax.swing.JTextField xtelefono;

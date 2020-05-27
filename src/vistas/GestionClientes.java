@@ -1,22 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
-import codigos.ClienteCombo_1;
+import combos.ClienteCombo_1;
+import consultas.ConsultasCliente;
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author crist
- */
+import javax.swing.table.DefaultTableModel;
+import modelo.Cliente;
+
+
 public class GestionClientes extends javax.swing.JFrame {
-
-    /**
-     * Creates new form GestionClientes
-     */
+    
+    Cliente cli =new Cliente();
+    ConsultasCliente clv = new ConsultasCliente();
+    DefaultTableModel modelo = new DefaultTableModel();
     public GestionClientes() {
         initComponents();
         actualizarCombo();
@@ -43,13 +41,13 @@ public class GestionClientes extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        xlista = new javax.swing.JTable();
         xbuscarC = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        xlistaU = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -66,18 +64,15 @@ public class GestionClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        xlista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "RUT", "NOMBRE", "TELEFONO", "DIRECCION", "COMUNA"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(xlista);
 
         jButton2.setText("BUSCAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -120,15 +115,15 @@ public class GestionClientes extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Listar", jPanel2);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        xlistaU.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Rut_Cliente", "Nombre", "Telefono", "Direccion", "Comuna"
+                "ID", "Rut_Cliente", "Nombre", "Telefono", "Direccion", "Comuna"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(xlistaU);
 
         jLabel2.setText("Nombre");
 
@@ -278,18 +273,45 @@ public class GestionClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        consultas.ConsultasCliente.listarCliente();
+        lista();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    void lista(){
+        cli.setRut_Cliente(xbuscarC.getText());      
+        xlista.setModel(clv.listar(cli));
+    }
     private void buscarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCliActionPerformed
-        // TODO add your handling code here:
-        consultas.ConsultasCliente.buscarListaGestion();
+       listarU();
+       buscarCliente();
     }//GEN-LAST:event_buscarCliActionPerformed
-
+    void listarU(){
+        cli.setRut_Cliente(xbuscar1.getSelectedItem().toString());
+        xlistaU.setModel(clv.listarU(cli));
+    }
+    void buscarCliente(){
+        cli.setRut_Cliente(xbuscar1.getSelectedItem().toString());
+        if(clv.buscarCliente(cli)){
+        xnombre.setText(cli.getNombre());
+        xcomuna.setSelectedItem(""+cli.getComuna_id());
+        xtelefono.setText(cli.getNumero_Telefono());
+        xdirecion.setText(cli.getDireccion()); 
+        }
+    }
     private void modificarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarCliActionPerformed
-
+        modificarCliente();
     }//GEN-LAST:event_modificarCliActionPerformed
-
+    void modificarCliente(){
+        String Rut = xbuscar1.getSelectedItem().toString();
+        String Nombre = xnombre.getText();
+        String Numero_Telfono = xtelefono.getText();
+        int Comuna = Integer.parseInt(xcomuna.getSelectedItem().toString());
+        String Direcion = xdirecion.getText();
+        cli.setNombre(Nombre);
+        cli.setRut_Cliente(Rut);
+        cli.setNumero_Telefono(Numero_Telfono);
+        cli.setComuna_id(Comuna);
+        cli.setDireccion(Direcion);
+        clv.modificarCliente(cli);  
+    }
     private void xbuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xbuscar1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_xbuscar1ActionPerformed
@@ -344,13 +366,13 @@ public class GestionClientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    public static javax.swing.JTable jTable2;
-    public static javax.swing.JTable jTable3;
     public javax.swing.JButton modificarCli;
     public static javax.swing.JComboBox<String> xbuscar1;
     public static javax.swing.JTextField xbuscarC;
     public static javax.swing.JComboBox<String> xcomuna;
     public static javax.swing.JTextField xdirecion;
+    public static javax.swing.JTable xlista;
+    public static javax.swing.JTable xlistaU;
     public static javax.swing.JTextField xnombre;
     public static javax.swing.JTextField xtelefono;
     // End of variables declaration//GEN-END:variables
