@@ -1,4 +1,3 @@
-
 package vistas;
 
 import combos.RutaCombo_1;
@@ -12,29 +11,43 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.Ruta;
-
 
 public class Rutas extends javax.swing.JFrame {
 
     Ruta ru = new Ruta();
     ConsultasRutas cru = new ConsultasRutas();
+
     public Rutas() {
         initComponents();
         actualizarCombo();
     }
+
     void actualizarCombo() {
         RutaCombo_1.conectar();
         xverfoto.removeAllItems();
         xbuscar1.removeAllItems();
-        
+
         ArrayList<String> lista = new ArrayList<String>();
         lista = RutaCombo_1.llenar_combox();
         for (int i = 0; i < lista.size(); i++) {
             xverfoto.addItem(lista.get(i));
             xbuscar1.addItem(lista.get(i));
         }
+    }
+
+    void limpiarA() {
+        xkilometraje.setText("");
+        xnombreR.setText("");
+        xfoto.setText("");
+    }
+
+    void limpiarU() {
+        xkilometraje1.setText("");
+        xnombreR1.setText("");
+        xfoto1.setText("");
     }
 
     /**
@@ -61,6 +74,7 @@ public class Rutas extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaRutas = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
@@ -71,7 +85,6 @@ public class Rutas extends javax.swing.JFrame {
         xkilometraje1 = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         xbuscar1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaU = new javax.swing.JTable();
         jButton8 = new javax.swing.JButton();
@@ -92,6 +105,18 @@ public class Rutas extends javax.swing.JFrame {
         jLabel13.setText("Foto:");
 
         xfoto.setEditable(false);
+
+        xkilometraje.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        xkilometraje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xkilometrajeActionPerformed(evt);
+            }
+        });
+        xkilometraje.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                xkilometrajeKeyTyped(evt);
+            }
+        });
 
         jButton3.setText("AGREGAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -119,9 +144,8 @@ public class Rutas extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(xnombreR, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                        .addComponent(xkilometraje))
+                    .addComponent(xnombreR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(xkilometraje, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(xfoto, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                 .addGap(6, 6, 6)
                 .addComponent(jButton4)
@@ -174,6 +198,8 @@ public class Rutas extends javax.swing.JFrame {
         tablaRutas.setRowHeight(15);
         jScrollPane2.setViewportView(tablaRutas);
 
+        jLabel3.setText("Nombre:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -183,6 +209,8 @@ public class Rutas extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(xbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2))
@@ -195,7 +223,8 @@ public class Rutas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -225,11 +254,9 @@ public class Rutas extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Id_Rutas");
-
         tablaU.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Kilometraje", "Nombre", "Foto"
@@ -249,48 +276,43 @@ public class Rutas extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(xfoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6))
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(xnombreR1)
-                        .addComponent(xkilometraje1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton7))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(0, 19, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(xfoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton6))
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(xnombreR1)
+                                .addComponent(xkilometraje1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addGap(0, 19, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jButton8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(26, 26, 26))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton8)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -408,30 +430,55 @@ public class Rutas extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         JFileChooser j = new JFileChooser();
-        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
+        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
         j.setFileFilter(fil);
-        
+
         int s = j.showOpenDialog(this);
-        if(s == JFileChooser.APPROVE_OPTION){
+        if (s == JFileChooser.APPROVE_OPTION) {
             String ruta = j.getSelectedFile().getAbsolutePath();
             xfoto.setText(ruta);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       agregarRuta();
+        agregarRuta();
     }//GEN-LAST:event_jButton3ActionPerformed
+    void agregarRuta() {
+        try {
+            int kilo = Integer.parseInt(xkilometraje.getText());
+            String nom = xnombreR.getText();
+            ru.setKilometraje(kilo);
+            ru.setNombre_ruta(nom);
+            File ruta = new File(xfoto.getText());
+            ru.setRuta("" + ruta);
+            try {
+                byte[] icono = new byte[(int) ruta.length()];
+                InputStream input = new FileInputStream(ruta);
+                input.read(icono);
+                ru.setFoto(icono);
+            } catch (Exception ex) {
+                ru.setFoto(null);
+            }
 
+            if (cru.registrarRutas(ru)) {
+                JOptionPane.showMessageDialog(null, "SE AGREGO LA RUTA CORRECTAMENTE");
+                actualizarCombo();
+                limpiarA();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         visualizarFoto();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-         JFileChooser j = new JFileChooser();
-        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF","jpg","png","gif");
+        JFileChooser j = new JFileChooser();
+        FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
         j.setFileFilter(fil);
         int s = j.showOpenDialog(this);
-        if(s == JFileChooser.APPROVE_OPTION){
+        if (s == JFileChooser.APPROVE_OPTION) {
             String ruta = j.getSelectedFile().getAbsolutePath();
             xfoto1.setText(ruta);
         }
@@ -439,80 +486,85 @@ public class Rutas extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         modificarRutas();
+
     }//GEN-LAST:event_jButton7ActionPerformed
+    void modificarRutas() {
+        try {
+            int id = (Integer.parseInt(xbuscar1.getSelectedItem().toString()));
+            int kilo = (Integer.parseInt(xkilometraje1.getText()));
+            String nom = xnombreR1.getText();
+            ru.setId_ruta(id);
+            ru.setKilometraje(kilo);
+            ru.setNombre_ruta(nom);
+            File ruta = new File(xfoto1.getText());
+            ru.setRuta("" + ruta);
+            try {
+                byte[] icono = new byte[(int) ruta.length()];
+                InputStream input = new FileInputStream(ruta);
+                input.read(icono);
+                ru.setFoto(icono);
+            } catch (Exception ex) {
+                ru.setFoto(null);
+            }
 
+            if (cru.modificarRutas(ru)) {
+                JOptionPane.showMessageDialog(null, "SE MODIFICO LA RUTA CORRECTAMENTE");
+                limpiarU();
+                listarU();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       listarA();
+        listarA();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    void listarA() {
+        ru.setNombre_rutaL(xbuscar.getText());
+        tablaRutas.setModel(cru.listar(ru));
+    }
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         buscarRutas();
         listarU();
     }//GEN-LAST:event_jButton8ActionPerformed
-    void listarU(){
+
+    private void xkilometrajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xkilometrajeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xkilometrajeActionPerformed
+
+    private void xkilometrajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_xkilometrajeKeyTyped
+        char c = evt.getKeyChar();
+        if (c<'0'|| c>'9') evt.consume();
+    }//GEN-LAST:event_xkilometrajeKeyTyped
+    void listarU() {
         ru.setId_ruta(Integer.parseInt(xbuscar1.getSelectedItem().toString()));
         tablaU.setModel(cru.listarU(ru));
     }
-    void buscarRutas(){
+
+    void buscarRutas() {
         ru.setId_ruta(Integer.parseInt(xbuscar1.getSelectedItem().toString()));
-        if(cru.buscarRutas(ru)){
-        xkilometraje1.setText(""+ru.getKilometraje());
-        xnombreR1.setText(ru.getNombre_ruta());
-        xfoto1.setText(""+ru.getFoto());
+        if (cru.buscarRutas(ru)) {
+            xkilometraje1.setText("" + ru.getKilometraje());
+            xnombreR1.setText(ru.getNombre_ruta());
+            xfoto1.setText(ru.getRuta());
         }
     }
-    void listarA(){
-        ru.setNombre_ruta(xbuscar.getText());      
-        tablaRutas.setModel(cru.listar(ru));
-    }
-    void modificarRutas(){
-       int id = (Integer.parseInt(xbuscar1.getSelectedItem().toString()));
-       int kilo = (Integer.parseInt(xkilometraje1.getText()));
-       String nom = xnombreR1.getText();
-       File ruta = new File(xfoto1.getText());
-       try{
-            byte[] icono = new byte[(int) ruta.length()];
-            InputStream input = new FileInputStream(ruta);
-            input.read(icono);
-            ru.setFoto(icono);
-        }catch(Exception ex){
-            ru.setFoto(null);
-        }
-       ru.setId_ruta(id);
-       ru.setKilometraje(kilo);
-       ru.setNombre_ruta(nom);
-       cru.modificarRutas(ru);
-    }
-    void visualizarFoto(){
+
+    void visualizarFoto() {
         ru.setId_ruta(Integer.parseInt(xverfoto.getSelectedItem().toString()));
-        if(cru.visualizarRutas(ru)){
-            try{
-                    byte[] bi = ru.getFoto();
-                    BufferedImage image = null;
-                    InputStream in = new ByteArrayInputStream(bi);
-                    image = ImageIO.read(in);
-                    ImageIcon imgi = new ImageIcon(image.getScaledInstance(519, 334,0));
-                    xfotito.setIcon(imgi);
-                }catch(Exception ex){
-                }
+        if (cru.visualizarRutas(ru)) {
+            try {
+                byte[] bi = ru.getFoto();
+                BufferedImage image = null;
+                InputStream in = new ByteArrayInputStream(bi);
+                image = ImageIO.read(in);
+                ImageIcon imgi = new ImageIcon(image.getScaledInstance(519, 334, 0));
+                xfotito.setIcon(imgi);
+            } catch (Exception ex) {
+            }
         }
     }
-    void agregarRuta(){
-       int kilo = (Integer.parseInt(xkilometraje.getText()));
-       String nom = xnombreR.getText();
-       File ruta = new File(xfoto.getText());
-       try{
-            byte[] icono = new byte[(int) ruta.length()];
-            InputStream input = new FileInputStream(ruta);
-            input.read(icono);
-            ru.setFoto(icono);
-        }catch(Exception ex){
-            ru.setFoto(null);
-        }      
-       ru.setKilometraje(kilo);
-       ru.setNombre_ruta(nom);
-       cru.registrarRutas(ru);
-    }
+
     /**
      * @param args the command line arguments
      */
@@ -560,7 +612,7 @@ public class Rutas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

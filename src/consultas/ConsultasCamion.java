@@ -20,7 +20,7 @@ public class ConsultasCamion extends Conexion {
     public boolean registrarCamion(Camion cam) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "insert into camiones(Patente,Modelo,Marca,Revision_Tecnica,Proxima_Revision) values(?,?,?,?,?)";
+        String sql = "insert into camiones(Patente,Modelo,Marca,Revision_Tecnica,Proxima_Revision,Estado) values(?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, cam.getPatente());
@@ -28,6 +28,7 @@ public class ConsultasCamion extends Conexion {
             ps.setString(3, cam.getMarca());
             ps.setDate(4, (Fecha(cam.getRevicion_Tecnica())));
             ps.setDate(5, (Fecha(cam.getProxima_Revision())));
+            ps.setString(6, "NoAsignado");
             ps.execute();
             return true;
         } catch (Exception e) {
@@ -81,8 +82,8 @@ public class ConsultasCamion extends Conexion {
                 cam.setPatente(rs.getString("Patente"));
                 cam.setModelo(rs.getString("Modelo"));
                 cam.setMarca(rs.getString("Marca"));
-                cam.setRevicion_Tecnica(rs.getDate("Revision_Tecnica"));
-                cam.setProxima_Revision(rs.getDate("Proxima_Revision"));
+                cam.setRevicion_Tecnica(Fecha(rs.getDate("Revision_Tecnica")));
+                cam.setProxima_Revision(Fecha(rs.getDate("Proxima_Revision")));
                 ps.execute();
             }
             return true;
@@ -111,7 +112,7 @@ public class ConsultasCamion extends Conexion {
     }
 
     public DefaultTableModel listar(Camion cam) {
-        String campo = cam.getPatente();
+        String campo = cam.getPatenteL();
         String where = "";
         if (!"".equals(campo)) {
             where = "where Patente= '" + campo + "'";

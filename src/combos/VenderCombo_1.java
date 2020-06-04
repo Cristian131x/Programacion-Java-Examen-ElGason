@@ -22,7 +22,7 @@ public class VenderCombo_1 {
             Conexion.coneccion();
             ps = Conexion.coneccion().prepareStatement("select * from gas where tipo_id=? and estado=?");
             ps.setString(1, vistas.Vender.xtipogasG.getSelectedItem().toString());
-            ps.setString(2, "Bodega");
+            ps.setString(2, vistas.Vender.xdespacho.getSelectedItem().toString());
             rs = ps.executeQuery();
             System.out.println("Correcto");
         } catch (Exception e) {
@@ -31,6 +31,46 @@ public class VenderCombo_1 {
         try {
             while(rs.next()){
                 lista.add(rs.getString("id_gas"));
+    
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public static ArrayList<String> llenar_comboCamion(){
+        ArrayList<String> lista = new ArrayList<String>();
+        try {
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select * from camiones");
+            rs = ps.executeQuery();
+            System.out.println("Correcto");
+        } catch (Exception e) {
+            System.out.println("No Correcto");
+        }
+        try {
+            while(rs.next()){
+                lista.add(rs.getString("Patente"));
+    
+            }
+        } catch (Exception e) {
+        }
+        return lista;
+    }
+    public static ArrayList<String> llenar_comboCamionGases(){
+        ArrayList<String> lista = new ArrayList<String>();
+        try {
+            Conexion.coneccion();
+            ps = Conexion.coneccion().prepareStatement("select * from control_gas where Patente=? and TipoGas=?");
+            ps.setString(1, vistas.Vender.xcamiones.getSelectedItem().toString());
+            ps.setString(2, vistas.Vender.xtipogasG.getSelectedItem().toString());
+            rs = ps.executeQuery();
+            System.out.println("Correcto");
+        } catch (Exception e) {
+            System.out.println("No Correcto");
+        }
+        try {
+            while(rs.next()){
+                lista.add(rs.getString("gas_id"));
     
             }
         } catch (Exception e) {

@@ -62,12 +62,13 @@ public class ConsultasVender extends Conexion {
     public boolean GuardarDetalleCompra(DetalleCompra de) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "insert into detalle_compra (boleta_id,precio,gas_id)values(?,?,?)";
+        String sql = "insert into detalle_compra (boleta_id,precio,gas_id,id_tipo_gas)values(?,?,?,?)";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, de.getBoleta_numero());
             ps.setInt(2, de.getPrecio());
             ps.setInt(3, de.getGas_id());
+            ps.setInt(4, de.getTipo());
             ps.execute();
             return true;
         } catch (Exception e) {

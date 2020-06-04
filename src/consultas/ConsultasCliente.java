@@ -98,7 +98,7 @@ public class ConsultasCliente extends conexion.Conexion {
         return DTc;
     }
     public DefaultTableModel listar(Cliente clie) {
-        String campo = clie.getRut_Cliente();
+        String campo = clie.getRut_ClienteL();
         String where = "";
         if (!"".equals(campo)) {
             where = "where Rut_Cliente= '" + campo + "'";
@@ -141,7 +141,7 @@ public class ConsultasCliente extends conexion.Conexion {
     }
 
     public DefaultTableModel listarU(Cliente clie) {
-        String campo = clie.getRut_Cliente();
+        String campo = clie.getRut_ClienteL();
         String where = "";
         if (!"".equals(campo)) {
             where = "where Rut_Cliente= '" + campo + "'";

@@ -8,6 +8,16 @@ public class DetalleCompra {
     public int Cantidad;
     public int Precio;
     public int Gas_id;
+    public int Tipo;
+
+    public int getTipo() {
+        return Tipo;
+    }
+
+    public void setTipo(int Tipo) {
+        this.Tipo = Tipo;
+    }
+    
 
     public int getCodigo_detalle() {
         return Codigo_detalle;

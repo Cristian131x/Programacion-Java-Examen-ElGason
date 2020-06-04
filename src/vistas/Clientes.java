@@ -1,19 +1,18 @@
-
 package vistas;
 
 import consultas.ConsultasCliente;
+import javax.swing.JOptionPane;
 import modelo.Cliente;
-
 
 public class Clientes extends javax.swing.JFrame {
 
     Cliente clie = new Cliente();
-    ConsultasCliente clv= new ConsultasCliente();
+    ConsultasCliente clv = new ConsultasCliente();
 
     public Clientes() {
-        initComponents();      
+        initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,11 +54,17 @@ public class Clientes extends javax.swing.JFrame {
 
         jLabel1.setText("RUT Cliente:");
 
+        xrutC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xrutCActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Numero Telefono");
 
         jLabel3.setText("Direccion:");
 
-        xcomunaC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "1", "2", "3" }));
+        xcomunaC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
         jLabel4.setText("Comuna:");
 
@@ -91,17 +96,17 @@ public class Clientes extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(xdireccionC)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(xnombreC, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(xrutC, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(xcomunaC, javax.swing.GroupLayout.Alignment.LEADING, 0, 113, Short.MAX_VALUE))
-                                .addGap(46, 46, 46)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(xrutC)
+                                    .addComponent(xcomunaC, 0, 121, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(xnumeroC, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel5)))))
+                                        .addComponent(xnumeroC, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel5)))
+                            .addComponent(xnombreC)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(295, 295, 295)
                         .addComponent(agregarCli)))
@@ -168,40 +173,46 @@ public class Clientes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Vender v= new Vender();
+        Vender v = new Vender();
         v.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void agregarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCliActionPerformed
         registrarCliente();
-        Vender v = new Vender();
-        v.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_agregarCliActionPerformed
-    void registrarCliente(){
-        String Nombre = xnombreC.getText();
-        String Rut = xrutC.getText();
-        String Numero_Telfono = xnumeroC.getText();
-        int Comuna = Integer.parseInt(xcomunaC.getSelectedItem().toString());
-        String Direcion = xdireccionC.getText();
-        clie.setNombre(Nombre);
-        clie.setRut_Cliente(Rut);
-        clie.setNumero_Telefono(Numero_Telfono);
-        clie.setComuna_id(Comuna);
-        clie.setDireccion(Direcion);
-        if(clv.registrarCliente(clie)){
-        limpiar();
+
+    private void xrutCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xrutCActionPerformed
+
+    }//GEN-LAST:event_xrutCActionPerformed
+    void registrarCliente() {
+        try {
+            String Nombre = xnombreC.getText();
+            String Rut = xrutC.getText();
+            String Numero_Telfono = xnumeroC.getText();
+            int Comuna = Integer.parseInt(xcomunaC.getSelectedItem().toString());
+            String Direcion = xdireccionC.getText();
+            clie.setNombre(Nombre);
+            clie.setRut_Cliente(Rut);
+            clie.setNumero_Telefono(Numero_Telfono);
+            clie.setComuna_id(Comuna);
+            clie.setDireccion(Direcion);
+            if (clv.registrarCliente(clie)) {
+                limpiar();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
-        
     }
-    void limpiar(){
+
+    void limpiar() {
         xnombreC.setText(null);
         xnumeroC.setText(null);
         xdireccionC.setText(null);
         xrutC.setText(null);
         xcomunaC.setSelectedIndex(0);
     }
+
     /**
      * @param args the command line arguments
      */

@@ -3,6 +3,7 @@ package consultas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import modelo.Trabajador;
 
@@ -11,7 +12,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
     public boolean registrarTrabajador(Trabajador trab) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "insert into empleado(Rut,Nombre,Apellido,Sexo,Telefono,Estado,Puesto) values (?,?,?,?,?,?,?)";
+        String sql = "insert into empleado(Rut,Nombre,Apellido,Sexo,Telefono,Estado,Puesto,Lugar) values (?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, trab.getRut());
@@ -21,6 +22,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
             ps.setString(5, trab.getTelefono());
             ps.setString(6, trab.getEstado());
             ps.setString(7, trab.getPuesto());
+            ps.setString(8, "Nada");
             ps.execute();
             return true;
         } catch (Exception e) {
@@ -108,7 +110,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
     }
 
     public DefaultTableModel listar(Trabajador trab) {
-        String campo = trab.getRut();
+        String campo = trab.getRutL();
         String where = "";
         if (!"".equals(campo)) {
             where = "where Rut_Cliente= '" + campo + "'";
@@ -158,7 +160,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
         String campo = trab.getRut();
         String where = "";
         if (!"".equals(campo)) {
-            where = "where Rut_Cliente= '" + campo + "'";
+            where = "where Rut= '" + campo + "'";
         } else {
         }
         PreparedStatement ps = null;
@@ -179,12 +181,55 @@ public class ConsultasTrabajador extends conexion.Conexion {
                 ob[5] = rs.getString(6);
                 ob[6] = rs.getString(7);
                 ob[7] = rs.getString(8);
-                DTcu.addRow(ob);
+                DT.addRow(ob);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
-        return DTcu;
+        return DT;
+    }
+
+    public String IdEmpleado() {
+        PreparedStatement ps = null;
+        Connection con = getConexion();;
+        ResultSet rs = null;
+        String idB = "";
+        String sql = "select max(Id) from empleado";
+        try {
+
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                idB = rs.getString(1);
+
+            }
+        } catch (Exception e) {
+        }
+        return idB;
+
+    }
+
+    public boolean registrarPaleta(Trabajador trab) {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "insert into paletas(id_empleado,Rut,Nombre) values (?,?,?)";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, trab.getId());
+            ps.setString(2, trab.getRut());
+            ps.setString(3, trab.getNombre());
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
 }

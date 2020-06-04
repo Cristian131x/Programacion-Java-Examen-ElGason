@@ -1,8 +1,7 @@
-
 package modelo;
 
-
 public class StockGas {
+
     private int Stock;
     private int Id_gas;
     private String Nombre;
@@ -47,7 +46,10 @@ public class StockGas {
         return Precio;
     }
 
-    public void setPrecio(int Precio) {
+    public void setPrecio(int Precio) throws Exception {
+        if (Precio <=0) {
+            throw new Exception("El Precio debe ser mayor a 0");      
+        }
         this.Precio = Precio;
     }
 
@@ -71,7 +73,10 @@ public class StockGas {
         return Cantidad;
     }
 
-    public void setCantidad(int Cantidad) {
+    public void setCantidad(int Cantidad) throws Exception {
+        if (Cantidad <= 0) {
+            throw new Exception("Seleccione una cantidad mayor a 0");
+        }
         this.Cantidad = Cantidad;
     }
 
@@ -139,5 +144,4 @@ public class StockGas {
         this.X45v = X45v;
     }
 
-    
 }

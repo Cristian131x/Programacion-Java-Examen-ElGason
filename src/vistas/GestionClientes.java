@@ -5,6 +5,7 @@ import combos.ClienteCombo_1;
 import consultas.ConsultasCliente;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
@@ -18,6 +19,7 @@ public class GestionClientes extends javax.swing.JFrame {
     public GestionClientes() {
         initComponents();
         actualizarCombo();
+        lista();
     }
     void actualizarCombo() {
         ClienteCombo_1.conectar();
@@ -133,7 +135,7 @@ public class GestionClientes extends javax.swing.JFrame {
 
         jLabel5.setText("Comuna:");
 
-        xcomuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "1", "2", "3" }));
+        xcomuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
         xbuscar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,10 +168,6 @@ public class GestionClientes extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 409, Short.MAX_VALUE)
-                                .addComponent(buscarCli)
-                                .addGap(18, 18, 18))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +185,11 @@ public class GestionClientes extends javax.swing.JFrame {
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(xtelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                                             .addComponent(xnombre))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(buscarCli)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -200,7 +202,7 @@ public class GestionClientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarCli))
                 .addGap(18, 18, 18)
@@ -246,7 +248,7 @@ public class GestionClientes extends javax.swing.JFrame {
                     .addComponent(jTabbedPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(158, 158, 158)
+                        .addGap(200, 200, 200)
                         .addComponent(jLabel16)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -256,9 +258,12 @@ public class GestionClientes extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -276,30 +281,36 @@ public class GestionClientes extends javax.swing.JFrame {
         lista();
     }//GEN-LAST:event_jButton2ActionPerformed
     void lista(){
-        cli.setRut_Cliente(xbuscarC.getText());      
+        cli.setRut_ClienteL(xbuscarC.getText().trim());      
         xlista.setModel(clv.listar(cli));
+
     }
     private void buscarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCliActionPerformed
        listarU();
        buscarCliente();
     }//GEN-LAST:event_buscarCliActionPerformed
     void listarU(){
-        cli.setRut_Cliente(xbuscar1.getSelectedItem().toString());
-        xlistaU.setModel(clv.listarU(cli));
+        cli.setRut_ClienteL(xbuscar1.getSelectedItem().toString());
+        xlistaU.setModel(clv.listarU(cli));     
     }
     void buscarCliente(){
+        try{
         cli.setRut_Cliente(xbuscar1.getSelectedItem().toString());
         if(clv.buscarCliente(cli)){
         xnombre.setText(cli.getNombre());
         xcomuna.setSelectedItem(""+cli.getComuna_id());
         xtelefono.setText(cli.getNumero_Telefono());
-        xdirecion.setText(cli.getDireccion()); 
+        xdirecion.setText(cli.getDireccion());}    
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
     }
     private void modificarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarCliActionPerformed
         modificarCliente();
     }//GEN-LAST:event_modificarCliActionPerformed
     void modificarCliente(){
+        try{
         String Rut = xbuscar1.getSelectedItem().toString();
         String Nombre = xnombre.getText();
         String Numero_Telfono = xtelefono.getText();
@@ -310,7 +321,21 @@ public class GestionClientes extends javax.swing.JFrame {
         cli.setNumero_Telefono(Numero_Telfono);
         cli.setComuna_id(Comuna);
         cli.setDireccion(Direcion);
-        clv.modificarCliente(cli);  
+        clv.modificarCliente(cli); 
+        limpiar();
+        actualizarCombo();
+        listarU();
+        JOptionPane.showMessageDialog(null, "SE MODIFICO EL CLIENTE CON EXITO");
+        }
+         catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
+        }
+    }
+    void limpiar() {
+        xnombre.setText(null);
+        xtelefono.setText(null);
+        xdirecion.setText(null);
+        xcomuna.setSelectedIndex(0);
     }
     private void xbuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xbuscar1ActionPerformed
         // TODO add your handling code here:

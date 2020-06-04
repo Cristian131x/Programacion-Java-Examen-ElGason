@@ -149,7 +149,7 @@ public class ConsultasStockGas extends conexion.Conexion {
         String sql = "update gas set estado =? where id_gas=?";
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, "Vendido");
+            ps.setString(1, "Pendiente");
             ps.setInt(2, stk.getId_gas());
             ps.execute();
             return true;
@@ -425,22 +425,112 @@ public class ConsultasStockGas extends conexion.Conexion {
         return DT;
     }
 
-    public static void comboGas() {
+    public boolean buscarGas(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select * from tipo where id_tipo=?";
         try {
-            Conexion.coneccion();
-            ps = Conexion.coneccion().prepareStatement("select * from tipo where id_tipo= ?");
-            ps.setString(1, vistas.StockGases.xtipo.getSelectedItem().toString());
-
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, stk.getTipo_id());
             rs = ps.executeQuery();
             if (rs.next()) {
-                vistas.StockGases.xprecio.setText(rs.getString("Precio"));
-                vistas.StockGases.xnombre.setText(rs.getString("nombre"));
-            } else {
+                stk.setPrecio(Integer.parseInt((rs.getString("Precio"))));
+                stk.setNombre(rs.getString("nombre"));
+                ps.execute();
             }
-        } catch (SQLException ex) {
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
+    }
+
+    public boolean modificarPrecioG(StockGas stk) {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "update tipo set Precio=? where id_tipo=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, stk.getPrecio());
+            ps.setInt(2, stk.getTipo_id());
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public boolean modificarPrecioGases(StockGas stk) {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "update gas set precio=? where tipo_id=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, stk.getPrecio());
+            ps.setInt(2, stk.getTipo_id());
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+    private DefaultTableModel DTGA;
+
+    private DefaultTableModel setTituloGA() {
+        DTGA = new DefaultTableModel();
+        DTGA.addColumn("Id_Gas");
+        DTGA.addColumn("Nombre");
+        DTGA.addColumn("Tipo_Id");
+        return DTGA;
+    }
+
+    public DefaultTableModel listarGA(StockGas stk) {
+        String campo = "Bodega";
+        String where = "";
+        if (!"".equals(campo)) {
+            where = "where estado= '" + campo + "' ";
+        } else {
+        }
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select id_gas,nombre,tipo_id from gas " + where;
+        try {
+            setTituloGA();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            Object ob[] = new Object[5];
+            while (rs.next()) {
+                ob[0] = rs.getInt(1);
+                ob[1] = rs.getString(2);
+                ob[2] = rs.getInt(3);
+                DTGA.addRow(ob);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return DTGA;
     }
 
 }
