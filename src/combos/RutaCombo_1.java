@@ -1,23 +1,22 @@
 
 package combos;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+
+import conexion.Conexion;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 
 public class RutaCombo_1 {
-    static Statement st;
     static ResultSet rs;
-    static Connection conexion=null;
+    static PreparedStatement ps;
         
-        public static ArrayList<String> llenar_combox(){
+        public static ArrayList<String> llenar_combox(Conexion con){
         ArrayList<String> lista = new ArrayList<String>();
-        String q = "SELECT * FROM rutas";
         try {
-            rs = st.executeQuery(q);
+            ps = con.getConexion().prepareStatement("SELECT * FROM rutas");
+            rs = ps.executeQuery();
             System.out.println("Correcto");
         } catch (Exception e) {
             System.out.println("No Correcto");
@@ -30,17 +29,4 @@ public class RutaCombo_1 {
         }
         return lista;
     }
-    public static void conectar(){
-        String ruta="jdbc:mysql://localhost/proyectogas";
-        String user="root";
-        String pass="";
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conexion=DriverManager.getConnection(ruta,user,pass); 
-            st= conexion.createStatement();
-            System.out.println("Conectado");
-        } catch (Exception e) {
-            System.out.println("No conectado");
-        }
-    }  
 }

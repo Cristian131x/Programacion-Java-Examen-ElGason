@@ -183,11 +183,11 @@ public class ConsultasRutas extends Conexion {
                 ob[1] = rs.getInt(2);
                 ob[2] = rs.getString(3);
                 ob[3] = rs.getString(4);
-                DTc.addRow(ob);
+                DTu.addRow(ob);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        return DTc;
+        return DTu;
     }
 }

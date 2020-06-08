@@ -153,7 +153,7 @@ public class GestionGas extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 255, 204));
         jLabel3.setText("CONTROL Y GESTION GASES");
 
-        jButton4.setText("Home");
+        jButton4.setText("MENU");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);

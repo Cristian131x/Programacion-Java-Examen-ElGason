@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import modelo.Camion;
 
-public class ConsultasCamion extends Conexion {
+public class ConsultasCamion extends Conexion{
 
     public static java.sql.Date Fecha(java.util.Date date) {
         if (date != null) {
@@ -17,12 +17,12 @@ public class ConsultasCamion extends Conexion {
         return null;
     }
 
-    public boolean registrarCamion(Camion cam) {
+    public boolean registrarCamion(Camion cam,Conexion con) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
+
         String sql = "insert into camiones(Patente,Modelo,Marca,Revision_Tecnica,Proxima_Revision,Estado) values(?,?,?,?,?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = con.getConexion().prepareStatement(sql);
             ps.setString(1, cam.getPatente());
             ps.setString(2, cam.getModelo());
             ps.setString(3, cam.getMarca());
@@ -36,11 +36,15 @@ public class ConsultasCamion extends Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                con.getConexion().close();
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
+    }
+    public boolean registrarCamion(Camion cam) {
+        registrarCamion(cam, this);
+        return true;
     }
 
     public boolean modificarCamion(Camion cam) {
@@ -184,5 +188,7 @@ public class ConsultasCamion extends Conexion {
         }
         return DTu;
     }
+
+    
 
 }

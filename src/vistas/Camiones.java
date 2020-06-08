@@ -1,6 +1,8 @@
+
 package vistas;
 
 import combos.CamionCombo_1;
+import conexion.Conexion;
 import consultas.ConsultasCamion;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,19 +13,20 @@ public class Camiones extends javax.swing.JFrame {
 
     Camion cam = new Camion();
     ConsultasCamion ccam = new ConsultasCamion();
-
-
+    Conexion cone = new Conexion();
+    CamionCombo_1 cam1= new CamionCombo_1();
 
     public Camiones() {
         initComponents();
         actualizarCombo();
+        listar();
     }
 
     void actualizarCombo() {
-        CamionCombo_1.conectar();
+        cone.getConexion();
         xbuscar1.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
-        lista = CamionCombo_1.llenar_combox();
+        lista = cam1.llenar_combox(cone);
         for (int i = 0; i < lista.size(); i++) {
             xbuscar1.addItem(lista.get(i));
         }
@@ -349,20 +352,18 @@ public class Camiones extends javax.swing.JFrame {
                                     .addComponent(xmarca1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(xprevision1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(xrevision1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(112, 350, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(modificarC)
+                        .addGap(16, 16, 16))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(jScrollPane3))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(xbuscarC, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(modificarC)
-                .addGap(25, 25, 25))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,11 +395,14 @@ public class Camiones extends javax.swing.JFrame {
                         .addComponent(xrevision1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel22)
-                    .addComponent(xprevision1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(modificarC)
-                .addGap(21, 21, 21))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(xprevision1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(modificarC)
+                        .addGap(30, 30, 30))))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -424,7 +428,7 @@ public class Camiones extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Modificar", jPanel3);
 
-        jButton1.setText("Home");
+        jButton1.setText("MENU");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -472,7 +476,6 @@ public class Camiones extends javax.swing.JFrame {
     }//GEN-LAST:event_xmodeloActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         Menu m = new Menu();
         m.setVisible(true);
         this.setVisible(false);

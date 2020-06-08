@@ -477,11 +477,13 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean modificarPrecioGases(StockGas stk) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "update gas set precio=? where tipo_id=?";
+        String sql = "update gas set precio=? where tipo_id=? and estado=? or estado=?";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, stk.getPrecio());
             ps.setInt(2, stk.getTipo_id());
+            ps.setString(3, "Camion");
+            ps.setString(4, "Bodega");
             ps.execute();
             return true;
         } catch (Exception e) {

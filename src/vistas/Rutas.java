@@ -1,6 +1,7 @@
 package vistas;
 
 import combos.RutaCombo_1;
+import conexion.Conexion;
 import consultas.ConsultasRutas;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -19,6 +20,8 @@ public class Rutas extends javax.swing.JFrame {
 
     Ruta ru = new Ruta();
     ConsultasRutas cru = new ConsultasRutas();
+    Conexion cone = new Conexion();
+    RutaCombo_1 rut1 = new RutaCombo_1();
 
     public Rutas() {
         initComponents();
@@ -26,12 +29,11 @@ public class Rutas extends javax.swing.JFrame {
     }
 
     void actualizarCombo() {
-        RutaCombo_1.conectar();
+        cone.getConexion();
         xverfoto.removeAllItems();
         xbuscar1.removeAllItems();
-
         ArrayList<String> lista = new ArrayList<String>();
-        lista = RutaCombo_1.llenar_combox();
+        lista = rut1.llenar_combox(cone);
         for (int i = 0; i < lista.size(); i++) {
             xverfoto.addItem(lista.get(i));
             xbuscar1.addItem(lista.get(i));
@@ -378,7 +380,7 @@ public class Rutas extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Ver Rutas", jPanel1);
 
-        jButton1.setText("Home");
+        jButton1.setText("MENU");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

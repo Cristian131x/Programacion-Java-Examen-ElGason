@@ -1,6 +1,7 @@
 package vistas;
 
 import combos.TrabajadorCombo_1;
+import conexion.Conexion;
 import consultas.ConsultasTrabajador;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,8 @@ public class Trabajadores extends javax.swing.JFrame {
 
     Trabajador trab = new Trabajador();
     ConsultasTrabajador ctrab = new ConsultasTrabajador();
+    Conexion cone = new Conexion();
+    TrabajadorCombo_1 trab1 = new TrabajadorCombo_1();
 
     public Trabajadores() {
         initComponents();
@@ -39,10 +42,10 @@ public class Trabajadores extends javax.swing.JFrame {
     }
 
     void actualizarCombo() {
-        TrabajadorCombo_1.conectar();
+        cone.getConexion();
         xbuscar1.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
-        lista = TrabajadorCombo_1.llenar_combox();
+        lista = trab1.llenar_combox(cone);
         for (int i = 0; i < lista.size(); i++) {
             xbuscar1.addItem(lista.get(i));
         }
@@ -186,7 +189,7 @@ public class Trabajadores extends javax.swing.JFrame {
                     .addComponent(xrut, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(xsexo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(xestado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(468, Short.MAX_VALUE))
+                .addContainerGap(446, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(agregarT)
@@ -439,7 +442,7 @@ public class Trabajadores extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Modificar", jPanel3);
 
-        jButton1.setText("Home");
+        jButton1.setText("MENU");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

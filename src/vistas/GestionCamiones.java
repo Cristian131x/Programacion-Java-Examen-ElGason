@@ -127,7 +127,7 @@ public class GestionCamiones extends javax.swing.JFrame {
 
         jButton2.setText("REFRESCAR");
 
-        jButton3.setText("Home");
+        jButton3.setText("MENU");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -325,6 +325,8 @@ public class GestionCamiones extends javax.swing.JFrame {
             estadoNoAsignado();
             listarCamiones();
             listarCamionesRu();
+            idCG.setText("");
+            
         }
     }
     void estadoNoAsignado(){

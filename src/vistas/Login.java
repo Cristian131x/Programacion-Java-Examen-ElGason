@@ -10,9 +10,7 @@ import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Inicio
-     */
+    Conexion cone = new Conexion();
     public Login() {
         initComponents();
     }
@@ -22,7 +20,7 @@ public class Login extends javax.swing.JFrame {
         String usuario=xusuario.getText();
         String SQL="select * from usuario where usuario='"+usuario+"' and password='"+password+"'";
         try {
-            Statement st=Conexion.coneccion().createStatement();
+            Statement st= cone.getConexion().createStatement();
             ResultSet rs=st.executeQuery(SQL);
             if (rs.next()){
                 resultado = 1;

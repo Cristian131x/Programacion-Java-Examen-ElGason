@@ -2,9 +2,9 @@
 package vistas;
 
 import combos.ClienteCombo_1;
+import conexion.Conexion;
 import consultas.ConsultasCliente;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -16,16 +16,19 @@ public class GestionClientes extends javax.swing.JFrame {
     Cliente cli =new Cliente();
     ConsultasCliente clv = new ConsultasCliente();
     DefaultTableModel modelo = new DefaultTableModel();
+    ClienteCombo_1 clie1 = new ClienteCombo_1();
+    Conexion cone = new Conexion();
+    
     public GestionClientes() {
         initComponents();
         actualizarCombo();
         lista();
     }
     void actualizarCombo() {
-        ClienteCombo_1.conectar();
+        cone.getConexion();
         xbuscar1.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
-        lista = ClienteCombo_1.llenar_combox();
+        lista = clie1.llenar_combox(cone);
         for (int i = 0; i < lista.size(); i++) {
             xbuscar1.addItem(lista.get(i));
         }
@@ -231,7 +234,7 @@ public class GestionClientes extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel16.setText("Cliente");
 
-        jButton1.setText("Home");
+        jButton1.setText("MENU");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

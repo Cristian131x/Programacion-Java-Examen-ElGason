@@ -21,18 +21,4 @@ public class Conexion {
         }
         return con;
     }
-    public static Connection coneccion() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/proyectogas";
-        String user = "root";
-        String pass = "";
-
-        Connection con = DriverManager.getConnection(url, user, pass);
-        try {
-            System.out.println("Si se pudo conectar a la base de datos");
-            return con;
-        } catch (Exception e) {
-            System.out.println("No se pudo conectar a la base de datos: " + e.toString());
-            return con;
-        }
-    }
 }
