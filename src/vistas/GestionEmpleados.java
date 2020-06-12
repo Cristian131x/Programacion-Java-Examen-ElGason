@@ -1,3 +1,4 @@
+
 package vistas;
 
 import consultas.ConsultasCamion;
@@ -6,8 +7,8 @@ import modelo.Camion;
 import modelo.ControlGestiones;
 import modelo.Trabajador;
 
-public class GestionEmpleados extends javax.swing.JFrame {
-
+public class GestionEmpleados extends javax.swing.JInternalFrame {
+    
     Camion cam = new Camion();
     ConsultasCamion ccam = new ConsultasCamion();
     Trabajador trab = new Trabajador();
@@ -28,31 +29,65 @@ public class GestionEmpleados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        xlista = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tablaT = new javax.swing.JTable();
-        xpuesto = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         idCam = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        xlista = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         idE = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaEC = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaT = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
+        xpuesto = new javax.swing.JComboBox<>();
         xCT = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jButton3.setText("REFRESCAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Puesto");
+
+        jButton4.setText("INGRESAR ->");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("REFRESCAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("<- QUITAR");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        idCam.setEditable(false);
+
+        jLabel2.setText("ID CAMION SELECCIONADO");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("LISTA DE TRABAJADORES");
 
         xlista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,19 +112,38 @@ public class GestionEmpleados extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(xlista);
-        if (xlista.getColumnModel().getColumnCount() > 0) {
-            xlista.getColumnModel().getColumn(0).setResizable(false);
-            xlista.getColumnModel().getColumn(1).setResizable(false);
-            xlista.getColumnModel().getColumn(2).setResizable(false);
-            xlista.getColumnModel().getColumn(3).setResizable(false);
-            xlista.getColumnModel().getColumn(4).setResizable(false);
-            xlista.getColumnModel().getColumn(5).setResizable(false);
-        }
+
+        jLabel4.setText("Empleado Seleccionado");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("TRABAJADORES EN CAMION");
+
+        idE.setEditable(false);
+        idE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idEActionPerformed(evt);
+            }
+        });
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 255, 204));
         jLabel3.setText("CONTROL Y GESTION EMPLEADOS");
+
+        tablaEC.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "ID Camion", "ID Empleado", "Puesto"
+            }
+        ));
+        tablaEC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaECMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaEC);
 
         tablaT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,14 +167,12 @@ public class GestionEmpleados extends javax.swing.JFrame {
             }
         });
         jScrollPane3.setViewportView(tablaT);
-        if (tablaT.getColumnModel().getColumnCount() > 0) {
-            tablaT.getColumnModel().getColumn(0).setResizable(false);
-            tablaT.getColumnModel().getColumn(1).setResizable(false);
-            tablaT.getColumnModel().getColumn(2).setResizable(false);
-            tablaT.getColumnModel().getColumn(3).setResizable(false);
-        }
+
+        jLabel5.setText("Empleado Seleccionado");
 
         xpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Paleta", "Conductor" }));
+
+        xCT.setEditable(false);
 
         jButton1.setText("REFRESCAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -128,76 +180,6 @@ public class GestionEmpleados extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Puesto");
-
-        jButton2.setText("REFRESCAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        idCam.setEditable(false);
-
-        jLabel2.setText("ID Camion");
-
-        jLabel4.setText("Empleado Seleccionado");
-
-        idE.setEditable(false);
-
-        tablaEC.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "ID Camion", "ID Empleado", "Puesto"
-            }
-        ));
-        tablaEC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaECMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tablaEC);
-
-        jLabel5.setText("Empleado Seleccionado");
-
-        xCT.setEditable(false);
-
-        jButton3.setText("REFRESCAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("INGRESAR ->");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("<- QUITAR");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("MENU");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("LISTA DE TRABAJADORES");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("TRABAJADORES EN CAMION");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,10 +240,6 @@ public class GestionEmpleados extends javax.swing.JFrame {
                                 .addComponent(jLabel7)
                                 .addGap(36, 36, 36)))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +254,7 @@ public class GestionEmpleados extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(idCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
@@ -298,9 +276,7 @@ public class GestionEmpleados extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(jButton6)
-                        .addContainerGap())
+                        .addContainerGap(66, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addGap(43, 43, 43)
@@ -311,12 +287,21 @@ public class GestionEmpleados extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void xlistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xlistaMouseClicked
-        int seleccion = xlista.rowAtPoint(evt.getPoint());
-        idCam.setText(String.valueOf(xlista.getValueAt(seleccion, 0)));
-        listarGestionT();
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        try {
+            listarGestionT();
+        } catch (Exception e) {
+        }
 
-    }//GEN-LAST:event_xlistaMouseClicked
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try {
+            ingresarTrabajadorCamion();
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         listar();
@@ -325,58 +310,13 @@ public class GestionEmpleados extends javax.swing.JFrame {
         cam.setPatenteL("");
         xlista.setModel(ccam.listar(cam));
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        listarT();
-    }//GEN-LAST:event_jButton1ActionPerformed
-    void listarT() {
-        try {
-            trab.setPuesto(xpuesto.getSelectedItem().toString());
-            tablaT.setModel(ccg.listarT(trab));
-        } catch (Exception e) {
-        }
-    }
-    private void tablaTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTMouseClicked
-        int seleccion = tablaT.rowAtPoint(evt.getPoint());
-        idE.setText(String.valueOf(tablaT.getValueAt(seleccion, 0)));
-    }//GEN-LAST:event_tablaTMouseClicked
-
-    private void tablaECMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaECMouseClicked
-        int seleccion = tablaEC.rowAtPoint(evt.getPoint());
-        xCT.setText(String.valueOf(tablaEC.getValueAt(seleccion, 2)));
-    }//GEN-LAST:event_tablaECMouseClicked
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        try {
-            ingresarTrabajadorCamion();
-        } catch (Exception e) {
-        }
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            listarGestionT();
-        } catch (Exception e) {
-        }
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-    void listarGestionT() {
-        cge.setCamion_Id(Integer.parseInt(idCam.getText().toString()));
-        tablaEC.setModel(ccg.listarGestionTrab(cge));
-    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
             borrarTrabCamion();
         } catch (Exception e) {
         }
-        
-    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        Menu m = new Menu();
-        m.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButton5ActionPerformed
     void borrarTrabCamion() {
         int IdTrab = Integer.parseInt(xCT.getText().toString());
         cge.setId_Empleado(IdTrab);
@@ -417,40 +357,38 @@ public class GestionEmpleados extends javax.swing.JFrame {
         if (ccg.lugarEmpleado(trab)) {
         }
     }
+    private void xlistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xlistaMouseClicked
+        int seleccion = xlista.rowAtPoint(evt.getPoint());
+        idCam.setText(String.valueOf(xlista.getValueAt(seleccion, 0)));
+        listarGestionT();
+    }//GEN-LAST:event_xlistaMouseClicked
+    void listarGestionT() {
+        cge.setCamion_Id(Integer.parseInt(idCam.getText().toString()));
+        tablaEC.setModel(ccg.listarGestionTrab(cge));
+    }
+    private void tablaECMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaECMouseClicked
+        int seleccion = tablaEC.rowAtPoint(evt.getPoint());
+        xCT.setText(String.valueOf(tablaEC.getValueAt(seleccion, 2)));
+    }//GEN-LAST:event_tablaECMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void tablaTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaTMouseClicked
+        int seleccion = tablaT.rowAtPoint(evt.getPoint());
+        idE.setText(String.valueOf(tablaT.getValueAt(seleccion, 0)));
+    }//GEN-LAST:event_tablaTMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        listarT();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void idEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idEActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idEActionPerformed
+    void listarT() {
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionEmpleados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            trab.setPuesto(xpuesto.getSelectedItem().toString());
+            tablaT.setModel(ccg.listarT(trab));
+        } catch (Exception e) {
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GestionEmpleados().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -461,7 +399,6 @@ public class GestionEmpleados extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

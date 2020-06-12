@@ -4,17 +4,19 @@ import conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import modelo.ControlGestiones;
+import modelo.StockGas;
 
 public class VenderCombo_1 {
     static ResultSet rs;
     static PreparedStatement ps;
 
-    public static ArrayList<String> llenar_comboxs(Conexion con) {
+    public static ArrayList<String> llenar_comboxs(Conexion con, StockGas stk) {
         ArrayList<String> lista = new ArrayList<String>();
         try {
             ps = con.getConexion().prepareStatement("select * from gas where tipo_id=? and estado=?");
-            ps.setString(1, vistas.Vender.xtipogasG.getSelectedItem().toString());
-            ps.setString(2, vistas.Vender.xdespacho.getSelectedItem().toString());
+            ps.setInt(1, stk.getTipo_id());
+            ps.setString(2, stk.getEstado());
             rs = ps.executeQuery();
             System.out.println("Correcto");
         } catch (Exception e) {
@@ -47,12 +49,12 @@ public class VenderCombo_1 {
         return lista;
     }
 
-    public static ArrayList<String> llenar_comboCamionGases(Conexion con) {
+    public static ArrayList<String> llenar_comboCamionGases(Conexion con,ControlGestiones cg) {
         ArrayList<String> lista = new ArrayList<String>();
         try {
             ps = con.getConexion().prepareStatement("select * from control_gas where Patente=? and TipoGas=?");
-            ps.setString(1, vistas.Vender.xcamiones.getSelectedItem().toString());
-            ps.setString(2, vistas.Vender.xtipogasG.getSelectedItem().toString());
+            ps.setString(1, cg.getPatente());
+            ps.setInt(2,  cg.getTipo());
             rs = ps.executeQuery();
             System.out.println("Correcto");
         } catch (Exception e) {

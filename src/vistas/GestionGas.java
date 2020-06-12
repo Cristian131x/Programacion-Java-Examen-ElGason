@@ -1,3 +1,4 @@
+
 package vistas;
 
 import consultas.ConsultasCamion;
@@ -7,7 +8,7 @@ import modelo.Camion;
 import modelo.ControlGestiones;
 import modelo.StockGas;
 
-public class GestionGas extends javax.swing.JFrame {
+public class GestionGas extends javax.swing.JInternalFrame {
 
     Camion cam = new Camion();
     ConsultasCamion ccam = new ConsultasCamion();
@@ -15,7 +16,7 @@ public class GestionGas extends javax.swing.JFrame {
     ConsultasStockGas cstk = new ConsultasStockGas();
     ConsultasControlGestiones ccg = new ConsultasControlGestiones();
     ControlGestiones cg = new ControlGestiones();
-
+    
     public GestionGas() {
         initComponents();
         listar();
@@ -31,85 +32,41 @@ public class GestionGas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        xlista = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        xlistar = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        idCam = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        idGS = new javax.swing.JTextField();
         idGas = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         gestionG = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        idGS = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        xlista = new javax.swing.JTable();
         xpatente = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         xtipo = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        xlistar = new javax.swing.JTable();
+        jButton5 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        idCam = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        xlista.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Patente", "Modelo", "Marca", "Revision Tec.", "Prox. Revi."
-            }
-        ));
-        xlista.setRowHeight(30);
-        xlista.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                xlistaMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(xlista);
-
-        jButton2.setText("REFRESCAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        xlistar.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Nombre", "Tipo_ID"
-            }
-        ));
-        xlistar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                xlistarMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(xlistar);
-
-        jButton3.setText("REFRESCAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        idCam.setEditable(false);
-
-        jLabel1.setText("ID Camion");
+        idGS.setEditable(false);
 
         idGas.setEditable(false);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setText("LISTA DE GASES EN BODEGA");
+
         jLabel2.setText("GAS SELECCIONADO");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("GASES EN CAMION");
 
         gestionG.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,13 +90,26 @@ public class GestionGas extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(gestionG);
-        if (gestionG.getColumnModel().getColumnCount() > 0) {
-            gestionG.getColumnModel().getColumn(0).setResizable(false);
-            gestionG.getColumnModel().getColumn(1).setResizable(false);
-            gestionG.getColumnModel().getColumn(2).setResizable(false);
-            gestionG.getColumnModel().getColumn(3).setResizable(false);
-            gestionG.getColumnModel().getColumn(4).setResizable(false);
-        }
+
+        jLabel7.setText("Patente");
+
+        xlista.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Patente", "Modelo", "Marca", "Revision Tec.", "Prox. Revi."
+            }
+        ));
+        xlista.setRowHeight(30);
+        xlista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                xlistaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(xlista);
+
+        xpatente.setEditable(false);
 
         jButton1.setText("INSERTAR ->");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,17 +118,34 @@ public class GestionGas extends javax.swing.JFrame {
             }
         });
 
+        xtipo.setEditable(false);
+
+        jButton2.setText("REFRESCAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 255, 204));
         jLabel3.setText("CONTROL Y GESTION GASES");
 
-        jButton4.setText("MENU");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+        xlistar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre", "Tipo_ID"
+            }
+        ));
+        xlistar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                xlistarMouseClicked(evt);
             }
         });
+        jScrollPane3.setViewportView(xlistar);
 
         jButton5.setText("<- QUITAR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -167,7 +154,16 @@ public class GestionGas extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("REFRESCAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("GAS SELECCIONADO");
+
+        idCam.setEditable(false);
 
         jButton6.setText("REFRESCAR");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -176,19 +172,7 @@ public class GestionGas extends javax.swing.JFrame {
             }
         });
 
-        idGS.setEditable(false);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel5.setText("LISTA DE GASES EN BODEGA");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("GASES EN CAMION SELECCIONADO");
-
-        jLabel7.setText("Patente");
-
-        xpatente.setEditable(false);
-
-        xtipo.setEditable(false);
+        jLabel1.setText("ID Camion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -226,7 +210,6 @@ public class GestionGas extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton4)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(2, 2, 2)
@@ -240,13 +223,13 @@ public class GestionGas extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton2)))
-                        .addGap(0, 8, Short.MAX_VALUE))
+                        .addGap(0, 6, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
-                        .addGap(8, 8, 8)))
+                        .addGap(78, 78, 78)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -264,7 +247,7 @@ public class GestionGas extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel7)
                     .addComponent(xpatente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
@@ -283,29 +266,21 @@ public class GestionGas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27))
+                        .addGap(65, 65, 65))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(40, 40, 40)
                         .addComponent(jButton5)
-                        .addGap(103, 103, 103)))
-                .addComponent(jButton4)
-                .addContainerGap())
+                        .addGap(141, 141, 141))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        listar();
-    }//GEN-LAST:event_jButton2ActionPerformed
-    void listar() {
-        cam.setPatenteL("");
-        xlista.setModel(ccam.listar(cam));
-    }
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        listarGas();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void gestionGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionGMouseClicked
+        int seleccion = gestionG.rowAtPoint(evt.getPoint());
+        idGS.setText(String.valueOf(gestionG.getValueAt(seleccion, 1)));
+    }//GEN-LAST:event_gestionGMouseClicked
 
     private void xlistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xlistaMouseClicked
         int seleccion = xlista.rowAtPoint(evt.getPoint());
@@ -313,22 +288,13 @@ public class GestionGas extends javax.swing.JFrame {
         xpatente.setText(String.valueOf(xlista.getValueAt(seleccion, 1)));
         listarGestionGas();
     }//GEN-LAST:event_xlistaMouseClicked
-    void listarGestionGas(){
-        cg.setCamion_Id(Integer.parseInt(idCam.getText().toString()));
-        gestionG.setModel(ccg.listarGestionGas(cg));
-    }
-    private void xlistarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xlistarMouseClicked
-        int seleccion = xlistar.rowAtPoint(evt.getPoint());
-        idGas.setText(String.valueOf(xlistar.getValueAt(seleccion, 0)));
-        xtipo.setText(String.valueOf(xlistar.getValueAt(seleccion, 2)));
-    }//GEN-LAST:event_xlistarMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             ingresarGasCamion();
         } catch (Exception e) {
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
     void ingresarGasCamion(){
         int Camion = Integer.parseInt(idCam.getText().toString());
@@ -353,32 +319,26 @@ public class GestionGas extends javax.swing.JFrame {
             
         }
     }
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        Menu m = new Menu();
-        m.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void gestionGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionGMouseClicked
-        int seleccion = gestionG.rowAtPoint(evt.getPoint());
-        idGS.setText(String.valueOf(gestionG.getValueAt(seleccion, 1)));
-    }//GEN-LAST:event_gestionGMouseClicked
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        listar();
+    }//GEN-LAST:event_jButton2ActionPerformed
+    void listar() {
+        cam.setPatenteL("");
+        xlista.setModel(ccam.listar(cam));
+    }
+    private void xlistarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xlistarMouseClicked
+        int seleccion = xlistar.rowAtPoint(evt.getPoint());
+        idGas.setText(String.valueOf(xlistar.getValueAt(seleccion, 0)));
+        xtipo.setText(String.valueOf(xlistar.getValueAt(seleccion, 2)));
+    }//GEN-LAST:event_xlistarMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try {
-             borrarGasCamion();
+            borrarGasCamion();
         } catch (Exception e) {
         }
-       
-    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        try {
-            listarGestionGas();
-        } catch (Exception e) {
-        }
-        
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButton5ActionPerformed
     void borrarGasCamion(){
         int Gas = Integer.parseInt(idGS.getText().toString());
         cg.setGas_Id(Gas);
@@ -396,46 +356,25 @@ public class GestionGas extends javax.swing.JFrame {
             
         }
     }
-    
-            
-    
+
     void listarGas() {
         xlistar.setModel(cstk.listarGA(stk));
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionGas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionGas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionGas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionGas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        listarGas();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GestionGas().setVisible(true);
-            }
-        });
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        try {
+            listarGestionGas();
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+     void listarGestionGas(){
+        cg.setCamion_Id(Integer.parseInt(idCam.getText().toString()));
+        gestionG.setModel(ccg.listarGestionGas(cg));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -446,7 +385,6 @@ public class GestionGas extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
