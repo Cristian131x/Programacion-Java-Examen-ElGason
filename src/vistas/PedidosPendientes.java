@@ -3,6 +3,8 @@ package vistas;
 import consultas.ConsultasPedidosPendientes;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import javax.xml.transform.Source;
 import modelo.DetalleCompra;
 import modelo.PedidoPendiente;
 import modelo.StockGas;
@@ -66,9 +68,17 @@ public class PedidosPendientes extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        (xlistar).setFocusable(false);
+        (xlistar) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         xlistar.setEnabled(false);
         xlistar.setFocusable(false);
         xlistar.setRowHeight(60);
+        xlistar.getTableHeader().setResizingAllowed(false);
+        xlistar.getTableHeader().setReorderingAllowed(false);
         xlistar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 xlistarMouseClicked(evt);
@@ -283,12 +293,23 @@ public class PedidosPendientes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         gasVendido();
+        gasVendidoC();
         agregarVacio5();
         agregarVacio11();
         agregarVacio15();
         agregarVacio45();
         actualizarBoleta();
     }//GEN-LAST:event_jButton1ActionPerformed
+    void gasVendidoC() {
+        for (int i = 0; i < xdetalles.getRowCount(); i++) {
+            String estado = "VENDIDO";
+            int IdG = Integer.parseInt(xdetalles.getValueAt(i, 3).toString());
+            ped.setEstado(estado);
+            ped.setGas_Id(IdG);
+            cped.gasVendidoC(ped);
+        }
+    }
+
     void agregarVacio45() {
         int Cantidad = (Integer.parseInt(c45.getText()));
         ped.setCantidadV(Cantidad);
@@ -327,6 +348,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
             c11.setText("" + de.getCantidad());
         }
     }
+
     void gasVendido() {
         for (int i = 0; i < xdetalles.getRowCount(); i++) {
             String estado = "VENDIDO";
@@ -336,6 +358,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
             cped.gasVendido(ped);
         }
     }
+
     void actualizarBoleta() {
         String estado = "VentaConfirmada";
         ped.setId(Integer.parseInt(idbo.getText().toString()));
@@ -346,6 +369,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "PEDIDO CONFIRMADO CON EXITO");
         }
     }
+
     void actualizarStockVacio5() {
         try {
             int Cantidad = Integer.parseInt(c5.getText().toString());
@@ -355,6 +379,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
         } catch (Exception E) {
         }
     }
+
     void actualizarStockVacio11() {
         try {
             int Cantidad = Integer.parseInt(c11.getText().toString());
@@ -364,6 +389,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
         } catch (Exception E) {
         }
     }
+
     void actualizarStockVacio15() {
         try {
             int Cantidad = Integer.parseInt(c15.getText().toString());
@@ -373,6 +399,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
         } catch (Exception E) {
         }
     }
+
     void actualizarStockVacio45() {
         try {
             int Cantidad = Integer.parseInt(c45.getText().toString());
@@ -382,7 +409,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
         } catch (Exception E) {
         }
     }
-    
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         borrarDetalle();
         gasNoVendido();
@@ -405,6 +432,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
         } catch (Exception E) {
         }
     }
+
     void mas11() {
         try {
             int Cantidad = Integer.parseInt(c11.getText().toString());
@@ -414,6 +442,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
         } catch (Exception E) {
         }
     }
+
     void mas15() {
         try {
             int Cantidad = Integer.parseInt(c15.getText().toString());
@@ -423,6 +452,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
         } catch (Exception E) {
         }
     }
+
     void mas45() {
         try {
             int Cantidad = Integer.parseInt(c45.getText().toString());
@@ -432,6 +462,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
         } catch (Exception E) {
         }
     }
+
     void borrarDetalle() {
         de.setBoleta_numero(Integer.parseInt(idbo.getText().toString()));
         if (cped.borrarDetalle(de)) {
@@ -439,12 +470,28 @@ public class PedidosPendientes extends javax.swing.JFrame {
     }
 
     void gasNoVendido() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = (DefaultTableModel) xdetalles.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(modelo);
+
         for (int i = 0; i < xdetalles.getRowCount(); i++) {
-            String estado = "Bodega";
-            int IdG = Integer.parseInt(xdetalles.getValueAt(i, 3).toString());
-            ped.setEstado(estado);
-            ped.setGas_Id(IdG);
-            cped.gasVendido(ped);
+            String Lugar = xdetalles.getValueAt(i, 5).toString();
+            if ("Nulo".equals(Lugar)) {
+                String estado = "Bodega";
+                int IdG = Integer.parseInt(xdetalles.getValueAt(i, 3).toString());
+                ped.setEstado(estado);
+                ped.setGas_Id(IdG);
+                cped.gasVendido(ped);
+                System.out.println("Bodega");
+            } else {
+                String estado = "Camion";
+                int IdG = Integer.parseInt(xdetalles.getValueAt(i, 3).toString());
+                ped.setEstado(estado);
+                ped.setGas_Id(IdG);
+                cped.gasVendido(ped);
+                System.out.println("Camion");
+            }
+
         }
     }
 

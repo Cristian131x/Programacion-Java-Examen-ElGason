@@ -84,6 +84,14 @@ public class GestionGas extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        (gestionG).setFocusable(false);
+        (gestionG) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        gestionG.getTableHeader().setResizingAllowed(false);
+        gestionG.getTableHeader().setReorderingAllowed(false);
         gestionG.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gestionGMouseClicked(evt);
@@ -101,7 +109,15 @@ public class GestionGas extends javax.swing.JInternalFrame {
                 "ID", "Patente", "Modelo", "Marca", "Revision Tec.", "Prox. Revi."
             }
         ));
+        (xlista).setFocusable(false);
+        (xlista) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         xlista.setRowHeight(30);
+        xlista.getTableHeader().setResizingAllowed(false);
+        xlista.getTableHeader().setReorderingAllowed(false);
         xlista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 xlistaMouseClicked(evt);
@@ -140,6 +156,14 @@ public class GestionGas extends javax.swing.JInternalFrame {
                 "ID", "Nombre", "Tipo_ID"
             }
         ));
+        (xlistar).setFocusable(false);
+        (xlistar) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        xlistar.getTableHeader().setResizingAllowed(false);
+        xlistar.getTableHeader().setReorderingAllowed(false);
         xlistar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 xlistarMouseClicked(evt);
@@ -282,13 +306,6 @@ public class GestionGas extends javax.swing.JInternalFrame {
         idGS.setText(String.valueOf(gestionG.getValueAt(seleccion, 1)));
     }//GEN-LAST:event_gestionGMouseClicked
 
-    private void xlistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xlistaMouseClicked
-        int seleccion = xlista.rowAtPoint(evt.getPoint());
-        idCam.setText(String.valueOf(xlista.getValueAt(seleccion, 0)));
-        xpatente.setText(String.valueOf(xlista.getValueAt(seleccion, 1)));
-        listarGestionGas();
-    }//GEN-LAST:event_xlistaMouseClicked
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             ingresarGasCamion();
@@ -301,10 +318,12 @@ public class GestionGas extends javax.swing.JInternalFrame {
         int Gas = Integer.parseInt(idGas.getText().toString());
         String Patente = xpatente.getText().toString();
         int Tipo = Integer.parseInt(xtipo.getText().toString());
+        String Estado = "Camion";
         cg.setCamion_Id(Camion);
         cg.setGas_Id(Gas);
         cg.setPatente(Patente);
         cg.setTipo(Tipo);
+        cg.setEstado(Estado);
         if(ccg.ingresarGasCamion(cg)){
         estadoEnCamion();
         listarGas();
@@ -372,8 +391,16 @@ public class GestionGas extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void xlistaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xlistaMouseClicked
+        int seleccion = xlista.rowAtPoint(evt.getPoint());
+        idCam.setText(String.valueOf(xlista.getValueAt(seleccion, 0)));
+        xpatente.setText(String.valueOf(xlista.getValueAt(seleccion, 1)));
+        listarGestionGas();
+    }//GEN-LAST:event_xlistaMouseClicked
      void listarGestionGas(){
         cg.setCamion_Id(Integer.parseInt(idCam.getText().toString()));
+        cg.setEstado("Camion");
         gestionG.setModel(ccg.listarGestionGas(cg));
     }
 
@@ -397,7 +424,7 @@ public class GestionGas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    public static javax.swing.JTable xlista;
+    private javax.swing.JTable xlista;
     public static javax.swing.JTable xlistar;
     private javax.swing.JTextField xpatente;
     private javax.swing.JTextField xtipo;

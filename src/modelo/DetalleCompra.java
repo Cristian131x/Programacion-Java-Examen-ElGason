@@ -9,6 +9,7 @@ public class DetalleCompra {
     public int Precio;
     public int Gas_id;
     public int Tipo;
+    public String Camion;
 
     public int getTipo() {
         return Tipo;
@@ -58,5 +59,14 @@ public class DetalleCompra {
     public void setGas_id(int Gas_id) {
         this.Gas_id = Gas_id;
     }
+
+    public String getCamion() {
+        return Camion;
+    }
+
+    public void setCamion(String Camion) {
+        this.Camion = Camion;
+    }
+    
         
 }

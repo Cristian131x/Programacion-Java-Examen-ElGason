@@ -190,11 +190,11 @@ public class Vender extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Nro", "ID", "Nombre", "Precio", "Tipo"
+                "Nro", "ID", "Nombre", "Precio", "Tipo", "Camion"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, true
+                true, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -202,6 +202,8 @@ public class Vender extends javax.swing.JInternalFrame {
             }
         });
         xtablaVenta.setEnabled(false);
+        xtablaVenta.getTableHeader().setResizingAllowed(false);
+        xtablaVenta.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(xtablaVenta);
 
         jLabel19.setText("FECHA:");
@@ -727,25 +729,27 @@ public class Vender extends javax.swing.JInternalFrame {
             String Nombre = xnombreG.getText();
             int Precio = Integer.parseInt(xprecioG.getText());
             int Tipo = Integer.parseInt(xtipogasG.getSelectedItem().toString());
+            String Camion = xcamiones.getSelectedItem().toString();
             ArrayList listaG = new ArrayList();
             listaG.add(item);
             listaG.add(ID);
             listaG.add(Nombre);
             listaG.add(Precio);
             listaG.add(Tipo);
-            Object[] ob = new Object[5];
+            listaG.add(Camion);
+            Object[] ob = new Object[6];
             ob[0] = listaG.get(0);
             ob[1] = listaG.get(1);
             ob[2] = listaG.get(2);
             ob[3] = listaG.get(3);
             ob[4] = listaG.get(4);
+            ob[5] = listaG.get(5);
             gases.addRow(ob);
             xtablaVenta.setModel(gases);
             cantidad();
             total();
             montoTotal();
-        } else {
-            JOptionPane.showMessageDialog(null, "GAS YA INGRESADO A LA LISTA,");
+        } else {          
         }
     }
 
@@ -753,6 +757,11 @@ public class Vender extends javax.swing.JInternalFrame {
         boolean existe = false;
         for (int i = 0; i < xtablaVenta.getRowCount(); i++) {
             if (xtablaVenta.getValueAt(i, 1).equals(xgasito.getSelectedItem())) {
+                JOptionPane.showMessageDialog(null, "GAS YA INGRESADO A LA LISTA,");
+                existe = true;
+            }
+            if (!xtablaVenta.getValueAt(i, 5).equals(xcamiones.getSelectedItem())) {
+                JOptionPane.showMessageDialog(null, "NO PUEDES AGREGAR GASES DE MULTIPLES DEPOSITOS");
                 existe = true;
             }
         }
@@ -867,6 +876,7 @@ public class Vender extends javax.swing.JInternalFrame {
         }
         if (xdespacho.getSelectedItem().toString() == "Bodega") {
             xcamiones.removeAllItems();
+            xcamiones.addItem("Nulo");
             xtipogasG.setSelectedIndex(0);
             xgasito.removeAllItems();
         }
@@ -1017,10 +1027,12 @@ public class Vender extends javax.swing.JInternalFrame {
             int IdG = Integer.parseInt(xtablaVenta.getValueAt(i, 1).toString());
             int PrecioG = Integer.parseInt(xtablaVenta.getValueAt(i, 3).toString());
             int Tipo = Integer.parseInt(xtablaVenta.getValueAt(i, 4).toString());
+            String Camion = xtablaVenta.getValueAt(i, 5).toString();
             dc.setBoleta_numero(idVe);
             dc.setGas_id(IdG);
             dc.setPrecio(PrecioG);
             dc.setTipo(Tipo);
+            dc.setCamion(Camion);
             cv.GuardarDetalleCompra(dc);
         }
     }
@@ -1047,6 +1059,7 @@ public class Vender extends javax.swing.JInternalFrame {
         xtotalPagar.setText("0");
         gases.setRowCount(0);
         xcamiones.removeAllItems();
+        xgasito.removeAllItems();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -52,9 +52,10 @@ public class VenderCombo_1 {
     public static ArrayList<String> llenar_comboCamionGases(Conexion con,ControlGestiones cg) {
         ArrayList<String> lista = new ArrayList<String>();
         try {
-            ps = con.getConexion().prepareStatement("select * from control_gas where Patente=? and TipoGas=?");
+            ps = con.getConexion().prepareStatement("select * from control_gas where Patente=? and TipoGas=? and EstadoGas=?");
             ps.setString(1, cg.getPatente());
             ps.setInt(2,  cg.getTipo());
+            ps.setString(3, "Camion");
             rs = ps.executeQuery();
             System.out.println("Correcto");
         } catch (Exception e) {

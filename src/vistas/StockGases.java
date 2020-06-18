@@ -258,9 +258,17 @@ public class StockGases extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        (xlistar).setFocusable(false);
+        (xlistar) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         xlistar.setEnabled(false);
         xlistar.setMinimumSize(new java.awt.Dimension(75, 16));
         xlistar.setRowHeight(30);
+        xlistar.getTableHeader().setResizingAllowed(false);
+        xlistar.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(xlistar);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N

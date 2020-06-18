@@ -76,7 +76,15 @@ public class GestionClientes extends javax.swing.JInternalFrame {
                 "ID", "RUT", "NOMBRE", "TELEFONO", "DIRECCION", "COMUNA"
             }
         ));
+        (xlista).setFocusable(false);
+        (xlista) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         xlista.setRowHeight(30);
+        xlista.getTableHeader().setResizingAllowed(false);
+        xlista.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(xlista);
 
         xbuscarC.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -133,7 +141,15 @@ public class GestionClientes extends javax.swing.JInternalFrame {
                 "ID", "Rut_Cliente", "Nombre", "Telefono", "Direccion", "Comuna"
             }
         ));
+        (xlistaU).setFocusable(false);
+        (xlistaU) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         xlistaU.setRowHeight(30);
+        xlistaU.getTableHeader().setResizingAllowed(false);
+        xlistaU.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(xlistaU);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N

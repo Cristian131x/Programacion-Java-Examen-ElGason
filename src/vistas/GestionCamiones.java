@@ -1,4 +1,3 @@
-
 package vistas;
 
 import consultas.ConsultasControlGestiones;
@@ -8,6 +7,8 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import modelo.Camion;
 import modelo.ControlGestiones;
 import modelo.Ruta;
@@ -19,14 +20,13 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
     ConsultasRutas cru = new ConsultasRutas();
     Camion cam = new Camion();
     ControlGestiones cg = new ControlGestiones();
-    
+
     public GestionCamiones() {
         initComponents();
         listarR();
         listarCamiones();
-        
-        tablaRutas.getTableHeader().setReorderingAllowed(false) ;
-        xlista.getTableHeader().setReorderingAllowed(false) ;
+        tablaRutas.getTableHeader().setReorderingAllowed(false);
+        xlista.getTableHeader().setReorderingAllowed(false);
         tablaGRC.getTableHeader().setReorderingAllowed(false);
     }
 
@@ -69,6 +69,7 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 255, 204));
         jLabel3.setText("GESTION Y CONTROL CAMIONES");
 
         tablaGRC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -80,6 +81,14 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
                 "ID", "ID Ruta", "ID Camion"
             }
         ));
+        (tablaGRC).setFocusable(false);
+        (tablaGRC) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tablaGRC.getTableHeader().setResizingAllowed(false);
+        tablaGRC.getTableHeader().setReorderingAllowed(false);
         tablaGRC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaGRCMouseClicked(evt);
@@ -112,17 +121,19 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
                 "ID", "Kilometraje", "Nombre"
             }
         ));
-        tablaRutas.setAutoscrolls(false);
+        (tablaRutas).setFocusable(false);
+        (tablaRutas) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaRutas.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        tablaRutas.setEnabled(false);
         tablaRutas.setFocusable(false);
         tablaRutas.setMaximumSize(new java.awt.Dimension(2147483647, 64));
         tablaRutas.setMinimumSize(new java.awt.Dimension(60, 64));
-        tablaRutas.setOpaque(false);
-        tablaRutas.setRequestFocusEnabled(false);
         tablaRutas.setRowHeight(50);
-        tablaRutas.setUpdateSelectionOnSort(false);
-        tablaRutas.setVerifyInputWhenFocusTarget(false);
+        tablaRutas.getTableHeader().setResizingAllowed(false);
+        tablaRutas.getTableHeader().setReorderingAllowed(false);
         tablaRutas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaRutasMouseClicked(evt);
@@ -174,7 +185,16 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        (xlista).setFocusable(false);
+        (xlista) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        xlista.setFocusable(false);
         xlista.setRowHeight(30);
+        xlista.getTableHeader().setResizingAllowed(false);
+        xlista.getTableHeader().setReorderingAllowed(false);
         xlista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 xlistaMouseClicked(evt);
@@ -257,7 +277,7 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
                     .addComponent(xfotito, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(idRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
@@ -292,7 +312,7 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         borrarGestionCamion();
     }//GEN-LAST:event_jButton6ActionPerformed
-    void borrarGestionCamion(){
+    void borrarGestionCamion() {
         int IdCam = Integer.parseInt(idCG.getText().toString());
         cg.setCamion_Id(IdCam);
         if (ccg.borrarRutaCamion(cg)) {
@@ -300,26 +320,29 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
             listarCamiones();
             listarCamionesRu();
             idCG.setText("");
-            
+
         }
     }
-    void estadoNoAsignado(){
+
+    void estadoNoAsignado() {
         int IdCam = Integer.parseInt(idCG.getText().toString());
         cam.setId_camion(IdCam);
         if (ccg.estadoNoAsignado(cam)) {
-            
+
         }
     }
-    void estadoEnRuta(){
+
+    void estadoEnRuta() {
         int Camion = Integer.parseInt(idCam.getText().toString());
         cam.setId_camion(Camion);
-        if (ccg.estadoEnRuta(cam)) {  
+        if (ccg.estadoEnRuta(cam)) {
         }
-        
+
     }
+
     void listarCamiones() {
 
-            xlista.setModel(ccg.listarCamiones(cam));
+        xlista.setModel(ccg.listarCamiones(cam));
 
     }
     private void tablaGRCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaGRCMouseClicked
@@ -361,13 +384,13 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
         int Ruta = Integer.parseInt(idRuta.getText().toString());
         cg.setCamion_Id(Camion);
         cg.setId_Ruta(Ruta);
-        if(ccg.ingresarRutaCamion(cg)){
+        if (ccg.ingresarRutaCamion(cg)) {
             estadoEnRuta();
             listarCamiones();
             listarCamionesRu();
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-    void listarCamionesRu(){
+    void listarCamionesRu() {
         ru.setId_ruta(Integer.parseInt(idRuta.getText().toString()));
         tablaGRC.setModel(ccg.listarCamionesRu(ru));
     }

@@ -105,7 +105,15 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        (xlista).setFocusable(false);
+        (xlista) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         xlista.setRowHeight(30);
+        xlista.getTableHeader().setResizingAllowed(false);
+        xlista.getTableHeader().setReorderingAllowed(false);
         xlista.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 xlistaMouseClicked(evt);
@@ -138,6 +146,14 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                 "ID", "ID Camion", "ID Empleado", "Puesto"
             }
         ));
+        (tablaEC).setFocusable(false);
+        (tablaEC) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tablaEC.getTableHeader().setResizingAllowed(false);
+        tablaEC.getTableHeader().setReorderingAllowed(false);
         tablaEC.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaECMouseClicked(evt);
@@ -161,6 +177,15 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        (tablaT).setFocusable(false);
+        (tablaT) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tablaT.setSurrendersFocusOnKeystroke(true);
+        tablaT.getTableHeader().setResizingAllowed(false);
+        tablaT.getTableHeader().setReorderingAllowed(false);
         tablaT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaTMouseClicked(evt);

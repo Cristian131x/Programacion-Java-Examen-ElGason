@@ -249,7 +249,15 @@ public class Trabajadores extends javax.swing.JInternalFrame {
                 "Id", "Rut", "Nombre", "Apellido", "Contacto", "Sexo", "Estado", "Puesto"
             }
         ));
+        (tablaT).setFocusable(false);
+        (tablaT) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaT.setRowHeight(30);
+        tablaT.getTableHeader().setResizingAllowed(false);
+        tablaT.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaT);
 
         xbuscar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -307,9 +315,17 @@ public class Trabajadores extends javax.swing.JInternalFrame {
                 "Id", "Rut", "Nombre", "Apellido", "Contacto", "Sexo", "Estado", "Puesto"
             }
         ));
+        (tablaModificar).setFocusable(false);
+        (tablaModificar) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaModificar.setColumnSelectionAllowed(true);
         tablaModificar.setEnabled(false);
         tablaModificar.setRowHeight(30);
+        tablaModificar.getTableHeader().setResizingAllowed(false);
+        tablaModificar.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tablaModificar);
         tablaModificar.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 

@@ -78,6 +78,7 @@ public class Camiones extends javax.swing.JInternalFrame {
         modificarC = new javax.swing.JButton();
         xbuscar1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -201,7 +202,15 @@ public class Camiones extends javax.swing.JInternalFrame {
                 "ID", "Patente", "Modelo", "Marca", "Revision Tec.", "Prox. Revi."
             }
         ));
+        (xlista).setFocusable(false);
+        (xlista) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         xlista.setRowHeight(30);
+        xlista.getTableHeader().setResizingAllowed(false);
+        xlista.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(xlista);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -269,8 +278,16 @@ public class Camiones extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        (xlistaU).setFocusable(false);
+        (xlistaU) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         xlistaU.setEnabled(false);
         xlistaU.setRowHeight(30);
+        xlistaU.getTableHeader().setResizingAllowed(false);
+        xlistaU.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(xlistaU);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -452,16 +469,20 @@ public class Camiones extends javax.swing.JInternalFrame {
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(331, 331, 331)
+                .addGap(203, 203, 203)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(211, 211, 211))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -596,6 +617,7 @@ public class Camiones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

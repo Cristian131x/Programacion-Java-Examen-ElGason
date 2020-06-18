@@ -10,7 +10,6 @@ import javax.swing.JInternalFrame;
 
 public class Menu extends javax.swing.JFrame {
 
-    JInternalFrame JIF = null;
     public Menu() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -244,68 +243,56 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         Rutas ru = new Rutas();
-        JIF = ru;
         Centrar(ru);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         GestionClientes clie = new GestionClientes();
-        JIF = clie;
         Centrar(clie);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         GestionGas ggas = new GestionGas();
-        JIF = ggas;
         Centrar(ggas);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         GestionCamiones gec = new GestionCamiones();
-        JIF = gec;
         Centrar(gec);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
         StockGases stk = new StockGases();
-        JIF = stk;
         Centrar(stk);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         Vender ven = new Vender();
-        JIF = ven;
         Centrar(ven);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
   
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         GestionEmpleados gtrab = new GestionEmpleados();
-        JIF = gtrab;
         Centrar(gtrab);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         Camiones cam = new Camiones();
-        JIF = cam;
         Centrar(cam);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         Trabajadores trab = new Trabajadores();
-        JIF = trab;
         Centrar(trab);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         Pedidos ped = new Pedidos();
-        JIF = ped;
         Centrar(ped);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
     void Centrar(JInternalFrame Frame){
-        if (JIF != null) {
-            JIF.dispose();
-            VentanaPrin.remove(JIF);
-        }
+        VentanaPrin.removeAll();
+        VentanaPrin.updateUI();
         VentanaPrin.add(Frame);
         Dimension dim = VentanaPrin.getSize();
         Dimension fventas= Frame.getSize();

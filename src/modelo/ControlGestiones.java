@@ -11,6 +11,8 @@ public class ControlGestiones {
     private int Id_Ruta;
     private String Patente;
     private int Tipo;
+    private String Estado;
+    
     public int getCodigoControlGas() {
         return CodigoControlGas;
     }
@@ -73,6 +75,14 @@ public class ControlGestiones {
 
     public void setTipo(int Tipo) {
         this.Tipo = Tipo;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
     }
     
     

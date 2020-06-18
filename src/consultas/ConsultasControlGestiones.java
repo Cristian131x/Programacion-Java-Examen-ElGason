@@ -15,13 +15,14 @@ public class ConsultasControlGestiones extends conexion.Conexion {
     public boolean ingresarGasCamion(ControlGestiones cge) {
         PreparedStatement ps = null;
         Connection con = getConexion();
-        String sql = "insert into control_gas(gas_id,TipoGas,camion_id,Patente) values (?,?,?,?)";
+        String sql = "insert into control_gas(gas_id,TipoGas,camion_id,Patente,EstadoGas) values (?,?,?,?,?)";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, cge.getGas_Id());
             ps.setInt(2, cge.getTipo());
             ps.setInt(3, cge.getCamion_Id());
             ps.setString(4, cge.getPatente());
+            ps.setString(5, cge.getEstado());
             ps.execute();
             return true;
         } catch (Exception e) {
@@ -70,9 +71,10 @@ public class ConsultasControlGestiones extends conexion.Conexion {
 
     public DefaultTableModel listarGestionGas(ControlGestiones cge) {
         int campo = cge.getCamion_Id();
+        String campo2 = cge.getEstado();
         String where = "";
         if (!"".equals(campo)) {
-            where = "where camion_id= '" + campo + "' ";
+            where = "where camion_id= '" + campo + "' and EstadoGas= '" + campo2 + "'";
         } else {
         }
         PreparedStatement ps = null;

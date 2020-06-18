@@ -1,6 +1,8 @@
 
 package modelo;
 
+import java.util.Date;
+
 
 public class PedidoPendiente {
     private int Id;
@@ -8,7 +10,8 @@ public class PedidoPendiente {
     private int Monto;
     private String Pago;
     private String Estado;
-    private String Fecha;
+    private Date Fecha;
+    private Date Fecha2;
     private int Id_detalle;
     private int Precio;
     private int Gas_Id;
@@ -81,14 +84,15 @@ public class PedidoPendiente {
         this.Estado = Estado;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return Fecha;
     }
 
-    public void setFecha(String Fecha) {
+    public void setFecha(Date Fecha) {
         this.Fecha = Fecha;
     }
 
+    
     public int getCantidadV() {
         return CantidadV;
     }
@@ -96,6 +100,15 @@ public class PedidoPendiente {
     public void setCantidadV(int CantidadV) {
         this.CantidadV = CantidadV;
     }
+
+    public Date getFecha2() {
+        return Fecha2;
+    }
+
+    public void setFecha2(Date Fecha2) {
+        this.Fecha2 = Fecha2;
+    }
+    
     
     
     

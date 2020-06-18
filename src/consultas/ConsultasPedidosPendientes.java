@@ -3,6 +3,7 @@ package consultas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import modelo.DetalleCompra;
 import modelo.PedidoPendiente;
@@ -10,6 +11,55 @@ import modelo.StockGas;
 
 public class ConsultasPedidosPendientes extends conexion.Conexion {
 
+    private DefaultTableModel DTF;
+
+    private DefaultTableModel setTituloF() {
+        DTF = new DefaultTableModel();
+        DTF.addColumn("Id");
+        DTF.addColumn("Cliente_Id");
+        DTF.addColumn("Monto_Total");
+        DTF.addColumn("Pago");
+        DTF.addColumn("Estado");
+        DTF.addColumn("Fecha");
+        return DTF;
+    }
+
+    public static java.sql.Date Fecha(java.util.Date date) {
+        if (date != null) {
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            return sqlDate;
+        }
+        return null;
+    }
+
+    public DefaultTableModel listarPedidosF(PedidoPendiente ped) {
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConexion();
+        String sql = "select * from boleta where Estado=? and fecha BETWEEN ? and ?";
+        try {
+            setTituloF();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, "VentaConfirmada");
+            ps.setDate(2, (Fecha(ped.getFecha())));
+            ps.setDate(3, (Fecha(ped.getFecha2())));
+            rs = ps.executeQuery();
+            Object ob[] = new Object[6];
+            while (rs.next()) {
+                ob[0] = rs.getInt(1);
+                ob[1] = rs.getInt(2);
+                ob[2] = rs.getInt(3);
+                ob[3] = rs.getString(4);
+                ob[4] = rs.getString(5);
+                ob[5] = rs.getString(6);
+                DTF.addRow(ob);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return DTF;
+    }
     private DefaultTableModel DTcu;
 
     private DefaultTableModel setTituloU() {
@@ -62,6 +112,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
         DT.addColumn("PRECIO");
         DT.addColumn("GAS_ID");
         DT.addColumn("TIPO_GAS");
+        DT.addColumn("CAMION");
         return DT;
     }
 
@@ -80,19 +131,42 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             setTitulo();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            Object ob[] = new Object[5];
+            Object ob[] = new Object[6];
             while (rs.next()) {
                 ob[0] = rs.getInt(1);
                 ob[1] = rs.getInt(2);
                 ob[2] = rs.getInt(3);
                 ob[3] = rs.getInt(4);
                 ob[4] = rs.getInt(5);
+                ob[5] = rs.getString(6);
                 DT.addRow(ob);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
         return DT;
+    }
+
+    public boolean gasVendidoC(PedidoPendiente ped) {
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        String sql = "update control_gas set EstadoGas=? where gas_id=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, ped.getEstado());
+            ps.setInt(2, ped.getGas_Id());
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 
     public boolean gasVendido(PedidoPendiente ped) {
@@ -122,6 +196,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
         Connection con = getConexion();
         String sql = "update gas set estado=? where id_gas=?";
         try {
+
             ps = con.prepareStatement(sql);
             ps.setString(1, ped.getEstado());
             ps.setInt(2, ped.getGas_Id());

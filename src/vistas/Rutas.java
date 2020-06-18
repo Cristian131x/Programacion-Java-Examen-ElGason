@@ -205,9 +205,17 @@ public class Rutas extends javax.swing.JInternalFrame {
                 "ID", "Kilometraje", "Nombre", "Foto"
             }
         ));
+        (tablaRutas).setFocusable(false);
+        (tablaRutas) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaRutas.setMaximumSize(new java.awt.Dimension(2147483647, 64));
         tablaRutas.setMinimumSize(new java.awt.Dimension(60, 64));
         tablaRutas.setRowHeight(30);
+        tablaRutas.getTableHeader().setResizingAllowed(false);
+        tablaRutas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaRutas);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -281,12 +289,21 @@ public class Rutas extends javax.swing.JInternalFrame {
 
         tablaU.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null}
             },
             new String [] {
                 "ID", "Kilometraje", "Nombre", "Foto"
             }
         ));
+        (tablaU).setFocusable(false);
+        (tablaU) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        tablaU.setRowHeight(30);
+        tablaU.getTableHeader().setResizingAllowed(false);
+        tablaU.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaU);
 
         jButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -336,12 +353,12 @@ public class Rutas extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton8)
+                    .addComponent(xbuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(xkilometraje1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
