@@ -14,7 +14,6 @@ public class Trabajadores extends javax.swing.JInternalFrame {
 
     Trabajador trab = new Trabajador();
     ConsultasTrabajador ctrab = new ConsultasTrabajador();
-    Conexion cone = new Conexion();
     TrabajadorCombo_1 trab1 = new TrabajadorCombo_1();
     
     public Trabajadores() {
@@ -44,10 +43,9 @@ public class Trabajadores extends javax.swing.JInternalFrame {
     }
 
     void actualizarCombo() {
-        cone.getConexion();
         xbuscar1.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
-        lista = trab1.llenar_combox(cone);
+        lista = trab1.llenar_combox();
         for (int i = 0; i < lista.size(); i++) {
             xbuscar1.addItem(lista.get(i));
         }
@@ -106,8 +104,9 @@ public class Trabajadores extends javax.swing.JInternalFrame {
         xpuesto1 = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel8.setText("TRABAJADORES");
 
         jPanel1.setForeground(new java.awt.Color(255, 153, 255));
@@ -233,7 +232,7 @@ public class Trabajadores extends javax.swing.JInternalFrame {
                         .addComponent(xestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(xpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addComponent(agregarT)
                 .addContainerGap())
         );
@@ -300,7 +299,7 @@ public class Trabajadores extends javax.swing.JInternalFrame {
                     .addComponent(xbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -467,12 +466,14 @@ public class Trabajadores extends javax.swing.JInternalFrame {
                     .addComponent(xpuesto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
                     .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(modificarT)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Modificar", jPanel3);
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/TRABAJADOR.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -483,17 +484,25 @@ public class Trabajadores extends javax.swing.JInternalFrame {
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(285, 285, 285)
+                .addGap(108, 108, 108)
                 .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel16)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jLabel8)
-                .addGap(26, 26, 26)
-                .addComponent(jTabbedPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(68, 68, 68)))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -532,6 +541,8 @@ public class Trabajadores extends javax.swing.JInternalFrame {
             trab.setPuesto(Puesto);
             if (ctrab.registrarTrabajador(trab)) {
                 JOptionPane.showMessageDialog(null, "Nuevo Trabajador");
+                limpiar();
+                actualizarCombo();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
@@ -641,6 +652,7 @@ public class Trabajadores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

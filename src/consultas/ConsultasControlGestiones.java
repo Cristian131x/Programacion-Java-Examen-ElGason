@@ -1,5 +1,6 @@
 package consultas;
 
+import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,14 +11,13 @@ import modelo.Ruta;
 import modelo.StockGas;
 import modelo.Trabajador;
 
-public class ConsultasControlGestiones extends conexion.Conexion {
+public class ConsultasControlGestiones {
 
     public boolean ingresarGasCamion(ControlGestiones cge) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into control_gas(gas_id,TipoGas,camion_id,Patente,EstadoGas) values (?,?,?,?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, cge.getGas_Id());
             ps.setInt(2, cge.getTipo());
             ps.setInt(3, cge.getCamion_Id());
@@ -30,7 +30,7 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -39,10 +39,9 @@ public class ConsultasControlGestiones extends conexion.Conexion {
 
     public boolean borrarGasCamion(ControlGestiones cge) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "delete from control_gas where gas_id=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, cge.getGas_Id());
             ps.execute();
             return true;
@@ -51,7 +50,7 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -79,11 +78,10 @@ public class ConsultasControlGestiones extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from control_gas " + where;
         try {
             setTituloGA();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[5];
             while (rs.next()) {
@@ -102,10 +100,9 @@ public class ConsultasControlGestiones extends conexion.Conexion {
 
     public boolean estadoEnCamion(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update gas set estado=? where id_gas=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, "Camion");
             ps.setInt(2, stk.getId_gas());
 
@@ -116,7 +113,7 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -125,10 +122,9 @@ public class ConsultasControlGestiones extends conexion.Conexion {
 
     public boolean estadoBodega(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update gas set estado=? where id_gas=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, "Bodega");
             ps.setInt(2, stk.getId_gas());
 
@@ -139,7 +135,7 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -166,11 +162,10 @@ public class ConsultasControlGestiones extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select Id,Nombre,Lugar,Puesto from empleado " + where;
         try {
             setTituloU();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[8];
             while (rs.next()) {
@@ -188,10 +183,9 @@ public class ConsultasControlGestiones extends conexion.Conexion {
 
     public boolean ingresarTrabajadorCamion(ControlGestiones cge) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into control_empleado_camion(id_camion,id_empleado,Puesto) values (?,?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, cge.getCamion_Id());
             ps.setInt(2, cge.getId_Empleado());
             ps.setString(3, cge.getPuesto());
@@ -202,7 +196,7 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -211,10 +205,9 @@ public class ConsultasControlGestiones extends conexion.Conexion {
 
     public boolean lugarEmpleado(Trabajador trab) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update empleado set Lugar=? where Id=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, "Camion");
             ps.setInt(2, trab.getId());
 
@@ -225,7 +218,7 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -234,10 +227,9 @@ public class ConsultasControlGestiones extends conexion.Conexion {
 
     public boolean lugarNada(Trabajador trab) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update empleado set Lugar=? where Id=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, "Nada");
             ps.setInt(2, trab.getId());
 
@@ -248,7 +240,7 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -274,11 +266,10 @@ public class ConsultasControlGestiones extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from control_empleado_camion " + where;
         try {
             setTituloT();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[5];
             while (rs.next()) {
@@ -296,10 +287,9 @@ public class ConsultasControlGestiones extends conexion.Conexion {
 
     public boolean borrarTrabCamion(ControlGestiones cge) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "delete from control_empleado_camion where id_empleado=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, cge.getId_Empleado());
             ps.execute();
             return true;
@@ -308,7 +298,7 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -334,11 +324,10 @@ public class ConsultasControlGestiones extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select id_ruta,kilometraje,nombre_ruta from rutas " + where;
         try {
             setTituloA();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[4];
             while (rs.next()) {
@@ -371,11 +360,10 @@ public class ConsultasControlGestiones extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select id_camion,Patente,Modelo from camiones " + where;
         try {
             setTituloC();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[3];
             while (rs.next()) {
@@ -408,11 +396,10 @@ public class ConsultasControlGestiones extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from control_rutas " + where;
         try {
             setTituloRC();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[3];
             while (rs.next()) {
@@ -426,12 +413,12 @@ public class ConsultasControlGestiones extends conexion.Conexion {
         }
         return DL;
     }
+
     public boolean ingresarRutaCamion(ControlGestiones cge) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into control_rutas (ruta_id,camion_id) values (?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, cge.getId_Ruta());
             ps.setInt(2, cge.getCamion_Id());
             ps.execute();
@@ -441,18 +428,18 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
     }
+
     public boolean estadoEnRuta(Camion cam) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update camiones set Estado=? where id_camion=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, "Asignado");
             ps.setInt(2, cam.getId_camion());
 
@@ -463,18 +450,18 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
     }
+
     public boolean estadoNoAsignado(Camion cam) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update camiones set Estado=? where id_camion=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, "NoAsignado");
             ps.setInt(2, cam.getId_camion());
 
@@ -485,18 +472,18 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
     }
+
     public boolean borrarRutaCamion(ControlGestiones cge) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "delete from control_rutas where camion_id=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, cge.getCamion_Id());
             ps.execute();
             return true;
@@ -505,12 +492,11 @@ public class ConsultasControlGestiones extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
     }
-    
 
 }

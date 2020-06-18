@@ -10,10 +10,10 @@ public class CamionCombo_1 {
     static ResultSet rs;
     static PreparedStatement ps;
         
-        public ArrayList<String> llenar_combox(Conexion con){
+        public ArrayList<String> llenar_combox(){
         ArrayList<String> lista = new ArrayList<String>();
         try {
-            ps = con.getConexion().prepareStatement("SELECT * FROM camiones");
+            ps = Conexion.Conectar().prepareStatement("SELECT * FROM camiones");
             rs = ps.executeQuery();
             System.out.println("Correcto");
         } catch (Exception e) {

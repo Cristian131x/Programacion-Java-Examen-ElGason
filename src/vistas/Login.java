@@ -13,7 +13,6 @@ public class Login extends javax.swing.JFrame {
     
     FondoLogin fondo = new FondoLogin();
 
-    Conexion cone = new Conexion();
     LoginM login = new LoginM();
     ConsultasLogin clogin = new ConsultasLogin();
 

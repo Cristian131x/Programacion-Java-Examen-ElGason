@@ -1,13 +1,12 @@
 package consultas;
 
 import conexion.Conexion;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import modelo.Camion;
 
-public class ConsultasCamion extends Conexion{
+public class ConsultasCamion{
 
     public static java.sql.Date Fecha(java.util.Date date) {
         if (date != null) {
@@ -17,12 +16,12 @@ public class ConsultasCamion extends Conexion{
         return null;
     }
 
-    public boolean registrarCamion(Camion cam,Conexion con) {
+    public boolean registrarCamion(Camion cam) {
         PreparedStatement ps = null;
 
         String sql = "insert into camiones(Patente,Modelo,Marca,Revision_Tecnica,Proxima_Revision,Estado) values(?,?,?,?,?,?)";
         try {
-            ps = con.getConexion().prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, cam.getPatente());
             ps.setString(2, cam.getModelo());
             ps.setString(3, cam.getMarca());
@@ -36,23 +35,19 @@ public class ConsultasCamion extends Conexion{
             return false;
         } finally {
             try {
-                con.getConexion().close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
     }
-    public boolean registrarCamion(Camion cam) {
-        registrarCamion(cam, this);
-        return true;
-    }
+
 
     public boolean modificarCamion(Camion cam) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update camiones set Patente=?,Modelo=?,Marca=?,Revision_Tecnica=?,Proxima_Revision=? where id_camion=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, cam.getPatente());
             ps.setString(2, cam.getModelo());
             ps.setString(3, cam.getMarca());
@@ -66,7 +61,7 @@ public class ConsultasCamion extends Conexion{
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -76,10 +71,9 @@ public class ConsultasCamion extends Conexion{
     public boolean buscarCamion(Camion cam) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from camiones where id_camion=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, cam.getId_camion());
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -96,7 +90,7 @@ public class ConsultasCamion extends Conexion{
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -124,11 +118,10 @@ public class ConsultasCamion extends Conexion{
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from camiones " + where;
         try {
             setTituloA();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[6];
             while (rs.next()) {
@@ -167,11 +160,10 @@ public class ConsultasCamion extends Conexion{
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from camiones " + where;
         try {
             setTituloU();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[6];
             while (rs.next()) {

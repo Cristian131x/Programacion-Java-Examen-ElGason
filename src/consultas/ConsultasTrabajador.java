@@ -1,5 +1,6 @@
 package consultas;
 
+import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,14 +8,13 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import modelo.Trabajador;
 
-public class ConsultasTrabajador extends conexion.Conexion {
+public class ConsultasTrabajador {
 
     public boolean registrarTrabajador(Trabajador trab) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into empleado(Rut,Nombre,Apellido,Sexo,Telefono,Estado,Puesto,Lugar) values (?,?,?,?,?,?,?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, trab.getRut());
             ps.setString(2, trab.getNombre());
             ps.setString(3, trab.getApellido());
@@ -30,7 +30,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -39,10 +39,9 @@ public class ConsultasTrabajador extends conexion.Conexion {
 
     public boolean modificarTrabajador(Trabajador trab) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update empleado set Nombre=?,Apellido=?,Telefono=?, Sexo=?, Estado=?, Puesto=? where Rut=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, trab.getNombre());
             ps.setString(2, trab.getApellido());
             ps.setString(3, trab.getTelefono());
@@ -57,7 +56,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -67,10 +66,9 @@ public class ConsultasTrabajador extends conexion.Conexion {
     public boolean buscarTrabajador(Trabajador trab) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from empleado where Rut=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, trab.getRut());
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -88,7 +86,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -118,11 +116,10 @@ public class ConsultasTrabajador extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from empleado " + where;
         try {
             setTituloU();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[8];
             while (rs.next()) {
@@ -165,11 +162,10 @@ public class ConsultasTrabajador extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from empleado " + where;
         try {
             setTitulo();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[8];
             while (rs.next()) {
@@ -191,13 +187,11 @@ public class ConsultasTrabajador extends conexion.Conexion {
 
     public String IdEmpleado() {
         PreparedStatement ps = null;
-        Connection con = getConexion();;
         ResultSet rs = null;
         String idB = "";
         String sql = "select max(Id) from empleado";
         try {
-
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 idB = rs.getString(1);
@@ -211,10 +205,9 @@ public class ConsultasTrabajador extends conexion.Conexion {
 
     public boolean registrarPaleta(Trabajador trab) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into paletas(id_empleado,Rut,Nombre) values (?,?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, trab.getId());
             ps.setString(2, trab.getRut());
             ps.setString(3, trab.getNombre());
@@ -225,7 +218,7 @@ public class ConsultasTrabajador extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }

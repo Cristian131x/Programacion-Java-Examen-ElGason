@@ -16,7 +16,7 @@ public class GestionClientes extends javax.swing.JInternalFrame {
     ConsultasCliente clv = new ConsultasCliente();
     DefaultTableModel modelo = new DefaultTableModel();
     ClienteCombo_1 clie1 = new ClienteCombo_1();
-    Conexion cone = new Conexion();
+
     
     public GestionClientes() {
         initComponents();
@@ -24,10 +24,9 @@ public class GestionClientes extends javax.swing.JInternalFrame {
         lista();
     }
     void actualizarCombo() {
-        cone.getConexion();
         xbuscar1.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
-        lista = clie1.llenar_combox(cone);
+        lista = clie1.llenar_combox();
         for (int i = 0; i < lista.size(); i++) {
             xbuscar1.addItem(lista.get(i));
         }
@@ -63,6 +62,7 @@ public class GestionClientes extends javax.swing.JInternalFrame {
         xbuscar1 = new javax.swing.JComboBox<>();
         buscarCli = new javax.swing.JButton();
         modificarCli = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel16.setText("Cliente");
@@ -259,6 +259,8 @@ public class GestionClientes extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Modificar", jPanel3);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/CLIENTE.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -267,16 +269,24 @@ public class GestionClientes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1))
             .addGroup(layout.createSequentialGroup()
-                .addGap(367, 367, 367)
+                .addGap(285, 285, 285)
                 .addComponent(jLabel16)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -351,6 +361,7 @@ public class GestionClientes extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton buscarCli;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

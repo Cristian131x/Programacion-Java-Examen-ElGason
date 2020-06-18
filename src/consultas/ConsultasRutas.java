@@ -7,14 +7,13 @@ import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ruta;
 
-public class ConsultasRutas extends Conexion {
+public class ConsultasRutas {
 
     public boolean registrarRutas(Ruta ru) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into Rutas(kilometraje,nombre_ruta,foto,ruta) values (?,?,?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, ru.getKilometraje());
             ps.setString(2, ru.getNombre_ruta());
             ps.setBytes(3, ru.getFoto());
@@ -26,7 +25,7 @@ public class ConsultasRutas extends Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -36,10 +35,9 @@ public class ConsultasRutas extends Conexion {
     public boolean buscarRutas(Ruta ru) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from rutas where id_ruta=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, ru.getId_ruta());
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -54,7 +52,7 @@ public class ConsultasRutas extends Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -63,10 +61,9 @@ public class ConsultasRutas extends Conexion {
 
     public boolean modificarRutas(Ruta ru) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update rutas set kilometraje=?,nombre_ruta=?,foto=?,ruta=? where id_ruta=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, ru.getKilometraje());
             ps.setString(2, ru.getNombre_ruta());
             ps.setBytes(3, ru.getFoto());
@@ -79,7 +76,7 @@ public class ConsultasRutas extends Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -89,10 +86,9 @@ public class ConsultasRutas extends Conexion {
     public boolean visualizarRutas(Ruta ru) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from rutas where id_ruta=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, ru.getId_ruta());
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -105,7 +101,7 @@ public class ConsultasRutas extends Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -131,11 +127,10 @@ public class ConsultasRutas extends Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select id_ruta,kilometraje,nombre_ruta,ruta from rutas " + where;
         try {
             setTituloA();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[4];
             while (rs.next()) {
@@ -171,11 +166,10 @@ public class ConsultasRutas extends Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select id_ruta,kilometraje,nombre_ruta,ruta from rutas " + where;
         try {
             setTituloU();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[4];
             while (rs.next()) {

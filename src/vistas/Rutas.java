@@ -1,8 +1,6 @@
-
 package vistas;
 
 import combos.RutaCombo_1;
-import conexion.Conexion;
 import consultas.ConsultasRutas;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -21,20 +19,18 @@ public class Rutas extends javax.swing.JInternalFrame {
 
     Ruta ru = new Ruta();
     ConsultasRutas cru = new ConsultasRutas();
-    Conexion cone = new Conexion();
     RutaCombo_1 rut1 = new RutaCombo_1();
 
-    
     public Rutas() {
         initComponents();
         actualizarCombo();
     }
+
     void actualizarCombo() {
-        cone.getConexion();
         xverfoto.removeAllItems();
         xbuscar1.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
-        lista = rut1.llenar_combox(cone);
+        lista = rut1.llenar_combox();
         for (int i = 0; i < lista.size(); i++) {
             xverfoto.addItem(lista.get(i));
             xbuscar1.addItem(lista.get(i));
@@ -52,6 +48,7 @@ public class Rutas extends javax.swing.JInternalFrame {
         xnombreR1.setText("");
         xfoto1.setText("");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,6 +93,7 @@ public class Rutas extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         xfotito = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Kilometraje");
@@ -429,6 +427,8 @@ public class Rutas extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel4.setText("RUTAS");
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/RUTAS.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -438,16 +438,23 @@ public class Rutas extends javax.swing.JInternalFrame {
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(372, 372, 372)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(66, 66, 66)
+                .addComponent(jLabel2)
+                .addGap(199, 199, 199))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(50, 50, 50)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(47, 47, 47)))
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -461,7 +468,9 @@ public class Rutas extends javax.swing.JInternalFrame {
 
     private void xkilometrajeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_xkilometrajeKeyTyped
         char c = evt.getKeyChar();
-        if (c<'0'|| c>'9') evt.consume();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_xkilometrajeKeyTyped
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -602,6 +611,7 @@ public class Rutas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -1,23 +1,21 @@
 package consultas;
 
+import conexion.Conexion;
 import java.sql.PreparedStatement;
 import modelo.StockGas;
-import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
-public class ConsultasStockGas extends conexion.Conexion {
+public class ConsultasStockGas{
 
     public boolean agregarGas(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)";
         int Cantidad = stk.getCantidad();
         try {
             for (int i = 0; i < Cantidad; i++) {
-                ps = con.prepareStatement(sql);
+                ps = Conexion.Conectar().prepareStatement(sql);
                 ps.setInt(1, stk.getPrecio());
                 ps.setString(2, stk.getNombre());
                 ps.setInt(3, stk.getTipo_id());
@@ -30,7 +28,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -39,10 +37,9 @@ public class ConsultasStockGas extends conexion.Conexion {
 
     public boolean actualizarStockGas(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock + ? where id_tipo = ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.setInt(2, stk.getTipo_id());
             ps.execute();
@@ -52,7 +49,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -61,10 +58,9 @@ public class ConsultasStockGas extends conexion.Conexion {
 
     public boolean actualizarStockGasVenta5(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock - ? where id_tipo = 5";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.execute();
             return true;
@@ -73,7 +69,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -82,10 +78,9 @@ public class ConsultasStockGas extends conexion.Conexion {
 
     public boolean actualizarStockGasVenta11(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock - ? where id_tipo = 11";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.execute();
             return true;
@@ -94,7 +89,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -103,10 +98,9 @@ public class ConsultasStockGas extends conexion.Conexion {
 
     public boolean actualizarStockGasVenta15(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock - ? where id_tipo = 15";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.execute();
             return true;
@@ -115,7 +109,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -124,10 +118,9 @@ public class ConsultasStockGas extends conexion.Conexion {
 
     public boolean actualizarStockGasVenta45(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock - ? where id_tipo = 45";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.execute();
             return true;
@@ -136,7 +129,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -145,10 +138,9 @@ public class ConsultasStockGas extends conexion.Conexion {
 
     public boolean actualizarEstadoGases(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update gas set estado =? where id_gas=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, "Pendiente");
             ps.setInt(2, stk.getId_gas());
             ps.execute();
@@ -158,7 +150,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -167,11 +159,10 @@ public class ConsultasStockGas extends conexion.Conexion {
 
     public boolean buscarStocks(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         ResultSet rs = null;
         String sql = "select * from tipo where id_tipo= ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getTipo_id());
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -185,7 +176,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -195,10 +186,9 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean verStock5(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = ("select * from tipo where id_tipo=5");
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 stk.setX5(Integer.parseInt(rs.getString("stock")));;
@@ -209,7 +199,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -219,10 +209,9 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean verStock15(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = ("select * from tipo where id_tipo=15");
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 stk.setX15(Integer.parseInt(rs.getString("stock")));;
@@ -233,7 +222,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -243,10 +232,9 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean verStock11(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = ("select * from tipo where id_tipo=11");
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 stk.setX11(Integer.parseInt(rs.getString("stock")));;
@@ -257,7 +245,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -267,10 +255,9 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean verStock45(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = ("select * from tipo where id_tipo=45");
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 stk.setX45(Integer.parseInt(rs.getString("stock")));;
@@ -281,7 +268,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -291,10 +278,9 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean verStock5v(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = ("select * from tipo where id_tipo=50");
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 stk.setX5v(Integer.parseInt(rs.getString("stock")));;
@@ -305,7 +291,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -315,10 +301,9 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean verStock15v(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = ("select * from tipo where id_tipo=150");
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 stk.setX15v(Integer.parseInt(rs.getString("stock")));;
@@ -329,7 +314,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -339,10 +324,9 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean verStock11v(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = ("select * from tipo where id_tipo=110");
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 stk.setX11v(Integer.parseInt(rs.getString("stock")));;
@@ -353,7 +337,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -363,10 +347,9 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean verStock45v(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = ("select * from tipo where id_tipo=450");
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
                 stk.setX45v(Integer.parseInt(rs.getString("stock")));;
@@ -377,7 +360,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -404,11 +387,10 @@ public class ConsultasStockGas extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from gas " + where;
         try {
             setTituloA();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[5];
             while (rs.next()) {
@@ -428,10 +410,9 @@ public class ConsultasStockGas extends conexion.Conexion {
     public boolean buscarGas(StockGas stk) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from tipo where id_tipo=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getTipo_id());
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -445,7 +426,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -454,10 +435,9 @@ public class ConsultasStockGas extends conexion.Conexion {
 
     public boolean modificarPrecioG(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set Precio=? where id_tipo=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getPrecio());
             ps.setInt(2, stk.getTipo_id());
             ps.execute();
@@ -467,7 +447,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -476,10 +456,9 @@ public class ConsultasStockGas extends conexion.Conexion {
 
     public boolean modificarPrecioGases(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update gas set precio=? where tipo_id=? and estado=? or estado=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getPrecio());
             ps.setInt(2, stk.getTipo_id());
             ps.setString(3, "Camion");
@@ -491,7 +470,7 @@ public class ConsultasStockGas extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -516,11 +495,10 @@ public class ConsultasStockGas extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select id_gas,nombre,tipo_id from gas " + where;
         try {
             setTituloGA();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[5];
             while (rs.next()) {

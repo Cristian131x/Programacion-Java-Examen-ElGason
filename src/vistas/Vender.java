@@ -31,7 +31,6 @@ public class Vender extends javax.swing.JInternalFrame {
     ConsultasCliente clv = new ConsultasCliente();
     DefaultTableModel gases = new DefaultTableModel();
     ClienteCombo_1 clie1 = new ClienteCombo_1();
-    Conexion cone = new Conexion();
     VenderCombo_1 ven1 = new VenderCombo_1();
     ControlGestiones cg = new ControlGestiones();
 
@@ -48,10 +47,9 @@ public class Vender extends javax.swing.JInternalFrame {
     }
 
     void actualizarCombo() {
-        cone.getConexion();
         xrunC.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
-        lista = clie1.llenar_combox(cone);
+        lista = clie1.llenar_combox();
         for (int i = 0; i < lista.size(); i++) {
             xrunC.addItem(lista.get(i));
         }
@@ -59,14 +57,13 @@ public class Vender extends javax.swing.JInternalFrame {
 
     void actualizarComboGas() {
         try {
-            cone.getConexion();
             int IdGas = Integer.parseInt(xtipogasG.getSelectedItem().toString());
             String Estado = xdespacho.getSelectedItem().toString();
             stk.setTipo_id(IdGas);
             stk.setEstado(Estado);
             xgasito.removeAllItems();
             ArrayList<String> lista = new ArrayList<String>();
-            lista = ven1.llenar_comboxs(cone, stk);
+            lista = ven1.llenar_comboxs(stk);
             for (int i = 0; i < lista.size(); i++) {
                 xgasito.addItem(lista.get(i));
             }
@@ -75,10 +72,9 @@ public class Vender extends javax.swing.JInternalFrame {
     }
 
     void actualizarComboCamiones() {
-        cone.getConexion();
         xcamiones.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
-        lista = ven1.llenar_comboCamion(cone);
+        lista = ven1.llenar_comboCamion();
         for (int i = 0; i < lista.size(); i++) {
             xcamiones.addItem(lista.get(i));
         }
@@ -86,14 +82,13 @@ public class Vender extends javax.swing.JInternalFrame {
 
     void actaulizarComboCamionesGas() {
         try {
-            cone.getConexion();
             int IdGas = Integer.parseInt(xtipogasG.getSelectedItem().toString());
             String Patente = xcamiones.getSelectedItem().toString();
             cg.setTipo(IdGas);
             cg.setPatente(Patente);
             xgasito.removeAllItems();
             ArrayList<String> lista = new ArrayList<String>();
-            lista = ven1.llenar_comboCamionGases(cone, cg);
+            lista = ven1.llenar_comboCamionGases(cg);
             for (int i = 0; i < lista.size(); i++) {
                 xgasito.addItem(lista.get(i));
             }

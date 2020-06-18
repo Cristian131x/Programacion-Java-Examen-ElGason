@@ -11,11 +11,11 @@ public class ClienteCombo_1 {
     static ResultSet rs;
     static PreparedStatement ps;
         
-        public static ArrayList<String> llenar_combox(Conexion con){
+        public static ArrayList<String> llenar_combox(){
         ArrayList<String> lista = new ArrayList<String>();
        
         try {
-            ps = con.getConexion().prepareStatement("SELECT * FROM cliente");
+            ps = Conexion.Conectar().prepareStatement("SELECT * FROM cliente");
             rs = ps.executeQuery();
             System.out.println("Correcto");
         } catch (Exception e) {

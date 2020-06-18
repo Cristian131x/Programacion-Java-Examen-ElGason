@@ -1,19 +1,19 @@
 package consultas;
 
+import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 
-public class ConsultasCliente extends conexion.Conexion {
+public class ConsultasCliente{
 
     public boolean registrarCliente(Cliente clie) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into cliente(Rut_Cliente,nombre,numero_telefono,direccion,comuna_id) values (?,?,?,?,?)";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, clie.getRut_Cliente());
             ps.setString(2, clie.getNombre());
             ps.setString(3, clie.getNumero_Telefono());
@@ -26,7 +26,7 @@ public class ConsultasCliente extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -34,10 +34,9 @@ public class ConsultasCliente extends conexion.Conexion {
     }
     public boolean modificarCliente(Cliente clie) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update cliente set nombre=?,numero_telefono=?,direccion=?,comuna_id=? where Rut_Cliente=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, clie.getNombre());
             ps.setString(2, clie.getNumero_Telefono());
             ps.setString(3, clie.getDireccion());
@@ -50,7 +49,7 @@ public class ConsultasCliente extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -60,10 +59,9 @@ public class ConsultasCliente extends conexion.Conexion {
     public boolean buscarCliente(Cliente clie) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from cliente where Rut_Cliente=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, clie.getRut_Cliente());
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -80,7 +78,7 @@ public class ConsultasCliente extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -106,11 +104,10 @@ public class ConsultasCliente extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from cliente " + where;
         try {
             setTituloA();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[6];
             while (rs.next()) {
@@ -149,11 +146,10 @@ public class ConsultasCliente extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from cliente " + where;
         try {
             setTituloU();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[6];
             while (rs.next()) {

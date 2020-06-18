@@ -1,15 +1,14 @@
 package consultas;
 
-import java.sql.Connection;
+import conexion.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import modelo.DetalleCompra;
 import modelo.PedidoPendiente;
 import modelo.StockGas;
 
-public class ConsultasPedidosPendientes extends conexion.Conexion {
+public class ConsultasPedidosPendientes{
 
     private DefaultTableModel DTF;
 
@@ -36,11 +35,10 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from boleta where Estado=? and fecha BETWEEN ? and ?";
         try {
             setTituloF();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, "VentaConfirmada");
             ps.setDate(2, (Fecha(ped.getFecha())));
             ps.setDate(3, (Fecha(ped.getFecha2())));
@@ -82,11 +80,10 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from boleta " + where;
         try {
             setTituloU();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[6];
             while (rs.next()) {
@@ -125,11 +122,10 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
         }
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select * from detalle_compra " + where;
         try {
             setTitulo();
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             Object ob[] = new Object[6];
             while (rs.next()) {
@@ -149,10 +145,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean gasVendidoC(PedidoPendiente ped) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update control_gas set EstadoGas=? where gas_id=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, ped.getEstado());
             ps.setInt(2, ped.getGas_Id());
             ps.execute();
@@ -162,7 +157,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -171,10 +166,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean gasVendido(PedidoPendiente ped) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update gas set estado=? where id_gas=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, ped.getEstado());
             ps.setInt(2, ped.getGas_Id());
             ps.execute();
@@ -184,7 +178,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -193,11 +187,10 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean gasNoVendido(PedidoPendiente ped) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update gas set estado=? where id_gas=?";
         try {
 
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, ped.getEstado());
             ps.setInt(2, ped.getGas_Id());
             ps.execute();
@@ -207,7 +200,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -216,10 +209,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean actualizarBoleta(PedidoPendiente ped) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update boleta set Estado=? where id_ventas=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, ped.getEstado());
             ps.setInt(2, ped.getId());
             ps.execute();
@@ -229,7 +221,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -238,12 +230,11 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean agregarVacio45(PedidoPendiente ped) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)";
         int Cantidad = ped.getCantidadV();
         try {
             for (int i = 0; i < Cantidad; i++) {
-                ps = con.prepareStatement(sql);
+                ps = Conexion.Conectar().prepareStatement(sql);
                 ps.setInt(1, 0);
                 ps.setString(2, "Gas 45 Vacio");
                 ps.setInt(3, 450);
@@ -256,7 +247,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -265,12 +256,11 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean agregarVacio15(PedidoPendiente ped) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)";
         int Cantidad = ped.getCantidadV();
         try {
             for (int i = 0; i < Cantidad; i++) {
-                ps = con.prepareStatement(sql);
+                ps = Conexion.Conectar().prepareStatement(sql);
                 ps.setInt(1, 0);
                 ps.setString(2, "Gas 15 Vacio");
                 ps.setInt(3, 150);
@@ -283,7 +273,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -292,12 +282,11 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean agregarVacio11(PedidoPendiente ped) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)";
         int Cantidad = ped.getCantidadV();
         try {
             for (int i = 0; i < Cantidad; i++) {
-                ps = con.prepareStatement(sql);
+                ps = Conexion.Conectar().prepareStatement(sql);
                 ps.setInt(1, 0);
                 ps.setString(2, "Gas 11 Vacio");
                 ps.setInt(3, 110);
@@ -310,7 +299,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -319,12 +308,11 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean agregarVacio5(PedidoPendiente ped) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)";
         int Cantidad = ped.getCantidadV();
         try {
             for (int i = 0; i < Cantidad; i++) {
-                ps = con.prepareStatement(sql);
+                ps = Conexion.Conectar().prepareStatement(sql);
                 ps.setInt(1, 0);
                 ps.setString(2, "Gas 5 Vacio");
                 ps.setInt(3, 50);
@@ -337,7 +325,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -346,10 +334,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean borrarDetalle(DetalleCompra de) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "delete from detalle_compra where boleta_id=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, de.getBoleta_numero());
             ps.execute();
             return true;
@@ -358,7 +345,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -368,10 +355,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
     public boolean buscarCantidad11(DetalleCompra de) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select count(*) as Contar11 from  detalle_compra where boleta_id=? and id_tipo_gas=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, de.getBoleta_numero());
             ps.setInt(2, 11);
             rs = ps.executeQuery();
@@ -384,7 +370,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -394,10 +380,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
     public boolean buscarCantidad5(DetalleCompra de) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select count(*) as Contar5 from  detalle_compra where boleta_id=? and id_tipo_gas=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, de.getBoleta_numero());
             ps.setInt(2, 5);
             rs = ps.executeQuery();
@@ -410,7 +395,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -420,10 +405,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
     public boolean buscarCantidad15(DetalleCompra de) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select count(*) as Contar15 from  detalle_compra where boleta_id=? and id_tipo_gas=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, de.getBoleta_numero());
             ps.setInt(2, 15);
             rs = ps.executeQuery();
@@ -436,7 +420,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -446,10 +430,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
     public boolean buscarCantidad45(DetalleCompra de) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Connection con = getConexion();
         String sql = "select count(*) as Contar45 from  detalle_compra where boleta_id=? and id_tipo_gas=?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, de.getBoleta_numero());
             ps.setInt(2, 45);
             rs = ps.executeQuery();
@@ -462,7 +445,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -471,10 +454,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean mas45(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock + ? where id_tipo = ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.setInt(2, 45);
             ps.execute();
@@ -484,7 +466,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -493,10 +475,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean mas11(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock + ? where id_tipo = ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.setInt(2, 11);
             ps.execute();
@@ -506,7 +487,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -515,10 +496,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean mas15(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock + ? where id_tipo = ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.setInt(2, 15);
             ps.execute();
@@ -528,7 +508,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -537,10 +517,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean mas5(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock + ? where id_tipo = ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.setInt(2, 5);
             ps.execute();
@@ -550,7 +529,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -559,10 +538,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean actualizarStockVacio45(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock + ? where id_tipo = ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.setInt(2, 450);
             ps.execute();
@@ -572,7 +550,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -581,10 +559,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean actualizarStockVacio15(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock + ? where id_tipo = ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.setInt(2, 150);
             ps.execute();
@@ -594,7 +571,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -603,10 +580,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean actualizarStockVacio11(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock + ? where id_tipo = ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.setInt(2, 110);
             ps.execute();
@@ -616,7 +592,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -625,10 +601,9 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
 
     public boolean actualizarStockVacio5(StockGas stk) {
         PreparedStatement ps = null;
-        Connection con = getConexion();
         String sql = "update tipo set stock = stock + ? where id_tipo = ?";
         try {
-            ps = con.prepareStatement(sql);
+            ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getCantidad());
             ps.setInt(2, 50);
             ps.execute();
@@ -638,7 +613,7 @@ public class ConsultasPedidosPendientes extends conexion.Conexion {
             return false;
         } finally {
             try {
-                con.close();
+                Conexion.Desconectar();
             } catch (Exception e) {
                 System.out.println(e);
             }
