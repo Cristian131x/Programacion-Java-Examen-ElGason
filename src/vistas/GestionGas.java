@@ -2,7 +2,7 @@
 package vistas;
 
 import consultas.ConsultasCamion;
-import consultas.ConsultasControlGestiones;
+import consultas.ConsultasGestionGas;
 import consultas.ConsultasStockGas;
 import modelo.Camion;
 import modelo.ControlGestiones;
@@ -14,7 +14,7 @@ public class GestionGas extends javax.swing.JInternalFrame {
     ConsultasCamion ccam = new ConsultasCamion();
     StockGas stk = new StockGas();
     ConsultasStockGas cstk = new ConsultasStockGas();
-    ConsultasControlGestiones ccg = new ConsultasControlGestiones();
+    ConsultasGestionGas ccg = new ConsultasGestionGas();
     ControlGestiones cg = new ControlGestiones();
     
     public GestionGas() {

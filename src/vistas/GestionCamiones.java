@@ -1,14 +1,12 @@
 package vistas;
 
-import consultas.ConsultasControlGestiones;
+import consultas.ConsultasGestionCamion;
 import consultas.ConsultasRutas;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import modelo.Camion;
 import modelo.ControlGestiones;
 import modelo.Ruta;
@@ -16,7 +14,7 @@ import modelo.Ruta;
 public class GestionCamiones extends javax.swing.JInternalFrame {
 
     Ruta ru = new Ruta();
-    ConsultasControlGestiones ccg = new ConsultasControlGestiones();
+    ConsultasGestionCamion ccg = new ConsultasGestionCamion();
     ConsultasRutas cru = new ConsultasRutas();
     Camion cam = new Camion();
     ControlGestiones cg = new ControlGestiones();

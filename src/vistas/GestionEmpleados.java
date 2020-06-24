@@ -2,7 +2,7 @@
 package vistas;
 
 import consultas.ConsultasCamion;
-import consultas.ConsultasControlGestiones;
+import consultas.ConsultasGestionEmpleado;
 import modelo.Camion;
 import modelo.ControlGestiones;
 import modelo.Trabajador;
@@ -13,7 +13,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     ConsultasCamion ccam = new ConsultasCamion();
     Trabajador trab = new Trabajador();
     ControlGestiones cge = new ControlGestiones();
-    ConsultasControlGestiones ccg = new ConsultasControlGestiones();
+    ConsultasGestionEmpleado ccg = new ConsultasGestionEmpleado();
 
     public GestionEmpleados() {
         initComponents();
