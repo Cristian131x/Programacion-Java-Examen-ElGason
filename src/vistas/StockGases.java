@@ -1,17 +1,19 @@
-
 package vistas;
 
 import consultas.ConsultasStockGas;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import modelo.StockGas;
-
 
 public class StockGases extends javax.swing.JInternalFrame {
 
     StockGas stk = new StockGas();
     ConsultasStockGas cstk = new ConsultasStockGas();
-    
+
     public StockGases() {
+        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         initComponents();
         verStock5();
         verStock11();
@@ -23,7 +25,6 @@ public class StockGases extends javax.swing.JInternalFrame {
         verStock45v();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,13 +71,18 @@ public class StockGases extends javax.swing.JInternalFrame {
         xnombre = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         xcantidad = new javax.swing.JSpinner();
+        vacios = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(938, 744));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel2.setText("STOCK GAS");
 
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jTabbedPane1.setInheritsPopupMenu(true);
         jTabbedPane1.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTabbedPane1CaretPositionChanged(evt);
@@ -169,7 +175,7 @@ public class StockGases extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(782, Short.MAX_VALUE)
+                .addContainerGap(784, Short.MAX_VALUE)
                 .addComponent(buscarG)
                 .addGap(41, 41, 41))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -233,7 +239,7 @@ public class StockGases extends javax.swing.JInternalFrame {
                     .addComponent(jLabel12)
                     .addComponent(jLabel17)
                     .addComponent(x45v, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(buscarG)
                 .addGap(24, 24, 24))
         );
@@ -292,7 +298,7 @@ public class StockGases extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 926, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel3)
@@ -311,7 +317,7 @@ public class StockGases extends javax.swing.JInternalFrame {
                     .addComponent(xbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -353,7 +359,7 @@ public class StockGases extends javax.swing.JInternalFrame {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(xtipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xprecio1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -376,7 +382,7 @@ public class StockGases extends javax.swing.JInternalFrame {
                         .addComponent(xprecio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(60, 60, 60)
                 .addComponent(jButton3)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ModificarPrecios", jPanel5);
@@ -420,6 +426,12 @@ public class StockGases extends javax.swing.JInternalFrame {
 
         xcantidad.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
+        vacios.setEditable(false);
+        vacios.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel18.setText("Vacios Totales");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -439,13 +451,20 @@ public class StockGases extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(xtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(128, 128, 128)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(agregarG)
-                    .addComponent(xcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(agregarG)
+                            .addComponent(xcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(vacios, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,14 +477,16 @@ public class StockGases extends javax.swing.JInternalFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(xtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(xtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vacios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18))
                         .addGap(150, 150, 150)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(xnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(xprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addComponent(agregarG)
                 .addGap(40, 40, 40))
         );
@@ -478,7 +499,7 @@ public class StockGases extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 959, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(215, 215, 215)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -497,7 +518,7 @@ public class StockGases extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jLabel15)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -541,9 +562,30 @@ public class StockGases extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         modificarPrecioG();
+        modificarPrecioGases();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void xtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xtipoActionPerformed
+        if (xtipo.getSelectedItem().toString() == "5") {
+            if (cstk.verStock5v(stk)) {
+                vacios.setText("" + stk.getX5v());
+            }
+        }
+        if (xtipo.getSelectedItem().toString() == "11") {
+            if (cstk.verStock11v(stk)) {
+                vacios.setText("" + stk.getX11v());
+            }
+        }
+        if (xtipo.getSelectedItem().toString() == "15") {
+            if (cstk.verStock15v(stk)) {
+                vacios.setText("" + stk.getX15v());
+            }
+        }
+        if (xtipo.getSelectedItem().toString() == "45") {
+            if (cstk.verStock45v(stk)) {
+                vacios.setText("" + stk.getX45v());
+            }
+        }
         buscarGas();
     }//GEN-LAST:event_xtipoActionPerformed
     void buscarGas() {
@@ -558,12 +600,52 @@ public class StockGases extends javax.swing.JInternalFrame {
         }
     }
     private void agregarGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarGActionPerformed
-        agregarGas();
+        if (Integer.parseInt(vacios.getText()) < Integer.parseInt(xcantidad.getValue().toString())) {
+            JOptionPane.showMessageDialog(null, "NO PUEDES EXCEDER LA CANTIDAD DE GASES VACIOS");
+        } else {
+            try {
+                restarVacios();
+                agregarGas();
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
     }//GEN-LAST:event_agregarGActionPerformed
 
     private void jTabbedPane1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTabbedPane1CaretPositionChanged
 
     }//GEN-LAST:event_jTabbedPane1CaretPositionChanged
+    void restarVacios() throws Exception {
+        if (xtipo.getSelectedItem().toString() == "5") {
+            int IDg = 50;
+            stk.setTipo_id(IDg);
+            int Cantidad = (Integer.parseInt(xcantidad.getValue().toString()));
+            stk.setCantidad(Cantidad);
+            cstk.actualizarStockGasVentaVacios(stk);
+        }
+        if (xtipo.getSelectedItem().toString() == "11") {
+            int IDg = 110;
+            stk.setTipo_id(IDg);
+            int Cantidad = (Integer.parseInt(xcantidad.getValue().toString()));
+            stk.setCantidad(Cantidad);
+            cstk.actualizarStockGasVentaVacios(stk);
+        }
+        if (xtipo.getSelectedItem().toString() == "15") {
+            int IDg = 150;
+            stk.setTipo_id(IDg);
+            int Cantidad = (Integer.parseInt(xcantidad.getValue().toString()));
+            stk.setCantidad(Cantidad);
+            cstk.actualizarStockGasVentaVacios(stk);
+        }
+        if (xtipo.getSelectedItem().toString() == "45") {
+            int IDg = 450;
+            stk.setTipo_id(IDg);
+            int Cantidad = (Integer.parseInt(xcantidad.getValue().toString()));
+            stk.setCantidad(Cantidad);
+            cstk.actualizarStockGasVentaVacios(stk);
+        }
+    }
+
     void modificarPrecioG() {
         try {
             int TipoID = Integer.parseInt(xtipo1.getSelectedItem().toString());
@@ -572,8 +654,7 @@ public class StockGases extends javax.swing.JInternalFrame {
             stk.setPrecio(Precio);
             if (cstk.modificarPrecioG(stk)) {
                 JOptionPane.showMessageDialog(null, "PRECIO ACTUALIZADO CON EXITO");
-                modificarPrecioGases();
-                limpiarUP();
+
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
@@ -587,6 +668,7 @@ public class StockGases extends javax.swing.JInternalFrame {
             stk.setTipo_id(TipoID);
             stk.setPrecio(Precio);
             if (cstk.modificarPrecioGases(stk)) {
+                limpiarUP();
             }
         } catch (Exception e) {
         }
@@ -687,6 +769,7 @@ public class StockGases extends javax.swing.JInternalFrame {
     void limpiarGas() {
         xprecio.setText("");
         xnombre.setText("");
+        vacios.setText("");
         xtipo.setSelectedIndex(0);
         xcantidad.setValue(0);
     }
@@ -717,6 +800,7 @@ public class StockGases extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -731,6 +815,7 @@ public class StockGases extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField vacios;
     public static javax.swing.JTextField x11;
     public static javax.swing.JTextField x11v;
     public static javax.swing.JTextField x15;

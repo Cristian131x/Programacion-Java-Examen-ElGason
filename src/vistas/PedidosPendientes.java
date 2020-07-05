@@ -1,10 +1,10 @@
 package vistas;
 
 import consultas.ConsultasPedidosPendientes;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import javax.xml.transform.Source;
 import modelo.DetalleCompra;
 import modelo.PedidoPendiente;
 import modelo.StockGas;
@@ -17,6 +17,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
     DetalleCompra de = new DetalleCompra();
 
     public PedidosPendientes() {
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/GAS_1.png")).getImage());
         initComponents();
         listarPedidos();
     }
@@ -36,7 +37,6 @@ public class PedidosPendientes extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         xlistar = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         xdetalles = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -56,6 +56,8 @@ public class PedidosPendientes extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pendientes - El Gason");
+        setUndecorated(true);
 
         xlistar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,7 +76,6 @@ public class PedidosPendientes extends javax.swing.JFrame {
                 return false;
             }
         };
-        xlistar.setEnabled(false);
         xlistar.setFocusable(false);
         xlistar.setRowHeight(60);
         xlistar.getTableHeader().setResizingAllowed(false);
@@ -85,13 +86,6 @@ public class PedidosPendientes extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(xlistar);
-
-        jButton2.setText("REFRESCAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         xdetalles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,7 +98,16 @@ public class PedidosPendientes extends javax.swing.JFrame {
 
             }
         ));
+        (xdetalles).setFocusable(false);
+        (xdetalles) = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        xdetalles.setFocusable(false);
+        xdetalles.setFocusable(false);
         xdetalles.setRowHeight(32);
+        xdetalles.setRowSelectionAllowed(false);
         jScrollPane2.setViewportView(xdetalles);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -212,7 +215,8 @@ public class PedidosPendientes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton4.setText("CERRAR");
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setText("CERRAR VENTANA");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -233,39 +237,33 @@ public class PedidosPendientes extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addGap(138, 138, 138))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton2)
-                                    .addGap(50, 50, 50)))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(338, 338, 338)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addGap(5, 5, 5)
+                .addGap(43, 43, 43)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(8, 8, 8)
                 .addComponent(jButton4)
-                .addGap(8, 8, 8))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        listarPedidos();
-    }//GEN-LAST:event_jButton2ActionPerformed
     void listarPedidos() {
         ped.setEstado("PROCESO");
         xlistar.setModel(cped.listarPedidos(ped));
@@ -294,10 +292,10 @@ public class PedidosPendientes extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         gasVendido();
         gasVendidoC();
-        agregarVacio5();
-        agregarVacio11();
-        agregarVacio15();
-        agregarVacio45();
+        actualizarStockVacio11();
+        actualizarStockVacio15();
+        actualizarStockVacio45();
+        actualizarStockVacio5();
         actualizarBoleta();
     }//GEN-LAST:event_jButton1ActionPerformed
     void gasVendidoC() {
@@ -307,38 +305,6 @@ public class PedidosPendientes extends javax.swing.JFrame {
             ped.setEstado(estado);
             ped.setGas_Id(IdG);
             cped.gasVendidoC(ped);
-        }
-    }
-
-    void agregarVacio45() {
-        int Cantidad = (Integer.parseInt(c45.getText()));
-        ped.setCantidadV(Cantidad);
-        if (cped.agregarVacio45(ped)) {
-            actualizarStockVacio45();
-        }
-    }
-
-    void agregarVacio15() {
-        int Cantidad = (Integer.parseInt(c15.getText()));
-        ped.setCantidadV(Cantidad);
-        if (cped.agregarVacio15(ped)) {
-            actualizarStockVacio15();
-        }
-    }
-
-    void agregarVacio11() {
-        int Cantidad = (Integer.parseInt(c11.getText()));
-        ped.setCantidadV(Cantidad);
-        if (cped.agregarVacio11(ped)) {
-            actualizarStockVacio11();
-        }
-    }
-
-    void agregarVacio5() {
-        int Cantidad = (Integer.parseInt(c5.getText()));
-        ped.setCantidadV(Cantidad);
-        if (cped.agregarVacio5(ped)) {
-            actualizarStockVacio5();
         }
     }
 
@@ -364,6 +330,7 @@ public class PedidosPendientes extends javax.swing.JFrame {
         ped.setId(Integer.parseInt(idbo.getText().toString()));
         ped.setEstado(estado);
         if (cped.actualizarBoleta(ped)) {
+            actualizarPedidoConfirmado();
             listarPedidos();
             limpiarDetalle();
             JOptionPane.showMessageDialog(null, "PEDIDO CONFIRMADO CON EXITO");
@@ -500,46 +467,29 @@ public class PedidosPendientes extends javax.swing.JFrame {
         ped.setId(Integer.parseInt(idbo.getText().toString()));
         ped.setEstado(estado);
         cped.actualizarBoleta(ped);
+        actualizarPedidoCancelado();
         limpiarDetalle();
         listarPedidos();
         JOptionPane.showMessageDialog(null, "PEDIDO CANCELADO CON EXITO");
     }
 
+    void actualizarPedidoCancelado() {
+        String estado = "Cancelado";
+        ped.setId(Integer.parseInt(idbo.getText().toString()));
+        ped.setEstado(estado);
+        cped.actualizarPedidos(ped);
+    }
+
+    void actualizarPedidoConfirmado() {
+        String estado = "Confirmado";
+        ped.setId(Integer.parseInt(idbo.getText().toString()));
+        ped.setEstado(estado);
+        cped.actualizarPedidos(ped);
+    }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PedidosPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PedidosPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PedidosPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PedidosPendientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PedidosPendientes().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField c11;
@@ -548,7 +498,6 @@ public class PedidosPendientes extends javax.swing.JFrame {
     private javax.swing.JTextField c5;
     private javax.swing.JTextField idbo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;

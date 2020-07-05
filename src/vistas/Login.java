@@ -10,33 +10,37 @@ import javax.swing.JPanel;
 import modelo.LoginM;
 
 public class Login extends javax.swing.JFrame {
-    
+
     FondoLogin fondo = new FondoLogin();
 
     LoginM login = new LoginM();
     ConsultasLogin clogin = new ConsultasLogin();
 
     public Login() {
-
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono.png")).getImage());
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
     }
 
     void limpiar() {
         xusuario.setText("");
         xpassword.setText("");
     }
-    class FondoLogin extends JPanel{
+
+    class FondoLogin extends JPanel {
+
         private Image imagen;
+
         @Override
-        public void paint (Graphics g){
+        public void paint(Graphics g) {
             imagen = new ImageIcon(getClass().getResource("/imagenes/login.jpg")).getImage();
-            g.drawImage(imagen,0,0, getWidth(),getHeight(),this);
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +59,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login - El Gason");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -104,7 +109,7 @@ public class Login extends javax.swing.JFrame {
                         .addGap(330, 330, 330)
                         .addComponent(jButton1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(268, 268, 268)
+                        .addGap(281, 281, 281)
                         .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -159,7 +164,7 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Debe ingresar usuarios validos");
                 limpiar();
                 xusuario.requestFocus();
-                
+
             }
         }
     }
@@ -175,7 +180,7 @@ public class Login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

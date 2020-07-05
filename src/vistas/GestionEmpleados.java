@@ -3,6 +3,7 @@ package vistas;
 
 import consultas.ConsultasCamion;
 import consultas.ConsultasGestionEmpleado;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import modelo.Camion;
 import modelo.ControlGestiones;
 import modelo.Trabajador;
@@ -16,6 +17,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     ConsultasGestionEmpleado ccg = new ConsultasGestionEmpleado();
 
     public GestionEmpleados() {
+        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         initComponents();
         listar();
     }
@@ -51,6 +53,9 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         xpuesto = new javax.swing.JComboBox<>();
         xCT = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+
+        setBorder(null);
+        setInheritsPopupMenu(true);
 
         jButton3.setText("REFRESCAR");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +140,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 255, 204));
+        jLabel3.setForeground(new java.awt.Color(0, 102, 255));
         jLabel3.setText("CONTROL Y GESTION EMPLEADOS");
 
         tablaEC.setModel(new javax.swing.table.DefaultTableModel(
@@ -279,7 +284,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(idCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
@@ -301,7 +306,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
-                        .addContainerGap(66, Short.MAX_VALUE))
+                        .addContainerGap(69, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addGap(43, 43, 43)

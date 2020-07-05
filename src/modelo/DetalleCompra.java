@@ -1,8 +1,7 @@
-
 package modelo;
 
-
 public class DetalleCompra {
+
     public int Codigo_detalle;
     public int Boleta_numero;
     public int Cantidad;
@@ -11,6 +10,7 @@ public class DetalleCompra {
     public int Tipo;
     public String Camion;
 
+
     public int getTipo() {
         return Tipo;
     }
@@ -18,7 +18,6 @@ public class DetalleCompra {
     public void setTipo(int Tipo) {
         this.Tipo = Tipo;
     }
-    
 
     public int getCodigo_detalle() {
         return Codigo_detalle;
@@ -67,6 +66,5 @@ public class DetalleCompra {
     public void setCamion(String Camion) {
         this.Camion = Camion;
     }
-    
-        
+
 }

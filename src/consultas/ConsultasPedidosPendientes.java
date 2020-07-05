@@ -8,7 +8,7 @@ import modelo.DetalleCompra;
 import modelo.PedidoPendiente;
 import modelo.StockGas;
 
-public class ConsultasPedidosPendientes{
+public class ConsultasPedidosPendientes {
 
     private DefaultTableModel DTF;
 
@@ -228,97 +228,14 @@ public class ConsultasPedidosPendientes{
         }
     }
 
-    public boolean agregarVacio45(PedidoPendiente ped) {
+    public boolean actualizarPedidos(PedidoPendiente ped) {
         PreparedStatement ps = null;
-        String sql = "insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)";
-        int Cantidad = ped.getCantidadV();
+        String sql = "update pedidos set Estado=? where boleta_id=?";
         try {
-            for (int i = 0; i < Cantidad; i++) {
-                ps = Conexion.Conectar().prepareStatement(sql);
-                ps.setInt(1, 0);
-                ps.setString(2, "Gas 45 Vacio");
-                ps.setInt(3, 450);
-                ps.setString(4, "BodegaV");
-                ps.execute();
-            }
-            return true;
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
-        } finally {
-            try {
-                Conexion.Desconectar();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    }
-
-    public boolean agregarVacio15(PedidoPendiente ped) {
-        PreparedStatement ps = null;
-        String sql = "insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)";
-        int Cantidad = ped.getCantidadV();
-        try {
-            for (int i = 0; i < Cantidad; i++) {
-                ps = Conexion.Conectar().prepareStatement(sql);
-                ps.setInt(1, 0);
-                ps.setString(2, "Gas 15 Vacio");
-                ps.setInt(3, 150);
-                ps.setString(4, "BodegaV");
-                ps.execute();
-            }
-            return true;
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
-        } finally {
-            try {
-                Conexion.Desconectar();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    }
-
-    public boolean agregarVacio11(PedidoPendiente ped) {
-        PreparedStatement ps = null;
-        String sql = "insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)";
-        int Cantidad = ped.getCantidadV();
-        try {
-            for (int i = 0; i < Cantidad; i++) {
-                ps = Conexion.Conectar().prepareStatement(sql);
-                ps.setInt(1, 0);
-                ps.setString(2, "Gas 11 Vacio");
-                ps.setInt(3, 110);
-                ps.setString(4, "BodegaV");
-                ps.execute();
-            }
-            return true;
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
-        } finally {
-            try {
-                Conexion.Desconectar();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-    }
-
-    public boolean agregarVacio5(PedidoPendiente ped) {
-        PreparedStatement ps = null;
-        String sql = "insert into gas(precio,nombre,tipo_id,estado) values (?,?,?,?)";
-        int Cantidad = ped.getCantidadV();
-        try {
-            for (int i = 0; i < Cantidad; i++) {
-                ps = Conexion.Conectar().prepareStatement(sql);
-                ps.setInt(1, 0);
-                ps.setString(2, "Gas 5 Vacio");
-                ps.setInt(3, 50);
-                ps.setString(4, "BodegaV");
-                ps.execute();
-            }
+            ps = Conexion.Conectar().prepareStatement(sql);
+            ps.setString(1, ped.getEstado());
+            ps.setInt(2, ped.getId());
+            ps.execute();
             return true;
         } catch (Exception e) {
             System.out.println(e);

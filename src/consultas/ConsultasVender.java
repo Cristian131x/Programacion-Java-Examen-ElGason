@@ -1,11 +1,11 @@
 package consultas;
 
 import conexion.Conexion;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import modelo.Boleta;
 import modelo.DetalleCompra;
+import modelo.Pedido;
 
 public class ConsultasVender{
 
@@ -66,6 +66,27 @@ public class ConsultasVender{
             ps.setInt(3, de.getGas_id());
             ps.setInt(4, de.getTipo());
             ps.setString(5, de.getCamion());
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        } finally {
+            try {
+                Conexion.Desconectar();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+    public boolean GuardarPedido(Pedido pe) {
+        PreparedStatement ps = null;
+        String sql = "insert into pedidos(Id_Pedido,boleta_id,Estado)values(?,?,?)";
+        try {
+            ps = Conexion.Conectar().prepareStatement(sql);
+            ps.setInt(1, pe.getId_Pedido());
+            ps.setInt(2, pe.getBoleta_numero());
+            ps.setString(3, pe.getEstado());
             ps.execute();
             return true;
         } catch (Exception e) {

@@ -3,11 +3,10 @@ package consultas;
 import conexion.Conexion;
 import java.sql.PreparedStatement;
 import modelo.StockGas;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
-public class ConsultasStockGas{
+public class ConsultasStockGas {
 
     public boolean agregarGas(StockGas stk) {
         PreparedStatement ps = null;
@@ -55,7 +54,26 @@ public class ConsultasStockGas{
             }
         }
     }
-
+    public boolean actualizarStockGasVentaVacios(StockGas stk) {
+        PreparedStatement ps = null;
+        String sql = "update tipo set stock = stock - ? where id_tipo = ?";
+        try {
+            ps = Conexion.Conectar().prepareStatement(sql);
+            ps.setInt(1, stk.getCantidad());
+            ps.setInt(2, stk.getTipo_id());
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        } finally {
+            try {
+                Conexion.Desconectar();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
     public boolean actualizarStockGasVenta5(StockGas stk) {
         PreparedStatement ps = null;
         String sql = "update tipo set stock = stock - ? where id_tipo = 5";
@@ -456,7 +474,7 @@ public class ConsultasStockGas{
 
     public boolean modificarPrecioGases(StockGas stk) {
         PreparedStatement ps = null;
-        String sql = "update gas set precio=? where tipo_id=? and estado=? or estado=?";
+        String sql = "update gas set precio=? where tipo_id=? and (estado=? or estado=?)";
         try {
             ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, stk.getPrecio());

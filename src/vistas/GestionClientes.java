@@ -1,28 +1,30 @@
-
 package vistas;
 
 import combos.ClienteCombo_1;
 import conexion.Conexion;
 import consultas.ConsultasCliente;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 
-
 public class GestionClientes extends javax.swing.JInternalFrame {
 
-    Cliente cli =new Cliente();
+    Cliente cli = new Cliente();
     ConsultasCliente clv = new ConsultasCliente();
     DefaultTableModel modelo = new DefaultTableModel();
     ClienteCombo_1 clie1 = new ClienteCombo_1();
 
-    
     public GestionClientes() {
+        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         initComponents();
         actualizarCombo();
         lista();
     }
+
     void actualizarCombo() {
         xbuscar1.removeAllItems();
         ArrayList<String> lista = new ArrayList<String>();
@@ -31,6 +33,7 @@ public class GestionClientes extends javax.swing.JInternalFrame {
             xbuscar1.addItem(lista.get(i));
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,8 +67,15 @@ public class GestionClientes extends javax.swing.JInternalFrame {
         modificarCli = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        setInheritsPopupMenu(true);
+
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel16.setText("Cliente");
+
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         xlista.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         xlista.setModel(new javax.swing.table.DefaultTableModel(
@@ -114,13 +124,13 @@ public class GestionClientes extends javax.swing.JInternalFrame {
                         .addComponent(xbuscarC, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 881, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(116, Short.MAX_VALUE)
+                .addContainerGap(108, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xbuscarC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2)
@@ -171,7 +181,7 @@ public class GestionClientes extends javax.swing.JInternalFrame {
         xdirecion.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         xcomuna.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        xcomuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        xcomuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "La Granja", "La Cisterna", "La Pintana" }));
 
         xbuscar1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         xbuscar1.addActionListener(new java.awt.event.ActionListener() {
@@ -211,12 +221,12 @@ public class GestionClientes extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(xcomuna, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(xnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(xdirecion, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(xtelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(429, 549, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(xnombre, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                            .addComponent(xdirecion, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                            .addComponent(xtelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                            .addComponent(xcomuna, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(429, 557, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +262,7 @@ public class GestionClientes extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(xcomuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(modificarCli)
                 .addContainerGap())
         );
@@ -267,7 +277,7 @@ public class GestionClientes extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(285, 285, 285)
                 .addComponent(jLabel16)
@@ -297,8 +307,8 @@ public class GestionClientes extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         lista();
     }//GEN-LAST:event_jButton2ActionPerformed
-    void lista(){
-        cli.setRut_ClienteL(xbuscarC.getText().trim());      
+    void lista() {
+        cli.setRut_ClienteL(xbuscarC.getText().trim());
         xlista.setModel(clv.listar(cli));
     }
     private void xbuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xbuscar1ActionPerformed
@@ -309,48 +319,67 @@ public class GestionClientes extends javax.swing.JInternalFrame {
         listarU();
         buscarCliente();
     }//GEN-LAST:event_buscarCliActionPerformed
-    void listarU(){
+    void listarU() {
         cli.setRut_ClienteL(xbuscar1.getSelectedItem().toString());
-        xlistaU.setModel(clv.listarU(cli));     
+        xlistaU.setModel(clv.listarU(cli));
     }
-    void buscarCliente(){
-        try{
-        cli.setRut_Cliente(xbuscar1.getSelectedItem().toString());
-        if(clv.buscarCliente(cli)){
-        xnombre.setText(cli.getNombre());
-        xcomuna.setSelectedItem(""+cli.getComuna_id());
-        xtelefono.setText(cli.getNumero_Telefono());
-        xdirecion.setText(cli.getDireccion());}    
-        }
-        catch (Exception e) {
+
+    void buscarCliente() {
+        try {
+            cli.setRut_Cliente(xbuscar1.getSelectedItem().toString());
+            if (clv.buscarCliente(cli)) {
+                xnombre.setText(cli.getNombre());
+                xcomuna.setSelectedItem("" + cli.getComuna_id());
+                xtelefono.setText(cli.getNumero_Telefono());
+                xdirecion.setText(cli.getDireccion());
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
+    }
+
+    public int IdComuna() {
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        int ID = 0;
+        String sql = "SELECT id_comuna FROM comuna WHERE nombre=?";
+        try {
+            ps = Conexion.Conectar().prepareStatement(sql);
+            ps.setString(1, xcomuna.getSelectedItem().toString());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ID = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            System.out.println("me mori");
+        }
+        return ID;
     }
     private void modificarCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarCliActionPerformed
         modificarCliente();
     }//GEN-LAST:event_modificarCliActionPerformed
-    void modificarCliente(){
-        try{
-        String Rut = xbuscar1.getSelectedItem().toString();
-        String Nombre = xnombre.getText();
-        String Numero_Telfono = xtelefono.getText();
-        int Comuna = Integer.parseInt(xcomuna.getSelectedItem().toString());
-        String Direcion = xdirecion.getText();
-        cli.setNombre(Nombre);
-        cli.setRut_Cliente(Rut);
-        cli.setNumero_Telefono(Numero_Telfono);
-        cli.setComuna_id(Comuna);
-        cli.setDireccion(Direcion);
-        clv.modificarCliente(cli); 
-        limpiar();
-        actualizarCombo();
-        listarU();
-        JOptionPane.showMessageDialog(null, "SE MODIFICO EL CLIENTE CON EXITO");
-        }
-         catch (Exception e) {
+    void modificarCliente() {
+        try {
+            String Rut = xbuscar1.getSelectedItem().toString();
+            String Nombre = xnombre.getText();
+            String Numero_Telfono = xtelefono.getText();
+            int Comuna = IdComuna();
+            String Direcion = xdirecion.getText();
+            cli.setNombre(Nombre);
+            cli.setRut_Cliente(Rut);
+            cli.setNumero_Telefono(Numero_Telfono);
+            cli.setComuna_id(Comuna);
+            cli.setDireccion(Direcion);
+            clv.modificarCliente(cli);
+            limpiar();
+            actualizarCombo();
+            listarU();
+            JOptionPane.showMessageDialog(null, "SE MODIFICO EL CLIENTE CON EXITO");
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
     }
+
     void limpiar() {
         xnombre.setText(null);
         xtelefono.setText(null);

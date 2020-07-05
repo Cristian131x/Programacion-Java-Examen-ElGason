@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import modelo.PedidoPendiente;
 
 public class Pedidos extends javax.swing.JInternalFrame {
@@ -14,6 +15,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
     ConsultasPedidosPendientes cped = new ConsultasPedidosPendientes();
 
     public Pedidos() {
+        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         initComponents();
         listarPedidos();
     }
@@ -63,6 +65,9 @@ public class Pedidos extends javax.swing.JInternalFrame {
         xfecha2 = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+        setInheritsPopupMenu(true);
 
         xlistar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         xlistar.setModel(new javax.swing.table.DefaultTableModel(
@@ -170,7 +175,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(xmaximo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -181,7 +186,7 @@ public class Pedidos extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

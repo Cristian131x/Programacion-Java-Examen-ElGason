@@ -1,7 +1,6 @@
 package consultas;
 
 import conexion.Conexion;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
@@ -61,7 +60,7 @@ public class ConsultasCliente{
         ResultSet rs = null;
         String sql = "select * from cliente where Rut_Cliente=?";
         try {
-            ps = Conexion.Conectar().prepareStatement(sql);
+            ps= Conexion.Conectar().prepareStatement(sql);
             ps.setString(1, clie.getRut_Cliente());
             rs = ps.executeQuery();
             while (rs.next()) {
