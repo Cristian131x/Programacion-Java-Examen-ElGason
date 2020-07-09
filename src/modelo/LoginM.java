@@ -7,6 +7,7 @@ public class LoginM {
     private int id;
     private String user;
     private String pass;
+    private String clave;
 
     public int getId() {
         return id;
@@ -15,9 +16,6 @@ public class LoginM {
     public void setId(int id) {
         this.id = id;
     }
-
-    
-    /*CIFRAR CONSTRASENIA*/
 
     public String getUser() {
         return user;
@@ -35,4 +33,12 @@ public class LoginM {
         this.pass = pass;
     }
 
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+    
 }
