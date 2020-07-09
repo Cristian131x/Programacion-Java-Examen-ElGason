@@ -431,8 +431,12 @@ public class PedidosPendientes extends javax.swing.JFrame {
     }
 
     void borrarDetalle() {
-        de.setBoleta_numero(Integer.parseInt(idbo.getText().toString()));
-        if (cped.borrarDetalle(de)) {
+        try {
+            de.setBoleta_numero(Integer.parseInt(idbo.getText().toString()));
+            if (cped.borrarDetalle(de)) {
+            }
+        } catch (Exception e) {
+
         }
     }
 

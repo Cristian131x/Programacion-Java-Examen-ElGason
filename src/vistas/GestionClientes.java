@@ -277,7 +277,7 @@ public class GestionClientes extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1))
             .addGroup(layout.createSequentialGroup()
                 .addGap(285, 285, 285)
                 .addComponent(jLabel16)

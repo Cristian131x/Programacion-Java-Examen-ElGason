@@ -1,4 +1,3 @@
-
 package vistas;
 
 import combos.TrabajadorCombo_1;
@@ -16,7 +15,7 @@ public class Trabajadores extends javax.swing.JInternalFrame {
     Trabajador trab = new Trabajador();
     ConsultasTrabajador ctrab = new ConsultasTrabajador();
     TrabajadorCombo_1 trab1 = new TrabajadorCombo_1();
-    
+
     public Trabajadores() {
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         initComponents();
@@ -24,14 +23,12 @@ public class Trabajadores extends javax.swing.JInternalFrame {
         listarT();
     }
 
-
     public void limpiar() {
         xrut.setText(null);
         xnombre.setText(null);
         xapellido.setText(null);
         xtelefono.setText(null);
         xsexo.setSelectedIndex(0);
-        xestado.setSelectedIndex(0);
         xpuesto.setSelectedIndex(0);
     }
 
@@ -55,6 +52,7 @@ public class Trabajadores extends javax.swing.JInternalFrame {
 
     PreparedStatement ps;
     ResultSet rs;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,8 +78,8 @@ public class Trabajadores extends javax.swing.JInternalFrame {
         xsexo = new javax.swing.JComboBox<>();
         xpuesto = new javax.swing.JComboBox<>();
         agregarT = new javax.swing.JButton();
-        xestado = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        xestado = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaT = new javax.swing.JTable();
@@ -159,7 +157,7 @@ public class Trabajadores extends javax.swing.JInternalFrame {
         xsexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Masculino", "Femenino" }));
 
         xpuesto.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        xpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Operador", "Conductor", "Paleta" }));
+        xpuesto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "Conductor", "Paleta" }));
 
         agregarT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         agregarT.setText("Aceptar");
@@ -169,11 +167,12 @@ public class Trabajadores extends javax.swing.JInternalFrame {
             }
         });
 
-        xestado.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        xestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contratado" }));
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setText("Estado:");
+
+        xestado.setEditable(false);
+        xestado.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        xestado.setText("Contratado");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -199,9 +198,9 @@ public class Trabajadores extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel7))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(xestado, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(xtelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(xtelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(xestado))))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -235,9 +234,10 @@ public class Trabajadores extends javax.swing.JInternalFrame {
                     .addComponent(xsexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(xestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(xestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(xpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
@@ -489,7 +489,7 @@ public class Trabajadores extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 878, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(108, 108, 108)
@@ -527,10 +527,41 @@ public class Trabajadores extends javax.swing.JInternalFrame {
 
     private void agregarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTActionPerformed
         registrarTrabajador();
-        if (xpuesto.getSelectedItem() == "Paleta") {
-            registrarPaleta();
-        }
     }//GEN-LAST:event_agregarTActionPerformed
+    public int IDPuesto() {
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        int ID = 0;
+        String sql = "SELECT Id_Tipo from tipo_empleado where Nombre=?";
+        try {
+            ps = Conexion.Conectar().prepareStatement(sql);
+            ps.setString(1, xpuesto.getSelectedItem().toString());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ID = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return ID;
+    }
+
+    public int IDPuesto2() {
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        int ID = 0;
+        String sql = "SELECT Id_Tipo from tipo_empleado where Nombre=?";
+        try {
+            ps = Conexion.Conectar().prepareStatement(sql);
+            ps.setString(1, xpuesto1.getSelectedItem().toString());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ID = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return ID;
+    }
+
     void registrarTrabajador() {
         try {
             String Rut = xrut.getText();
@@ -538,15 +569,15 @@ public class Trabajadores extends javax.swing.JInternalFrame {
             String Apellido = xapellido.getText();
             String Contacto = xtelefono.getText();
             String Sexo = xsexo.getSelectedItem().toString();
-            String Estado = xestado.getSelectedItem().toString();
-            String Puesto = xpuesto.getSelectedItem().toString();
+            String Estado = xestado.getText().toString();
+            int Puesto = IDPuesto();
             trab.setRut(Rut);
             trab.setNombre(Nombre);
             trab.setApellido(Apellido);
             trab.setTelefono(Contacto);
             trab.setSexo(Sexo);
             trab.setEstado(Estado);
-            trab.setPuesto(Puesto);
+            trab.setPuesto2(Puesto);
             if (ctrab.registrarTrabajador(trab)) {
                 JOptionPane.showMessageDialog(null, "Nuevo Trabajador");
                 limpiar();
@@ -557,22 +588,7 @@ public class Trabajadores extends javax.swing.JInternalFrame {
         }
     }
 
-    void registrarPaleta() {
-        try {
-            int IdPa = Integer.parseInt(ctrab.IdEmpleado());
-            String Rut = xrut.getText();
-            String Nombre = xnombre.getText();
-            trab.setId(IdPa);
-            trab.setRut(Rut);
-            trab.setNombre(Nombre);
-            if (ctrab.registrarPaleta(trab)) {
-                limpiar();
-                actualizarCombo();
-            }
-        } catch (Exception e) {
 
-        }
-    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         listarT();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -589,10 +605,11 @@ public class Trabajadores extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_xsexo1ActionPerformed
 
     private void buscarTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTActionPerformed
-        buscarTrabajador();
         listarU();
+        buscarTrabajador();
+
     }//GEN-LAST:event_buscarTActionPerformed
-     void listarU() {
+    void listarU() {
         try {
             trab.setRut(xbuscar1.getSelectedItem().toString());
             tablaModificar.setModel(ctrab.listarU(trab));
@@ -605,12 +622,21 @@ public class Trabajadores extends javax.swing.JInternalFrame {
         try {
             trab.setRut(xbuscar1.getSelectedItem().toString());
             if (ctrab.buscarTrabajador(trab)) {
+
                 xnombre1.setText(trab.getNombre());
                 xapellido1.setText(trab.getApellido());
                 xtelefono1.setText(trab.getTelefono());
                 xsexo1.setSelectedItem("" + trab.getSexo());
                 xestado1.setSelectedItem("" + trab.getEstado());
-                xpuesto1.setSelectedItem("" + trab.getPuesto());
+                if (trab.getPuesto2() == 1) {
+                    String Puesto = "Conductor";
+                    xpuesto1.setSelectedItem("" + Puesto);
+                }
+                if (trab.getPuesto2() == 2) {
+                    String Puesto = "Paleta";
+                    xpuesto1.setSelectedItem("" + Puesto);
+                }
+
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
@@ -628,16 +654,17 @@ public class Trabajadores extends javax.swing.JInternalFrame {
             String Contacto = xtelefono1.getText();
             String Sexo = xsexo1.getSelectedItem().toString();
             String Estado = xestado1.getSelectedItem().toString();
-            String Puesto = xpuesto1.getSelectedItem().toString();
+            int Puesto = IDPuesto2();
             trab.setRut(Rut);
             trab.setNombre(Nombre);
             trab.setApellido(Apellido);
             trab.setTelefono(Contacto);
             trab.setSexo(Sexo);
             trab.setEstado(Estado);
-            trab.setPuesto(Puesto);
-            if (ctrab.registrarTrabajador(trab)) {
+            trab.setPuesto2(Puesto);
+            if (ctrab.modificarTrabajador(trab)) {
                 JOptionPane.showMessageDialog(null, "Trabajador Modificado con Exito");
+                listarU();
                 limpiar1();
             }
         } catch (Exception e) {
@@ -682,7 +709,7 @@ public class Trabajadores extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField xapellido1;
     public static javax.swing.JTextField xbuscar;
     public static javax.swing.JComboBox<String> xbuscar1;
-    public static javax.swing.JComboBox<String> xestado;
+    private javax.swing.JTextField xestado;
     public static javax.swing.JComboBox<String> xestado1;
     public static javax.swing.JTextField xnombre;
     public static javax.swing.JTextField xnombre1;

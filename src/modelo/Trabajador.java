@@ -13,6 +13,7 @@ public class Trabajador {
     private String Estado;
     private String Puesto;
     private String RutL;
+    private int Puesto2;
 
     public String getRutL() {
         return RutL;
@@ -111,5 +112,14 @@ public class Trabajador {
         }
         this.Puesto = Puesto;
     }
+
+    public int getPuesto2() {
+        return Puesto2;
+    }
+
+    public void setPuesto2(int Puesto2) {
+        this.Puesto2 = Puesto2;
+    }
+    
 
 }

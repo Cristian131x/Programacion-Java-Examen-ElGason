@@ -5,18 +5,22 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import java.applet.AudioClip;
+import javax.swing.Icon;
+import musica.Reproductor;
 
 public class Menu extends javax.swing.JFrame {
 
+    Reproductor mi_reproductor = new Reproductor();
+
     public Menu() {
+        
         initComponents();
-        AudioClip Sound;
-        Sound = java.applet.Applet.newAudioClip(getClass().getResource("/musica/cancion.wav"));
-        Sound.play();
+        mi_reproductor = new Reproductor();
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono.png")).getImage());
         this.setExtendedState(MAXIMIZED_BOTH);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -28,12 +32,11 @@ public class Menu extends javax.swing.JFrame {
 
         });
     }
-    void musica(){
-        
-    }
+
     private void cerrarVentana() {
-        String Botones[] = {"ACEPTAR", "CANCELAR"};
-        int eleccion = JOptionPane.showOptionDialog(this, "ESTA SEGURO QUE DESEA CERRAR EL PROGRAMA", "Titulo", 0, 0, null, Botones, this);
+        Icon icono = new ImageIcon(getClass().getResource("/imagenes/cerrar.gif"));
+        String Botones[] = {"ACEPTAR", "CANCELAR",};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿ESTA SEGURO QUE DESEA CERRAR EL PROGRAMA?", "Mensaje De Alerta!", 0, 0, icono, Botones, this);
         if (eleccion == JOptionPane.YES_OPTION) {
             System.exit(0);
         } else if (eleccion == JOptionPane.NO_OPTION) {
@@ -51,7 +54,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/fondo.jpg"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/fondo.gif"));
         Image image = icon.getImage();
         VentanaPrin = new javax.swing.JDesktopPane(){
 
@@ -59,10 +62,12 @@ public class Menu extends javax.swing.JFrame {
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
             }
         };
-        gif = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -78,6 +83,11 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        start = new javax.swing.JMenuItem();
+        stop = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -93,25 +103,27 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal - El Gason");
 
-        gif.setIcon(new javax.swing.ImageIcon("C:\\Users\\crist\\Downloads\\LINK.gif")); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Terminator Two", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel1.setText("PROGRAMA EL GASOn - CREADO POR [g.p]");
 
-        VentanaPrin.setLayer(gif, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        VentanaPrin.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout VentanaPrinLayout = new javax.swing.GroupLayout(VentanaPrin);
         VentanaPrin.setLayout(VentanaPrinLayout);
         VentanaPrinLayout.setHorizontalGroup(
             VentanaPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(VentanaPrinLayout.createSequentialGroup()
-                .addContainerGap(1073, Short.MAX_VALUE)
-                .addComponent(gif, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(918, Short.MAX_VALUE))
         );
         VentanaPrinLayout.setVerticalGroup(
             VentanaPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, VentanaPrinLayout.createSequentialGroup()
-                .addContainerGap(461, Short.MAX_VALUE)
-                .addComponent(gif, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addContainerGap(700, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
@@ -130,8 +142,26 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem16.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem16.setText("Limpiar Menu");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem16);
+
+        jMenuItem13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem13.setText("Cerrar Sesion");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem13);
+
         jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jMenuItem2.setText("Salir");
+        jMenuItem2.setText("Apagar");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -243,6 +273,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/estadistica.png"))); // NOI18N
         jMenu5.setText("Ganancias");
         jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jMenu5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 
         jMenuItem12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem12.setText("Pedidos");
@@ -254,6 +285,48 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.add(jMenuItem12);
 
         jMenuBar1.add(jMenu5);
+
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/musica.png"))); // NOI18N
+        jMenu6.setText("Musica");
+        jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+
+        start.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        start.setText("Reproducir");
+        start.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startActionPerformed(evt);
+            }
+        });
+        jMenu6.add(start);
+
+        stop.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        stop.setText("Pausar");
+        stop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopActionPerformed(evt);
+            }
+        });
+        jMenu6.add(stop);
+
+        jMenuItem14.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem14.setText("Continuar");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem14);
+
+        jMenuItem15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jMenuItem15.setText("Detener");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem15);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -277,7 +350,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        System.exit(0);
+        Icon icono = new ImageIcon(getClass().getResource("/imagenes/cerrar.gif"));
+        String Botones[] = {"ACEPTAR", "CANCELAR",};
+        int eleccion = JOptionPane.showOptionDialog(this, "¿ESTA SEGURO QUE DESEA CERRAR EL PROGRAMA?", "Mensaje De Alerta!", 0, 0, icono, Botones, this);
+        if (eleccion == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else if (eleccion == JOptionPane.NO_OPTION) {
+            System.out.println("No se cerro");
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -329,9 +409,54 @@ public class Menu extends javax.swing.JFrame {
         Pedidos ped = new Pedidos();
         Centrar(ped);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        Login log = new Login();
+        log.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
+        try {
+            mi_reproductor.AbrirFichero("src\\musica\\menu.mp3");
+        } catch (Exception ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_startActionPerformed
+
+    private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
+        try {
+            mi_reproductor.Pausa();
+        } catch (Exception ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_stopActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        try {
+            mi_reproductor.Continuar();
+        } catch (Exception ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        try {
+            mi_reproductor.Stop();
+        } catch (Exception ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        VentanaPrin.removeAll();
+        VentanaPrin.updateUI();
+         VentanaPrin.add(jLabel1);
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
     void Centrar(JInternalFrame Frame) {
         VentanaPrin.removeAll();
-        VentanaPrin.add(gif);
+        VentanaPrin.add(jLabel1);
         VentanaPrin.updateUI();
         VentanaPrin.add(Frame);
         Dimension dim = VentanaPrin.getSize();
@@ -344,6 +469,7 @@ public class Menu extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -380,18 +506,23 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane VentanaPrin;
-    private javax.swing.JLabel gif;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -400,5 +531,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem start;
+    private javax.swing.JMenuItem stop;
     // End of variables declaration//GEN-END:variables
 }

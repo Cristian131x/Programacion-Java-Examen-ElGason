@@ -1,4 +1,3 @@
-
 package vistas;
 
 import consultas.ConsultasCamion;
@@ -15,7 +14,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     Trabajador trab = new Trabajador();
     ControlGestiones cge = new ControlGestiones();
     ConsultasGestionEmpleado ccg = new ConsultasGestionEmpleado();
-
+    
     public GestionEmpleados() {
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         initComponents();
@@ -54,7 +53,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         xCT = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         setInheritsPopupMenu(true);
 
         jButton3.setText("REFRESCAR");
@@ -284,7 +283,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(idCam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
@@ -306,7 +305,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE))
-                        .addContainerGap(69, Short.MAX_VALUE))
+                        .addContainerGap(67, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addGap(43, 43, 43)
@@ -357,22 +356,30 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
             xCT.setText("");
         }
     }
-
+    
     void lugarNada() {
         int IdTrab = Integer.parseInt(xCT.getText().toString());
         trab.setId(IdTrab);;
         if (ccg.lugarNada(trab)) {
-
+            
         }
     }
-
+    
     void ingresarTrabajadorCamion() {
         int Camion = Integer.parseInt(idCam.getText().toString());
         int IdEmpl = Integer.parseInt(idE.getText().toString());
-        String Puesto = xpuesto.getSelectedItem().toString();
+        if (xpuesto.getSelectedItem().toString() == "Conductor") {
+                int Puesto = 1;
+                cge.setPuesto(Puesto);
+            }
+            if (xpuesto.getSelectedItem().toString() == "Paleta") {
+                trab.setPuesto2(2);
+                int Puesto = 2;
+                cge.setPuesto(Puesto);
+            }
         cge.setCamion_Id(Camion);
         cge.setId_Empleado(IdEmpl);
-        cge.setPuesto(Puesto);
+        
         if (ccg.ingresarTrabajadorCamion(cge)) {
             lugarEmpleado();
             listarT();
@@ -380,7 +387,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
             idE.setText("");
         }
     }
-
+    
     void lugarEmpleado() {
         int IdEmpl = Integer.parseInt(idE.getText().toString());
         trab.setId(IdEmpl);
@@ -415,7 +422,13 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_idEActionPerformed
     void listarT() {
         try {
-            trab.setPuesto(xpuesto.getSelectedItem().toString());
+            if (xpuesto.getSelectedItem().toString() == "Conductor") {
+                trab.setPuesto2(1);
+            }
+            if (xpuesto.getSelectedItem().toString() == "Paleta") {
+                trab.setPuesto2(2);
+            }
+            
             tablaT.setModel(ccg.listarT(trab));
         } catch (Exception e) {
         }

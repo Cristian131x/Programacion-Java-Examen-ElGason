@@ -58,7 +58,7 @@ public class ConsultasGestionEmpleado {
             ps = Conexion.Conectar().prepareStatement(sql);
             ps.setInt(1, cge.getCamion_Id());
             ps.setInt(2, cge.getId_Empleado());
-            ps.setString(3, cge.getPuesto());
+            ps.setInt(3, cge.getPuesto());
             ps.execute();
             return true;
         } catch (Exception e) {
@@ -144,7 +144,7 @@ public class ConsultasGestionEmpleado {
     }
 
     public DefaultTableModel listarT(Trabajador trab) {
-        String campo = trab.getPuesto();
+        int campo = trab.getPuesto2();
         String campo2 = "Nada";
         String where = "";
         if (!"".equals(campo)) {
@@ -163,7 +163,7 @@ public class ConsultasGestionEmpleado {
                 ob[0] = rs.getInt(1);
                 ob[1] = rs.getString(2);
                 ob[2] = rs.getString(3);
-                ob[3] = rs.getString(4);
+                ob[3] = rs.getInt(4);
                 DTcu.addRow(ob);
             }
         } catch (Exception e) {

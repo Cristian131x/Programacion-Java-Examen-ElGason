@@ -20,7 +20,7 @@ public class ConsultasTrabajador {
             ps.setString(4, trab.getSexo());
             ps.setString(5, trab.getTelefono());
             ps.setString(6, trab.getEstado());
-            ps.setString(7, trab.getPuesto());
+            ps.setInt(7, trab.getPuesto2());
             ps.setString(8, "Nada");
             ps.execute();
             return true;
@@ -46,7 +46,7 @@ public class ConsultasTrabajador {
             ps.setString(3, trab.getTelefono());
             ps.setString(4, trab.getSexo());
             ps.setString(5, trab.getEstado());
-            ps.setString(6, trab.getPuesto());
+            ps.setInt(6, trab.getPuesto2());
             ps.setString(7, trab.getRut());
             ps.execute();
             return true;
@@ -77,7 +77,7 @@ public class ConsultasTrabajador {
                 trab.setSexo(rs.getString("Sexo"));
                 trab.setTelefono(rs.getString("Telefono"));
                 trab.setEstado(rs.getString("Estado"));
-                trab.setPuesto(rs.getString("Puesto"));
+                trab.setPuesto2(rs.getInt("Puesto"));
             }
             return true;
         } catch (Exception e) {
@@ -200,28 +200,6 @@ public class ConsultasTrabajador {
         }
         return idB;
 
-    }
-
-    public boolean registrarPaleta(Trabajador trab) {
-        PreparedStatement ps = null;
-        String sql = "insert into paletas(id_empleado,Rut,Nombre) values (?,?,?)";
-        try {
-            ps = Conexion.Conectar().prepareStatement(sql);
-            ps.setInt(1, trab.getId());
-            ps.setString(2, trab.getRut());
-            ps.setString(3, trab.getNombre());
-            ps.execute();
-            return true;
-        } catch (Exception e) {
-            System.out.println(e);
-            return false;
-        } finally {
-            try {
-                Conexion.Desconectar();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
     }
 
 }

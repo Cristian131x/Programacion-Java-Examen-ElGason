@@ -7,7 +7,7 @@ public class ControlGestiones {
     private int Gas_Id;
     private int Camion_Id;
     private int Id_Empleado;
-    private String Puesto;
+    private int Puesto;
     private int Id_Ruta;
     private String Patente;
     private int Tipo;
@@ -45,11 +45,11 @@ public class ControlGestiones {
         this.Id_Empleado = Id_Empleado;
     }
 
-    public String getPuesto() {
+    public int getPuesto() {
         return Puesto;
     }
 
-    public void setPuesto(String Puesto) {
+    public void setPuesto(int Puesto) {
         this.Puesto = Puesto;
     }
 
