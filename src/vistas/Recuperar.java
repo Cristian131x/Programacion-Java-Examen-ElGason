@@ -33,7 +33,7 @@ public class Recuperar extends javax.swing.JFrame {
         jTextPane1.setEditable(false);
         jTextPane1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jTextPane1.setForeground(new java.awt.Color(0, 51, 255));
-        jTextPane1.setText("PARA RECUPERAR SU USUARIO Y CONTRASEÑA DEBERA INGRESAR EL CODIGO DE RECUPERACION  DADO POR LA EMPREZA");
+        jTextPane1.setText("PARA RECUPERAR SU USUARIO Y CONTRASEÑA DEBERÁ INGRESAR EL CÓDIGO DE RECUPERACIÓN  DADO POR LA EMPRESA");
         jScrollPane1.setViewportView(jTextPane1);
 
         clave.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -81,7 +81,7 @@ public class Recuperar extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
                 .addComponent(clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))

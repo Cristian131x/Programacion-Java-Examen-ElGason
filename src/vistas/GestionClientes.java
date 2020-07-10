@@ -163,13 +163,13 @@ public class GestionClientes extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(xlistaU);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Nombre:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setText("Telefono");
+        jLabel3.setText("Teléfono:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setText("Direccion:");
+        jLabel4.setText("Dirección:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Comuna:");

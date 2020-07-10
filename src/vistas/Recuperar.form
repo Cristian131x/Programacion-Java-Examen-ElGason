@@ -55,7 +55,7 @@
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Component id="clave" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="95" max="32767" attributes="0"/>
+              <EmptySpace pref="124" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButton1" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
                   <Component id="jButton2" alignment="1" min="-2" pref="50" max="-2" attributes="0"/>
@@ -82,7 +82,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="33" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="PARA RECUPERAR SU USUARIO Y CONTRASE&#xd1;A DEBERA INGRESAR EL CODIGO DE RECUPERACION  DADO POR LA EMPREZA"/>
+            <Property name="text" type="java.lang.String" value="PARA RECUPERAR SU USUARIO Y CONTRASE&#xd1;A DEBER&#xc1; INGRESAR EL C&#xd3;DIGO DE RECUPERACI&#xd3;N  DADO POR LA EMPRESA"/>
           </Properties>
         </Component>
       </SubComponents>

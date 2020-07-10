@@ -73,7 +73,7 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 255));
-        jLabel3.setText("GESTION Y CONTROL CAMIONES");
+        jLabel3.setText("GESTIÓN Y CONTROL CAMIONES");
 
         tablaGRC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablaGRC.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,6 +99,7 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablaGRC);
 
+        idCG.setEditable(false);
         idCG.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -154,6 +155,7 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
         xfotito.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         xfotito.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        idCam.setEditable(false);
         idCam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -162,6 +164,7 @@ public class GestionCamiones extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Camion Seleccionado");
 
+        idRuta.setEditable(false);
         idRuta.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jButton5.setText("INGRESAR ->");

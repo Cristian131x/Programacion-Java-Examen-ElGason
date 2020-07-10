@@ -12,7 +12,6 @@ public class Reproductor {
     }
 
     public void coge(String y) {
-
     }
 
     public void Play() throws Exception {
@@ -35,5 +34,5 @@ public class Reproductor {
     public void Stop() throws Exception {
         player.stop();
     }
-
+    
 }

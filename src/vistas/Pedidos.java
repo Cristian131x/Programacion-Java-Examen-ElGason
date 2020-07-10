@@ -112,10 +112,10 @@ public class Pedidos extends javax.swing.JInternalFrame {
         jLabel1.setText("Dinero Total Ganado");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Venta Minima");
+        jLabel2.setText("Venta Mínima");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Venta Maxima");
+        jLabel3.setText("Venta Máxima");
 
         xminimo.setEditable(false);
         xminimo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

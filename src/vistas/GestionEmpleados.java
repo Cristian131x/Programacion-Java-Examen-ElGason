@@ -140,7 +140,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 255));
-        jLabel3.setText("CONTROL Y GESTION EMPLEADOS");
+        jLabel3.setText("CONTROL Y GESTIÓN EMPLEADOS");
 
         tablaEC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

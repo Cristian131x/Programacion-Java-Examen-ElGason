@@ -279,7 +279,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="66" red="0" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="CONTROL Y GESTION EMPLEADOS"/>
+        <Property name="text" type="java.lang.String" value="CONTROL Y GESTI&#xd3;N EMPLEADOS"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

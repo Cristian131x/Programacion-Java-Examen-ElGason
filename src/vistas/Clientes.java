@@ -12,6 +12,7 @@ public class Clientes extends javax.swing.JFrame {
 
     Cliente clie = new Cliente();
     ConsultasCliente clv = new ConsultasCliente();
+  
 
     public Clientes() {
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/CLIENTE.png")).getImage());
@@ -59,9 +60,9 @@ public class Clientes extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Numero Telefono");
+        jLabel2.setText("Número Teléfono");
 
-        jLabel3.setText("Direccion:");
+        jLabel3.setText("Dirección:");
 
         xcomunaC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar:", "La Granja", "La Cisterna", "La Pintana" }));
 

@@ -1,5 +1,6 @@
 package vistas;
 
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -19,8 +20,8 @@ public class Menu extends javax.swing.JFrame {
 
     public Menu() {
         
+        play();
         initComponents();
-        mi_reproductor = new Reproductor();
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono.png")).getImage());
         this.setExtendedState(MAXIMIZED_BOTH);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -83,7 +84,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
+        music = new javax.swing.JMenu();
         start = new javax.swing.JMenuItem();
         stop = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
@@ -130,7 +131,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.setPreferredSize(new java.awt.Dimension(100, 80));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/carpeta.png"))); // NOI18N
-        jMenu1.setText("Menu");
+        jMenu1.setText("Menú");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
 
         jMenuItem1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -286,18 +287,25 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/musica.png"))); // NOI18N
-        jMenu6.setText("Musica");
-        jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        music.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/musica.png"))); // NOI18N
+        music.setText("Música");
+        music.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        music.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        music.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 
         start.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         start.setText("Reproducir");
+        start.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                startMouseClicked(evt);
+            }
+        });
         start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startActionPerformed(evt);
             }
         });
-        jMenu6.add(start);
+        music.add(start);
 
         stop.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         stop.setText("Pausar");
@@ -306,7 +314,7 @@ public class Menu extends javax.swing.JFrame {
                 stopActionPerformed(evt);
             }
         });
-        jMenu6.add(stop);
+        music.add(stop);
 
         jMenuItem14.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem14.setText("Continuar");
@@ -315,7 +323,7 @@ public class Menu extends javax.swing.JFrame {
                 jMenuItem14ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem14);
+        music.add(jMenuItem14);
 
         jMenuItem15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jMenuItem15.setText("Detener");
@@ -324,9 +332,9 @@ public class Menu extends javax.swing.JFrame {
                 jMenuItem15ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItem15);
+        music.add(jMenuItem15);
 
-        jMenuBar1.add(jMenu6);
+        jMenuBar1.add(music);
 
         setJMenuBar(jMenuBar1);
 
@@ -415,14 +423,15 @@ public class Menu extends javax.swing.JFrame {
         log.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem13ActionPerformed
-
-    private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
+    void play() {
         try {
             mi_reproductor.AbrirFichero("src\\musica\\menu.mp3");
         } catch (Exception ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+    }
+    private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
+        play();
     }//GEN-LAST:event_startActionPerformed
 
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
@@ -452,8 +461,12 @@ public class Menu extends javax.swing.JFrame {
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
         VentanaPrin.removeAll();
         VentanaPrin.updateUI();
-         VentanaPrin.add(jLabel1);
+        VentanaPrin.add(jLabel1);
     }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void startMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startMouseClicked
     void Centrar(JInternalFrame Frame) {
         VentanaPrin.removeAll();
         VentanaPrin.add(jLabel1);
@@ -513,7 +526,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -531,6 +543,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenu music;
     private javax.swing.JMenuItem start;
     private javax.swing.JMenuItem stop;
     // End of variables declaration//GEN-END:variables

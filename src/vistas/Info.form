@@ -47,7 +47,7 @@
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,7 +117,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="24" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="COPIE LOS DATOS PORFAVOR"/>
+        <Property name="text" type="java.lang.String" value="COPIE LOS DATOS POR FAVOR"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">

@@ -31,8 +31,8 @@ public class Cliente {
     }
 
     public void setRut_Cliente(String Rut_Cliente) throws Exception {
-        if (Rut_Cliente.length() <= 7 || Rut_Cliente.length() >= 10) {
-            throw new Exception("El rut debe ser de 8 o 9 caractares");
+        if (Rut_Cliente.length() <= 6 || Rut_Cliente.length() >= 10) {
+            throw new Exception("El rut debe ser de 7 o 8 caractares");
         }
         this.Rut_Cliente = Rut_Cliente;
 
@@ -56,8 +56,8 @@ public class Cliente {
         if (Nombre.trim().length() == 0) {
             throw new Exception("El nombre no puede estar vacio");
         }
-        if (Nombre.trim().length() > 10) {
-            throw new Exception("El nombre debe ser menor a 10 caracteres");
+        if (Nombre.trim().length() > 30) {
+            throw new Exception("El nombre debe ser menor a 30 caracteres");
         }
         this.Nombre = Nombre;
     }
